@@ -6,6 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    // ---------------------------
+    //  id | role     | slug     |
+    // ---------------------------
+    //  1  | Admin    | admin    |
+    // ---------------------------
+    //  2  | Tenant   | tenant   |
+    // ---------------------------
+    //  3  | Landlord | landlord |
+    // ---------------------------
+    //  4  | Plumber  | plumber  |
+    // ---------------------------
     /**
      * Run the migrations.
      */

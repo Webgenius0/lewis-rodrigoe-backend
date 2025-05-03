@@ -21,8 +21,20 @@ class RoleSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'slug' => 'user',
-                'name' => 'User',
+                'slug' => 'tenant',
+                'name' => 'Tenant',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'slug' => 'landlord',
+                'name' => 'Landlord',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'slug' => 'plumber',
+                'name' => 'Plumber',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
