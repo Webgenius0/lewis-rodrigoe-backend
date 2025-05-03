@@ -7,13 +7,13 @@ To Install & Run This Project, Follow These Steps:
 1. Clone the repository:
 
     ```sh
-    git clone https://github.com/Webgenius0/lewis-rodrigoe-backend.git
+    git clone https://github.com/Webgenius0/lewis-rodrigoe-backend.git lewis-rodrigoe
     ```
 
 2. Navigate to the project directory:
 
     ```sh
-    cd xiiaospeed-backend
+    cd lewis-rodrigoe
     ```
 
 3. Install project dependencies:
