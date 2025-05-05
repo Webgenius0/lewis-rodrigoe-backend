@@ -11,11 +11,11 @@ return new class extends Migration
     // ---------------------------
     //  1  | Admin    | admin    |
     // ---------------------------
-    //  2  | Tenant   | tenant   |
+    //  2  | Owner    | owner    |
     // ---------------------------
     //  3  | Landlord | landlord |
     // ---------------------------
-    //  4  | Plumber  | plumber  |
+    //  4  | Engineer | engineer |
     // ---------------------------
     /**
      * Run the migrations.
