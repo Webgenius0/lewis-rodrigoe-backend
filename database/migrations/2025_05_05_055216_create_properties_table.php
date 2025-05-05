@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('address_id')->constrained('addresses')->cascadeOnDelete();
-            $table->foreignId('boiler_type_id')->constrained('boiler_types')->cascadeOnDelete();
-            $table->foreignId('boiler_model_id')->constrained('boiler_models')->cascadeOnDelete();
-            $table->foreignId('property_type_id')->constrained('property_types')->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('address_id')->nullable()->constrained('addresses')->nullOnDelete();
+            $table->foreignId('boiler_type_id')->nullable()->constrained('boiler_types')->nullOnDelete();
+            $table->foreignId('boiler_model_id')->nullable()->constrained('boiler_models')->nullOnDelete();
+            $table->foreignId('property_type_id')->nullable()->constrained('property_types')->nullOnDelete();
             $table->integer('quantity');
             $table->date('purchase_year');
             $table->date('last_service_date')->nullable();
