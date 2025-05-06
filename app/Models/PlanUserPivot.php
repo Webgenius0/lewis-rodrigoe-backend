@@ -3,15 +3,19 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Plan extends Model
+class PlanUserPivot extends Model
 {
+    /**
+     * table
+     * @var string
+     */
+    protected $table = 'plan_user';
     /**
      * fillable
      * @var array
      */
-    protected $fillable = ['name', 'price', 'duration', 'duration_value', 'features'];
+    protected $fillable = ['start_date', 'end_date', 'is_active'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -31,16 +35,12 @@ class Plan extends Model
     protected function casts(): array
     {
         return [
-            'id'             => 'integer',
-            'price'          => 'double',
-            'duration_value' => 'integer',
-            'created_at'     => 'datetime',
-            'updated_at'     => 'datetime',
+            'id'         => 'integer',
+            'start_date' => 'datetime',
+            'end_date'   => 'datetime',
+            'is_active'  => 'boolean',
+            'created_at' => 'datetime',
+            'updated_at' => 'datetime',
         ];
-    }
-
-    public function users():BelongsToMany
-    {
-        return $this->belongsToMany(User::class);
     }
 }

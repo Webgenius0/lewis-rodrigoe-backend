@@ -7,6 +7,7 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -193,5 +194,14 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     public function reviewsReceived(): HasMany
     {
         return $this->hasMany(Review::class, 'engineer');
+    }
+
+    /**
+     * plans
+     * @return BelongsToMany<Plan, User, \Illuminate\Database\Eloquent\Relations\Pivot>
+     */
+    public function plans(): BelongsToMany
+    {
+        return $this->belongsToMany(Plan::class);
     }
 }
