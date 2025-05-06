@@ -48,9 +48,14 @@ class PropertyJob extends Model
     protected function casts(): array
     {
         return [
-            'id'         => 'integer',
-            'created_at' => 'datetime',
-            'updated_at' => 'datetime',
+            'id'                   => 'integer',
+            'user_id'              => 'integer',
+            'property_id'          => 'integer',
+            'engineer'             => 'integer',
+            'date_time'            => 'datetime',
+            'engineer_assigned_at' => 'datetime',
+            'created_at'           => 'datetime',
+            'updated_at'           => 'datetime',
         ];
     }
 
