@@ -88,4 +88,13 @@ class Address extends Model
     {
         return $this->hasMany(Engineer::class);
     }
+
+    /**
+     * properties
+     * @return HasMany<Property, User>
+     */
+    public function properties():HasMany
+    {
+        return $this->hasMany(Property::class);
+    }
 }

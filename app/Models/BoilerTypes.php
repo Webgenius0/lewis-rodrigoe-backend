@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class BoilerTypes extends Model
 {
@@ -34,5 +35,14 @@ class BoilerTypes extends Model
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];
+    }
+
+    /**
+     * properties
+     * @return HasMany<Property, User>
+     */
+    public function properties(): HasMany
+    {
+        return $this->hasMany(Property::class);
     }
 }

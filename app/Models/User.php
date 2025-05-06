@@ -204,4 +204,13 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     {
         return $this->belongsToMany(Plan::class);
     }
+
+    /**
+     * properties
+     * @return HasMany<Property, User>
+     */
+    public function properties():HasMany
+    {
+        return $this->hasMany(Property::class);
+    }
 }

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
+            $table->string('sn')->unique();
             $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('address_id')->nullable()->constrained('addresses')->nullOnDelete();
             $table->foreignId('boiler_type_id')->nullable()->constrained('boiler_types')->nullOnDelete();

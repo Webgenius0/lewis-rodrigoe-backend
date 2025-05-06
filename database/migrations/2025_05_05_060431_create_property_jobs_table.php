@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('property_jobs', function (Blueprint $table) {
             $table->id();
+            $table->string('sn')->unique();
             $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('property_id')->nullable()->constrained('properties')->nullOnDelete();
             $table->unsignedBigInteger('engineer')->nullable();
