@@ -136,7 +136,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      * gasSafetyRegistration
      * @return HasOne<GasSafetyRegistration, User>
      */
-    public function gsr():HasOne
+    public function gsr(): HasOne
     {
         return $this->hasOne(GasSafetyRegistration::class);
     }
@@ -145,7 +145,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      * NVQQualification
      * @return HasOne<NVQQualification, User>
      */
-    public function nvq():HasOne
+    public function nvq(): HasOne
     {
         return $this->hasOne(NVQQualification::class);
     }
@@ -154,7 +154,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      * drivingLicence
      * @return HasOne<DrivingLicence, User>
      */
-    public function drivingLicence():HasOne
+    public function drivingLicence(): HasOne
     {
         return $this->hasOne(DrivingLicence::class);
     }
@@ -163,8 +163,17 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      * niceic
      * @return HasOne<NICEIC, User>
      */
-    public function niceic():HasOne
+    public function niceic(): HasOne
     {
         return $this->hasOne(NICEIC::class);
+    }
+
+    /**
+     * backAccount
+     * @return HasOne<BankAccount, User>
+     */
+    public function backAccount()
+    {
+        return $this->hasOne(BankAccount::class);
     }
 }
