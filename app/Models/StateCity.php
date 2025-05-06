@@ -54,4 +54,13 @@ class StateCity extends Model
     {
         return $this->hasMany(CityZip::class);
     }
+
+    /**
+     * addresses
+     * @return HasMany<Address, Country>
+     */
+    public function addresses(): HasMany
+    {
+        return $this->hasMany(Address::class, 'city_id');
+    }
 }

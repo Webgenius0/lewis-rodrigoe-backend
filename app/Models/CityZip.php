@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CityZip extends Model
 {
@@ -43,5 +44,14 @@ class CityZip extends Model
     public function city(): BelongsTo
     {
         return $this->belongsTo(StateCity::class);
+    }
+
+    /**
+     * addresses
+     * @return HasMany<Address, Country>
+     */
+    public function addresses(): HasMany
+    {
+        return $this->hasMany(Address::class, 'zip_id');
     }
 }

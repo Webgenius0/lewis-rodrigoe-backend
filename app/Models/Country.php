@@ -45,4 +45,13 @@ class Country extends Model
     {
         return $this->hasMany(CountryState::class);
     }
+
+    /**
+     * addresses
+     * @return HasMany<Address, Country>
+     */
+    public function addresses():HasMany
+    {
+        return $this->hasMany(Address::class, 'country_id');
+    }
 }
