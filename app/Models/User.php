@@ -136,8 +136,17 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      * gasSafetyRegistration
      * @return HasOne<GasSafetyRegistration, User>
      */
-    public function gasSafetyRegistration():HasOne
+    public function gsr():HasOne
     {
         return $this->hasOne(GasSafetyRegistration::class);
+    }
+
+    /**
+     * NVQQualification
+     * @return HasOne<NVQQualification, User>
+     */
+    public function nvq():HasOne
+    {
+        return $this->hasOne(NVQQualification::class);
     }
 }
