@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Property extends Model
 {
@@ -102,5 +103,14 @@ class Property extends Model
     public function propertyType(): BelongsTo
     {
         return $this->belongsTo(PropertyType::class);
+    }
+
+    /**
+     * jobs
+     * @return HasMany<PropertyJob, Property>
+     */
+    public function jobs(): HasMany
+    {
+        return $this->hasMany(PropertyJob::class, 'property_id');
     }
 }

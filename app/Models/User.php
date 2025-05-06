@@ -213,4 +213,22 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     {
         return $this->hasMany(Property::class);
     }
+
+    /**
+     * jobes I posted
+     * @return HasMany<PropertyJob, User>
+     */
+    public function postedJobs():HasMany
+    {
+        return $this->hasMany(PropertyJob::class, 'user_id');
+    }
+
+    /**
+     * assigned Jobs
+     * @return HasMany<PropertyJob, User>
+     */
+    public function assignedJobs():HasMany
+    {
+        return $this->hasMany(PropertyJob::class, 'engineer');
+    }
 }
