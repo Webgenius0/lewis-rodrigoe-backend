@@ -32,6 +32,8 @@ class CountryState extends Model
     protected function casts(): array
     {
         return [
+            'id'         => 'integer',
+            'country_id' => 'integer',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];

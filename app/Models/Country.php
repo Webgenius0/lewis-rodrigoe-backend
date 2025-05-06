@@ -32,6 +32,7 @@ class Country extends Model
     protected function casts(): array
     {
         return [
+            'id'         => 'integer',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];

@@ -32,8 +32,10 @@ class CityZip extends Model
     protected function casts(): array
     {
         return [
-            'created_at' => 'datetime',
-            'updated_at' => 'datetime',
+            'id'            => 'integer',
+            'state_city_id' => 'integer',
+            'updated_at'    => 'datetime',
+            'created_at'    => 'datetime',
         ];
     }
 

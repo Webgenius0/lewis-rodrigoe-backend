@@ -31,6 +31,13 @@ class Address extends Model
     protected function casts(): array
     {
         return [
+            'id'         => 'integer',
+            'country_id' => 'integer',
+            'state_id'   => 'integer',
+            'city_id'    => 'integer',
+            'zip_id'     => 'integer',
+            'latitude'   => 'double',
+            'longitude'  => 'double',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];

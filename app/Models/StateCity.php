@@ -32,8 +32,10 @@ class StateCity extends Model
     protected function casts(): array
     {
         return [
-            'created_at' => 'datetime',
-            'updated_at' => 'datetime',
+            'id'               => 'integer',
+            'country_state_id' => 'integer',
+            'created_at'       => 'datetime',
+            'updated_at'       => 'datetime',
         ];
     }
 
