@@ -149,4 +149,22 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     {
         return $this->hasOne(NVQQualification::class);
     }
+
+    /**
+     * drivingLicence
+     * @return HasOne<DrivingLicence, User>
+     */
+    public function drivingLicence():HasOne
+    {
+        return $this->hasOne(DrivingLicence::class);
+    }
+
+    /**
+     * niceic
+     * @return HasOne<NICEIC, User>
+     */
+    public function niceic():HasOne
+    {
+        return $this->hasOne(NICEIC::class);
+    }
 }
