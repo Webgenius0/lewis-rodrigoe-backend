@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('city_zips', function (Blueprint $table) {
             $table->id();
             $table->foreignId('state_city_id')->constrained('state_cities')->cascadeOnDelete();
+            $table->string('slug')->unique();
             $table->string('number');
             $table->timestamps();
         });
