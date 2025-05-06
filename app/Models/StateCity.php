@@ -3,8 +3,45 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class StateCity extends Model
 {
-    //
+    /**
+     * fillable
+     * @var array
+     */
+    protected $fillable = ['name', 'slug', 'country_state_id'];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var list<string>
+     */
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'created_at' => 'datetime',
+            'updated_at' => 'datetime',
+        ];
+    }
+
+    /**
+     * belongs to state
+     * @return BelongsTo<CountryState, DrivingLicence>
+     */
+    public function state(): BelongsTo
+    {
+        return $this->belongsTo(CountryState::class);
+    }
 }
