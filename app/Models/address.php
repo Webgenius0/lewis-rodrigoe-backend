@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Address extends Model
 {
@@ -77,5 +78,14 @@ class Address extends Model
     public function zip(): BelongsTo
     {
         return $this->belongsTo(CityZip::class, 'zip_id');
+    }
+
+    /**
+     * engineers
+     * @return HasMany<Engineer, Expertise>
+     */
+    public function engineers(): HasMany
+    {
+        return $this->hasMany(Engineer::class);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Expertise extends Model
 {
@@ -30,8 +31,18 @@ class Expertise extends Model
     protected function casts(): array
     {
         return [
+            'id'         => 'integer',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];
+    }
+
+    /**
+     * engineers
+     * @return HasMany<Engineer, Expertise>
+     */
+    public function engineers(): HasMany
+    {
+        return $this->hasMany(Engineer::class);
     }
 }

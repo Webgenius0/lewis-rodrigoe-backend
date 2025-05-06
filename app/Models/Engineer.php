@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Engineer extends Model
 {
@@ -36,5 +37,32 @@ class Engineer extends Model
             'created_at'   => 'datetime',
             'updated_at'   => 'datetime',
         ];
+    }
+
+    /**
+     * user
+     * @return BelongsTo<User, Engineer>
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * expertise
+     * @return BelongsTo<Expertise, Engineer>
+     */
+    public function expertise(): BelongsTo
+    {
+        return $this->belongsTo(Expertise::class);
+    }
+
+    /**
+     * address
+     * @return BelongsTo<Address, Engineer>
+     */
+    public function address(): BelongsTo
+    {
+        return $this->belongsTo(Address::class);
     }
 }
