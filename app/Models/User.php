@@ -176,4 +176,22 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     {
         return $this->hasOne(BankAccount::class);
     }
+
+    /**
+     * reviews user given
+     * @return HasMany<Review, User>
+     */
+    public function reviewsGiven(): HasMany
+    {
+        return $this->hasMany(Review::class, 'user_id');
+    }
+
+    /**
+     * reviews Received
+     * @return HasMany<Review, User>
+     */
+    public function reviewsReceived(): HasMany
+    {
+        return $this->hasMany(Review::class, 'engineer');
+    }
 }
