@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('country_states', function (Blueprint $table) {
             $table->id();
             $table->foreignId('country_id')->constrained('countries')->cascadeOnDelete();
+            $table->string('slug')->unique();
             $table->string('name');
             $table->timestamps();
         });
