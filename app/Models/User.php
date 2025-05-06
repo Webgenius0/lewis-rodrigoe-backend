@@ -131,4 +131,13 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     {
         return $this->hasOne(Engineer::class);
     }
+
+    /**
+     * gasSafetyRegistration
+     * @return HasOne<GasSafetyRegistration, User>
+     */
+    public function gasSafetyRegistration():HasOne
+    {
+        return $this->hasOne(GasSafetyRegistration::class);
+    }
 }
