@@ -21,6 +21,7 @@ class LoginResponce extends JsonResource
             'last_name' => $data['user']['last_name'],
             'handle' => $data['user']['handle'],
             'email' => $data['user']['email'],
+            'avatar' => $data['user']['avatar'],
             'role' => $data['user']['role']['name'],
         ];
         return [
