@@ -2,6 +2,7 @@
 
 namespace App\Services\Api\V1\Auth;
 
+use App\Helpers\Helper;
 use App\Interfaces\Api\V1\Auth\OTPRepositoryInterface;
 use App\Interfaces\Api\V1\Auth\UserRepositoryInterface;
 use Exception;
@@ -42,9 +43,12 @@ class AuthService
     public function register(array $credentials): array
     {
         try {
-
             DB::beginTransaction();
-            $user = $this->userRepository->createUser($credentials);
+            $avatar = null;
+            if (isset($credentials['avatar'])) {
+                $avatar = Helper::uploadFile($credentials['avatar'], 'avatar');
+            }
+            $user = $this->userRepository->createUser($credentials, $avatar);
             $otp = $this->otpRepository->sendOtp($user, 'email');
 
             $token = $token = JWTAuth::attempt(['email' => $credentials['email'], 'password' => $credentials['password']]);
