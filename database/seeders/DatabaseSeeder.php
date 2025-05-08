@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             ServiceSeeder::class,
             PropertyTypeSeeder::class,
+            BoilerTypeSeeder::class,
+            BoilerModelSeeder::class,
             UserSeeder::class,
         ]);
     }
