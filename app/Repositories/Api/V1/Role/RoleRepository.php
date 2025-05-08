@@ -17,7 +17,7 @@ class RoleRepository implements RoleRepositoryInterface
     public function getList(): Collection
     {
         try {
-            $data = Role::select(['id', 'name'])->all();
+            $data = Role::select(['id', 'name'])->where('slug', '!=', 'admin')->all();
             return $data;
         } catch (Exception $e) {
             Log::error('RoleRepository::getList', ['error' => $e->getMessage()]);
