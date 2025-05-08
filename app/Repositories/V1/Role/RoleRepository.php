@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories\Api\V1\Role;
+namespace App\Repositories\V1\Role;
 
-use App\Interfaces\Api\V1\Role\RoleRepositoryInterface;
+use App\Interfaces\V1\Role\RoleRepositoryInterface;
 use App\Models\Role;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;

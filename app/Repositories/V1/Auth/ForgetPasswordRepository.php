@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Repositories\Api\V1\Auth;
+namespace App\Repositories\V1\Auth;
 
 use App\Exceptions\OTPNotVerifiedException;
-use App\Interfaces\Api\V1\Auth\ForgetPasswordRepositoryInterface;
+use App\Interfaces\V1\Auth\ForgetPasswordRepositoryInterface;
 use App\Models\User;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;

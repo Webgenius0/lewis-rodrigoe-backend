@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Repositories\Api\V1\Auth;
+namespace App\Repositories\V1\Auth;
 
 use App\Helpers\Helper;
-use App\Interfaces\Api\V1\Auth\UserRepositoryInterface;
+use App\Interfaces\V1\Auth\UserRepositoryInterface;
 use App\Models\Business;
 use App\Models\User;
 use Exception;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Interfaces\Api\V1\Auth;
+namespace App\Interfaces\V1\Auth;
 
 interface ForgetPasswordRepositoryInterface
 {

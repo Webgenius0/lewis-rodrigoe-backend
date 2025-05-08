@@ -2,7 +2,7 @@
 
 namespace App\Services\Api\V1\Role;
 
-use App\Interfaces\Api\V1\Role\RoleRepositoryInterface;
+use App\Interfaces\V1\Role\RoleRepositoryInterface;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Log;
@@ -13,7 +13,7 @@ class RoleService
 
     /**
      * construct
-     * @param \App\Interfaces\Api\V1\Role\RoleRepositoryInterface $roleRepository
+     * @param \App\Interfaces\V1\Role\RoleRepositoryInterface $roleRepository
      */
     public function __construct(RoleRepositoryInterface $roleRepository)
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Interfaces\Api\V1\Role;
+namespace App\Interfaces\V1\Role;
 
 use App\Models\Role;
 use Illuminate\Database\Eloquent\Collection;

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Repositories\Api\V1\Auth;
+namespace App\Repositories\V1\Auth;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use App\Exceptions\OTPExpiredException;
 use App\Exceptions\OTPMismatchException;
 use App\Exceptions\UserAlreadyVarifiedException;
-use App\Interfaces\Api\V1\Auth\OTPRepositoryInterface;
+use App\Interfaces\V1\Auth\OTPRepositoryInterface;
 use App\Jobs\SendOTPEmail;
 use App\Mail\OTPMail;
 use Exception;

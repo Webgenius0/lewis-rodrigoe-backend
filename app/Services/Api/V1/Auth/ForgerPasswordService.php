@@ -3,13 +3,12 @@
 namespace App\Services\Api\V1\Auth;
 
 use App\Exceptions\OtpNotVerifiedException;
-use App\Interfaces\Api\V1\Auth\ForgetPasswordRepositoryInterface;
+use App\Interfaces\V1\Auth\ForgetPasswordRepositoryInterface;
 use App\Models\User;
 
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
 class ForgerPasswordService
