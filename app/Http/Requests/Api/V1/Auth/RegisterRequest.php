@@ -66,7 +66,7 @@ class RegisterRequest extends FormRequest
             'gender.required' => 'Please select your gender.',
             'gender.in'       => 'The selected gender is invalid. Choose male, female, or others.',
 
-            'phone.phone' => 'Please enter a valid UK phone number in international format.',
+            'phone.phone' => 'Please enter a valid UK phone number.',
         ];
     }
 
