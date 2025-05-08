@@ -2,7 +2,14 @@
 
 namespace App\Interfaces\V1\Role;
 
+use App\Models\Role;
+use Illuminate\Database\Eloquent\Collection;
+
 interface RoleRepositoryInterface
 {
-    // Define the methods your repository should implement
+    /**
+     * getList
+     * @return \Illuminate\Database\Eloquent\Collection<int, Role>
+     */
+    public function getList(): Collection;
 }
