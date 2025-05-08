@@ -54,25 +54,22 @@ class SocialLoginRequest extends FormRequest
 
 
     /**
-     * Handle a failed validation attempt.
-     *
-     * This method is triggered when the validation fails. It checks if the
-     * validation errors for the 'token' or 'provider' fields are present and
-     * selects the first error message to return as part of the response.
-     *
-     * @param Validator $validator The validator instance containing the validation errors.
-     *
-     * @throws ValidationException Throws a validation exception with the custom error response.
+     * failedValidation
+     * @param \Illuminate\Contracts\Validation\Validator $validator
+     * @throws \Illuminate\Validation\ValidationException
+     * @return never
      */
     protected function failedValidation(Validator $validator): never
     {
-        $tokenErrors = $validator->errors()->get('token') ?? null;
-        $providerErrors = $validator->errors()->get('provider') ?? null;
+        $fieldsToCheck = ['token', 'provider'];
+        $message = 'Validation error'; // Default message
 
-        if ($tokenErrors) {
-            $message = $tokenErrors[0];
-        } else {
-            $message = $providerErrors[0];
+        foreach ($fieldsToCheck as $field) {
+            $errors = $validator->errors()->get($field);
+            if (!empty($errors)) {
+                $message = $errors[0];
+                break;
+            }
         }
 
         $response = $this->error(
@@ -82,6 +79,5 @@ class SocialLoginRequest extends FormRequest
         );
 
         throw new ValidationException($validator, $response);
-
     }
 }

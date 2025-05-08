@@ -32,6 +32,9 @@ class RegisterRequest extends FormRequest
             'first_name' => "required|string",
             'last_name'  => "required|string",
             'password'   => "required|confirmed",
+            'avatar'     => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
+            'gender'     => 'required|in:male,femail,others',
+            'phone'      => 'required|phone:GB'
         ];
     }
 
@@ -55,41 +58,45 @@ class RegisterRequest extends FormRequest
 
             'password.required'  => 'Password is required.',
             'password.confirmed' => 'Passwords do not match.',
+
+            'avatar.image' => 'The uploaded file must be an image.',
+            'avatar.mimes' => 'Only jpeg, png, jpg, gif, svg, and webp formats are allowed.',
+            'avatar.max'   => 'The image must not be greater than 15MB.',
+
+            'gender.required' => 'Please select your gender.',
+            'gender.in'       => 'The selected gender is invalid. Choose male, female, or others.',
+
+            'phone.phone' => 'Please enter a valid UK phone number in international format.',
         ];
     }
 
 
 
     /**
-     * Handles failed validation by formatting the validation errors and throwing a ValidationException.
-     *
-     * This method is called when validation fails in a form request. It uses the `error` method
-     * from the `ApiResponse` trait to generate a standardized Errorsresponse with the validation
-     * Errorsmessages and a 422 HTTP status code. It then throws a `ValidationException` with the
-     * formatted response.
-     *
-     * @param Validator $validator The validator instance containing the validation errors.
-     *
-     * @return void Throws a ValidationException with a formatted Errorsresponse.
-     *
-     * @throws ValidationException The exception is thrown to halt further processing and return validation errors.
+     * failedValidation
+     * @param \Illuminate\Contracts\Validation\Validator $validator
+     * @throws \Illuminate\Validation\ValidationException
+     * @return never
      */
-    protected function failedValidation(Validator $validator):never
+    protected function failedValidation(Validator $validator): never
     {
+        $fieldsToCheck = [
+            'first_name',
+            'last_name',
+            'email',
+            'password',
+            'avatar',
+            'gender',
+            'phone',
+        ];
+        $message = 'Validation error'; // Default message
 
-        $firstNameErrors = $validator->errors()->get('first_name') ?? null;
-        $lastNameErrors = $validator->errors()->get('last_name') ?? null;
-        $emailErrors = $validator->errors()->get('email') ?? null;
-        $passwordErrors = $validator->errors()->get('password') ?? null;
-
-        if ($firstNameErrors) {
-            $message = $firstNameErrors[0];
-        } else if ($lastNameErrors) {
-            $message = $lastNameErrors[0];
-        } else if ($emailErrors) {
-            $message = $emailErrors[0];
-        } else if ($passwordErrors) {
-            $message = $passwordErrors[0];
+        foreach ($fieldsToCheck as $field) {
+            $errors = $validator->errors()->get($field);
+            if (!empty($errors)) {
+                $message = $errors[0];
+                break;
+            }
         }
 
         $response = $this->error(
@@ -97,6 +104,7 @@ class RegisterRequest extends FormRequest
             $message,
             $validator->errors(),
         );
+
         throw new ValidationException($validator, $response);
     }
 }

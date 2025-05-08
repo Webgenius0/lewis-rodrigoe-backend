@@ -51,29 +51,22 @@ class ForgetPasswordResetRequest extends FormRequest
 
 
     /**
-     * Handles failed validation by formatting the validation errors and throwing a ValidationException.
-     *
-     * This method is called when validation fails in a form request. It uses the `error` method
-     * from the `ApiResponse` trait to generate a standardized Errorsresponse with the validation
-     * Errorsmessages and a 422 HTTP status code. It then throws a `ValidationException` with the
-     * formatted response.
-     *
-     * @param Validator $validator The validator instance containing the validation errors.
-     *
-     * @return void Throws a ValidationException with a formatted Errorsresponse.
-     *
-     * @throws ValidationException The exception is thrown to halt further processing and return validation errors.
+     * failedValidation
+     * @param \Illuminate\Contracts\Validation\Validator $validator
+     * @throws \Illuminate\Validation\ValidationException
+     * @return never
      */
-    protected function failedValidation(Validator $validator):never
+    protected function failedValidation(Validator $validator): never
     {
+        $fieldsToCheck = ['email', 'password'];
+        $message = 'Validation error';
 
-        $emailErrors = $validator->errors()->get('email') ?? null;
-        $passwordErrors = $validator->errors()->get('password') ?? null;
-
-        if ($emailErrors) {
-            $message = $emailErrors[0];
-        } else if ($passwordErrors) {
-            $message = $passwordErrors[0];
+        foreach ($fieldsToCheck as $field) {
+            $errors = $validator->errors()->get($field);
+            if (!empty($errors)) {
+                $message = $errors[0];
+                break;
+            }
         }
 
         $response = $this->error(
@@ -81,6 +74,7 @@ class ForgetPasswordResetRequest extends FormRequest
             $message,
             $validator->errors(),
         );
+
         throw new ValidationException($validator, $response);
     }
 }
