@@ -8,3 +8,4 @@ use Illuminate\Support\Facades\Route;
  */
 require 'v1/auth/auth.php';                        // All Auth routes
 require 'v1/role/role.php';                        // All Auth routes
+require 'v1/service/service.php';                        // All Auth routes
