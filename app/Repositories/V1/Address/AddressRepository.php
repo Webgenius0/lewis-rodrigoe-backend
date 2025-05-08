@@ -2,9 +2,36 @@
 
 namespace App\Repositories\V1\Address;
 
+use App\Helpers\Helper;
 use App\Interfaces\V1\Address\AddressRepositoryInterface;
+use App\Models\Address;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class AddressRepository implements AddressRepositoryInterface
 {
-    // Your Repository logic goes here
+    /**
+     * create
+     * @param array $data
+     */
+    public function create(array $data)
+    {
+        try {
+            return Address::created([
+                'uin'        => Helper::generateUniqueId('addresses', 'uin'),
+                'label'      => $data['label'],
+                'street'     => $data['street'],
+                'apartment'  => $data['apartment'],
+                'country_id' => $data['country_id'],
+                'state_id'   => $data['state_id'],
+                'city_id'    => $data['city_id'],
+                'zip_id '    => $data['zip_id '],
+                'latitude'   => $data['latitude'],
+                'longitude'  => $data['longitude'],
+            ]);
+        }catch(Exception $e) {
+            Log::error('AddressRepository::getList', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
 }

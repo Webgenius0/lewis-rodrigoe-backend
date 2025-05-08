@@ -4,5 +4,9 @@ namespace App\Interfaces\V1\Address;
 
 interface AddressRepositoryInterface
 {
-    // Define the methods your repository should implement
+    /**
+     * create
+     * @param array $data
+     */
+    public function create(array $data);
 }
