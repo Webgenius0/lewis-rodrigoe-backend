@@ -39,6 +39,10 @@ class Plan extends Model
         ];
     }
 
+    /**
+     * users
+     * @return BelongsToMany<User, Plan, \Illuminate\Database\Eloquent\Relations\Pivot>
+     */
     public function users():BelongsToMany
     {
         return $this->belongsToMany(User::class);
