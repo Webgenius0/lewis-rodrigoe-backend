@@ -4,6 +4,7 @@ namespace App\Services\Api\V1\Property;
 
 use App\Interfaces\V1\Address\AddressRepositoryInterface;
 use App\Interfaces\V1\Property\PropertyRepositoryInterface;
+use App\Models\Property;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +18,7 @@ class PropertyService
      */
     private PropertyRepositoryInterface $propertyRepository;
     private AddressRepositoryInterface $addressRepository;
-    private $user;
+    protected $user;
 
     /**
      * construct
@@ -34,15 +35,16 @@ class PropertyService
     /**
      * createUserProperty
      * @param array $data
+     * @return \App\Models\Property
      */
-    public function createUserProperty(array $data)
+    public function createUserProperty(array $data): Property
     {
         DB::beginTransaction();
         try {
             $address = $this->addressRepository->createAddress($data);
             $property = $this->propertyRepository->createProperty($data, $this->user->id, $address->id);
             DB::commit();
-            return $property;
+            return $property->load('address');
         } catch (Exception $e) {
             DB::rollBack();
             Log::error('PropertyService::createUserProperty', ['error' => $e->getMessage()]);
