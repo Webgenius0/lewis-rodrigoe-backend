@@ -20,16 +20,17 @@ class PropertyRepository implements PropertyRepositoryInterface
     {
         try {
             return Property::created([
-                'sn' => Helper::generateUniqueId('properties', 'sn'),
-                'user_id' => $userId,
-                'address_id' => $addressId,
-                'boiler_type_id' => $data['boiler_type_id'],
-                'boiler_model_id' => $data['boiler_model_id'],
-                'property_type_id' => $data['property_type_id'],
-                'quantity' => $data['quantity'],
-                'purchase_year' => $data['purchase_year'],
-                'last_service_date' => $data['last_service_date'],
-                'location' => $data['location'],
+                'sn'                 => Helper::generateUniqueId('properties', 'sn'),
+                'user_id'            => $userId,
+                'address_id'         => $addressId,
+                'boiler_type_id'     => $data['boiler_type_id'],
+                'boiler_model_id'    => $data['boiler_model_id'],
+                'property_type_id'   => $data['property_type_id'],
+                'service_id'         => $data['service_id'],
+                'quantity'           => $data['quantity'],
+                'purchase_year'      => $data['purchase_year'],
+                'last_service_date'  => $data['last_service_date'],
+                'location'           => $data['location'],
                 'accessability_info' => $data['accessability_info'],
             ]);
         } catch (Exception $e) {

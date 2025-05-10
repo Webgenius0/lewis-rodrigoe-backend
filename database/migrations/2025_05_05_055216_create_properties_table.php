@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('boiler_type_id')->nullable()->constrained('boiler_types')->nullOnDelete();
             $table->foreignId('boiler_model_id')->nullable()->constrained('boiler_models')->nullOnDelete();
             $table->foreignId('property_type_id')->nullable()->constrained('property_types')->nullOnDelete();
+            $table->foreignId('service_id')->nullable()->constrained('services')->nullOnDelete();
             $table->integer('quantity');
             $table->date('purchase_year');
             $table->date('last_service_date')->nullable();
