@@ -7,6 +7,7 @@ use App\Interfaces\V1\Auth\ForgetPasswordRepositoryInterface;
 use App\Interfaces\V1\Auth\OTPRepositoryInterface;
 use App\Interfaces\V1\Auth\PasswordRepositoryInterface;
 use App\Interfaces\V1\Auth\UserRepositoryInterface;
+use App\Interfaces\V1\Property\PropertyRepositoryInterface;
 use App\Interfaces\V1\Role\RoleRepositoryInterface;
 use App\Interfaces\V1\Service\ServiceRepositoryInterface;
 use App\Repositories\V1\Address\AddressRepository;
@@ -14,6 +15,7 @@ use App\Repositories\V1\Auth\ForgetPasswordRepository;
 use App\Repositories\V1\Auth\OTPRepository;
 use App\Repositories\V1\Auth\PasswordRepository;
 use App\Repositories\V1\Auth\UserRepository;
+use App\Repositories\V1\Property\PropertyRepository;
 use App\Repositories\V1\Role\RoleRepository;
 use App\Repositories\V1\Service\ServiceRepository;
 use Illuminate\Support\ServiceProvider;
@@ -39,6 +41,10 @@ class AppServiceProvider extends ServiceProvider
 
         // address
         $this->app->bind(AddressRepositoryInterface::class, AddressRepository::class);
+
+        // property
+        $this->app->bind(PropertyRepositoryInterface::class, PropertyRepository::class);
+
 
     }
 
