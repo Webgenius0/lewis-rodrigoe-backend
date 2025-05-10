@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1\Property;
 
 use App\Http\Controllers\Api\V1\Controller;
 use App\Http\Requests\Api\V1\Property\CreateRequest;
+use App\Http\Resources\Api\V1\Property\StoreResource;
 use App\Services\Api\V1\Property\PropertyService;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -37,7 +38,7 @@ class PropertyController extends Controller
         try {
             $validatedData = $createRequest->validated();
             $response = $this->propertyService->createUserProperty($validatedData);
-            return $this->success(201, 'property created', $response);
+            return $this->success(201, 'property created', new StoreResource($response));
         } catch (Exception $e) {
             Log::error("PropertyController::store", ['message' => $e->getMessage()]);
             return $this->error(500, 'server error');
