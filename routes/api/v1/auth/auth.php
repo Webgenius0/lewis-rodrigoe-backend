@@ -7,7 +7,7 @@ use App\Http\Controllers\Api\V1\Auth\PasswordController;
 use App\Http\Controllers\Api\V1\Auth\SocialLoginController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('/v1/auth')->name('api.auth.')->group(function () {
+Route::prefix('/auth')->name('api.auth.')->group(function () {
 
     // Guest routes - Accessible by unauthenticated users only
     Route::middleware('guest:api')->group(function () {
