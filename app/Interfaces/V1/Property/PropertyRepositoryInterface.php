@@ -2,6 +2,8 @@
 
 namespace App\Interfaces\V1\Property;
 
+use App\Models\Property;
+
 interface PropertyRepositoryInterface
 {
     /**
@@ -9,6 +11,7 @@ interface PropertyRepositoryInterface
      * @param array $data
      * @param int $userId
      * @param int $addressId
+     * @return Property
      */
-    public function createProperty(array $data, int $userId, int $addressId);
+    public function createProperty(array $data, int $userId, int $addressId): Property;
 }

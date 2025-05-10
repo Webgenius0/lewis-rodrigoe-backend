@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             PropertyTypeSeeder::class,
             BoilerTypeSeeder::class,
             BoilerModelSeeder::class,
+            LocationSeeder::class,
             UserSeeder::class,
         ]);
     }

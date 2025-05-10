@@ -39,7 +39,7 @@ class PropertyService
     {
         DB::beginTransaction();
         try {
-            $address = $this->addressRepository->create($data);
+            $address = $this->addressRepository->createAddress($data);
             $property = $this->propertyRepository->createProperty($data, $this->user->id, $address->id);
             DB::commit();
             return $property;

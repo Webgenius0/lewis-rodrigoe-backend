@@ -15,11 +15,12 @@ class PropertyRepository implements PropertyRepositoryInterface
      * @param array $data
      * @param int $userId
      * @param int $addressId
+     * @return Property
      */
-    public function createProperty(array $data, int $userId, int $addressId)
+    public function createProperty(array $data, int $userId, int $addressId): Property
     {
         try {
-            return Property::created([
+            return Property::create([
                 'sn'                 => Helper::generateUniqueId('properties', 'sn'),
                 'user_id'            => $userId,
                 'address_id'         => $addressId,

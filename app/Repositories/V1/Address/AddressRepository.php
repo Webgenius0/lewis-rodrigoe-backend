@@ -11,13 +11,14 @@ use Illuminate\Support\Facades\Log;
 class AddressRepository implements AddressRepositoryInterface
 {
     /**
-     * create
+     * create Address
      * @param array $data
+     * @return Address
      */
-    public function create(array $data)
+    public function createAddress(array $data): Address
     {
         try {
-            return Address::created([
+            return Address::create([
                 'uin'        => Helper::generateUniqueId('addresses', 'uin'),
                 'label'      => $data['label'],
                 'street'     => $data['street'],
@@ -25,7 +26,7 @@ class AddressRepository implements AddressRepositoryInterface
                 'country_id' => $data['country_id'],
                 'state_id'   => $data['state_id'],
                 'city_id'    => $data['city_id'],
-                'zip_id '    => $data['zip_id '],
+                'zip_id '    => $data['zip_id'],
                 'latitude'   => $data['latitude'],
                 'longitude'  => $data['longitude'],
             ]);
