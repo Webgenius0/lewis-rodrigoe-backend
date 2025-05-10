@@ -24,7 +24,7 @@ return new class extends Migration
             $table->date('last_service_date')->nullable();
             $table->string('location');
             $table->text('accessability_info');
-            $table->decimal('price', 8,2)->nullable();
+            $table->decimal('price', 8,2)->nullable()->default(null);
             $table->timestamps();
         });
     }
