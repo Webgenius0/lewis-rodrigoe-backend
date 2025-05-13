@@ -14,8 +14,8 @@ jobs:
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
-        server: ftp.*****.xyz
-        username: api@****.xyz
+        server: ftp.softvencefsd.xyz
+        username: api@lewis-rodrigoe.softvencefsd.xyz
         password: ${{ secrets.ftp_password }}
         port: 21
         protocol: "ftp"
