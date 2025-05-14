@@ -38,7 +38,6 @@ class CreateRequest extends FormRequest
             'additional_info'      => 'nullable|string',
             'image'                => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
             'video'                => 'nullable|file|mimes:mp4,mov,avi,webm|max:102400',
-            'engineer_assigned_at' => 'nullable|date',
         ];
     }
 
@@ -64,7 +63,6 @@ class CreateRequest extends FormRequest
             'additional_info',
             'image',
             'video',
-            'engineer_assigned_at',
         ];
         $message = 'Validation error';
 

@@ -33,8 +33,6 @@ class PropertyJobRepository implements PropertyJobRepositoryInterface
                 'additional_info'      => $data['additional_info'],
                 'image'                => $data['image'],
                 'video'                => $data['video'],
-                'status'               => $data['status'],
-                'engineer_assigned_at' => $data['engineer_assigned_at'],
             ]);
         } catch (Exception $e) {
             Log::error('PropertyJobRepository::createJob', ['error' => $e->getMessage()]);
