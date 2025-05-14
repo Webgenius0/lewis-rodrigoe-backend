@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1\Property\Job;
 
 use App\Http\Controllers\Api\V1\Controller;
 use App\Http\Requests\Api\V1\Property\Job\CreateRequest;
+use App\Http\Resources\Api\V1\Property\Job\CreateResource;
 use App\Services\Api\V1\Property\Job\PropertyJobService;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -37,7 +38,7 @@ class PropertyJonController extends Controller
         try {
             $validatedData = $createRequest->validated();
             $response = $this->propertyJobService->createJobforProperty($validatedData);
-            return $this->success(201, 'Job Created', $response);
+            return $this->success(201, 'Job Created', new CreateResource($response));
         }catch (Exception $e) {
             Log::error("PropertyController::store", ['message' => $e->getMessage()]);
             return $this->error(500, 'server error');
