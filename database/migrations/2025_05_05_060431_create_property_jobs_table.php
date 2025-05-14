@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('video')->nullable();
             $table->enum('status', ['active', 'inactive', 'pending',  'ongoing', 'completed', 'engineer assigned']);
-            $table->timestamp('engineer_assigned_at');
+            $table->timestamp('engineer_assigned_at')->nullable();
             $table->timestamps();
             $table->foreign('engineer')->references('id')->on('users')->nullOnDelete();
         });
