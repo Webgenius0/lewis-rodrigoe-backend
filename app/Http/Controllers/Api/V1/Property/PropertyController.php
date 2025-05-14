@@ -44,4 +44,19 @@ class PropertyController extends Controller
             return $this->error(500, 'server error');
         }
     }
+
+    /**
+     * userDropdown
+     * @return JsonResponse
+     */
+    public function userDropdown(): JsonResponse
+    {
+        try {
+            $response = $this->propertyService->userPropertyDropdown();
+            return $this->success(200, 'users property', $response);
+        } catch (Exception $e) {
+            Log::error("PropertyController::userDropdown", ['message' => $e->getMessage()]);
+            return $this->error(500, 'server error');
+        }
+    }
 }

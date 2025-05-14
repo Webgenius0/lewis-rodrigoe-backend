@@ -51,4 +51,17 @@ class PropertyService
             throw $e;
         }
     }
+
+    /**
+     * userPropertyDropdown
+     */
+    public function userPropertyDropdown()
+    {
+        try {
+            return $this->propertyRepository->getUserPropertyAddressLabel($this->user->id);
+        }catch (Exception $e) {
+            Log::error('propertyDropdownOfUser::createUserProperty', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
 }

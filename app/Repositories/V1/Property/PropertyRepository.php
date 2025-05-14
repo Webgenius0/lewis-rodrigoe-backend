@@ -4,6 +4,7 @@ namespace App\Repositories\V1\Property;
 
 use App\Helpers\Helper;
 use App\Interfaces\V1\Property\PropertyRepositoryInterface;
+use App\Models\Address;
 use App\Models\Property;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -36,6 +37,20 @@ class PropertyRepository implements PropertyRepositoryInterface
             ]);
         } catch (Exception $e) {
             Log::error('PropertyRepository::createProperty', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
+    /**
+     * getUserPropertyAddressLabel
+     * @param int $userId
+     */
+    public function getUserPropertyAddressLabel(int $userId)
+    {
+        try {
+            return Property::with(['address'])->whereUserId($userId)->get();
+        }catch (Exception $e) {
+            Log::error('PropertyRepository::getUserPropertyAddressLabel', ['error' => $e->getMessage()]);
             throw $e;
         }
     }

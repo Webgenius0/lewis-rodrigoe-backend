@@ -14,4 +14,12 @@ interface PropertyRepositoryInterface
      * @return Property
      */
     public function createProperty(array $data, int $userId, int $addressId): Property;
+
+
+
+    /**
+     * getUserPropertyAddressLabel
+     * @param int $userId
+     */
+    public function getUserPropertyAddressLabel(int $userId);
 }
