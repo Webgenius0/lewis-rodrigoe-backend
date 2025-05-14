@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1\Property;
 
 use App\Http\Controllers\Api\V1\Controller;
 use App\Http\Requests\Api\V1\Property\CreateRequest;
+use App\Http\Resources\Api\V1\Property\DropdownResource;
 use App\Http\Resources\Api\V1\Property\StoreResource;
 use App\Services\Api\V1\Property\PropertyService;
 use Exception;
@@ -53,7 +54,7 @@ class PropertyController extends Controller
     {
         try {
             $response = $this->propertyService->userPropertyDropdown();
-            return $this->success(200, 'users property', $response);
+            return $this->success(200, 'users property', new DropdownResource($response));
         } catch (Exception $e) {
             Log::error("PropertyController::userDropdown", ['message' => $e->getMessage()]);
             return $this->error(500, 'server error');

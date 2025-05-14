@@ -55,7 +55,7 @@ class PropertyService
     /**
      * userPropertyDropdown
      */
-    public function userPropertyDropdown()
+    public function userPropertyDropdown():mixed
     {
         try {
             return $this->propertyRepository->getUserPropertyAddressLabel($this->user->id);

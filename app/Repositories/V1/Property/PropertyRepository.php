@@ -48,7 +48,7 @@ class PropertyRepository implements PropertyRepositoryInterface
     public function getUserPropertyAddressLabel(int $userId)
     {
         try {
-            return Property::with(['address'])->whereUserId($userId)->get();
+            return Property::select(['id', 'address_id'])->with(['address:id,label,street,apartment'])->whereUserId($userId)->get();
         }catch (Exception $e) {
             Log::error('PropertyRepository::getUserPropertyAddressLabel', ['error' => $e->getMessage()]);
             throw $e;
