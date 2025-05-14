@@ -2,7 +2,7 @@
 
 namespace App\Interfaces\V1\Property\Job;
 
-interface JobRepositoryInterface
+interface PropertyJobRepositoryInterface
 {
     // Define the methods your repository should implement
 }
