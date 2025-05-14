@@ -2,7 +2,14 @@
 
 namespace App\Interfaces\V1\Property\Job;
 
+use App\Models\PropertyJob;
+
 interface PropertyJobRepositoryInterface
 {
-    // Define the methods your repository should implement
+    /**
+     * createJob
+     * @param array $data
+     * @return PropertyJob
+     */
+    public function createJob(array $data, int $userId): PropertyJob;
 }
