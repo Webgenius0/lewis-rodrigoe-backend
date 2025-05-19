@@ -22,7 +22,6 @@ class PropertyJobRepository implements PropertyJobRepositoryInterface
                 'sn'                   => Helper::generateUniqueId('property_jobs', 'sn'),
                 'user_id'              => $userId,
                 'property_id'          => $data['property_id'],
-                'engineer'             => $data['engineer'],
                 'title'                => $data['title'],
                 'description'          => $data['description'],
                 'date_time'            => $data['date_time'],

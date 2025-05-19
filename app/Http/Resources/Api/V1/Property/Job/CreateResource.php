@@ -21,7 +21,6 @@ class CreateResource extends JsonResource
             'sn' => $data['sn'],
             'user_id' => $data['user_id'],
             'property_id' => $data['property_id'],
-            'engineer' => $data['engineer'],
             'title' => $data['title'],
             'description' => $data['description'],
             'date_time' => $data['date_time'],

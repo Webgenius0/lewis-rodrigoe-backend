@@ -27,7 +27,6 @@ class CreateRequest extends FormRequest
     {
         return [
             'property_id'          => 'required|exists:properties,id',
-            'engineer'             => 'required|exists:users,id',
             'title'                => 'required|string',
             'description'          => 'required|string',
             'date_time'            => 'required|date',
@@ -52,7 +51,6 @@ class CreateRequest extends FormRequest
     {
         $fieldsToCheck = [
             'property_id',
-            'engineer',
             'title',
             'description',
             'date_time',
