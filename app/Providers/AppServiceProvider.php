@@ -11,6 +11,7 @@ use App\Interfaces\V1\Auth\ForgetPasswordRepositoryInterface;
 use App\Interfaces\V1\Auth\OTPRepositoryInterface;
 use App\Interfaces\V1\Auth\PasswordRepositoryInterface;
 use App\Interfaces\V1\Auth\UserRepositoryInterface;
+use App\Interfaces\V1\Boiler\Type\BoilerTypeRepositoryInterface;
 use App\Interfaces\V1\Property\Job\PropertyJobRepositoryInterface;
 use App\Interfaces\V1\Property\PropertyRepositoryInterface;
 use App\Interfaces\V1\Role\RoleRepositoryInterface;
@@ -24,6 +25,7 @@ use App\Repositories\V1\Auth\ForgetPasswordRepository;
 use App\Repositories\V1\Auth\OTPRepository;
 use App\Repositories\V1\Auth\PasswordRepository;
 use App\Repositories\V1\Auth\UserRepository;
+use App\Repositories\V1\Boiler\Type\BoilerTypeRepository;
 use App\Repositories\V1\Property\Job\PropertyJobRepository;
 use App\Repositories\V1\Property\PropertyRepository;
 use App\Repositories\V1\Role\RoleRepository;
@@ -61,6 +63,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(StateRepositoryInterface::class, StateRepository::class);
         $this->app->bind(CityRepositoryInterface::class, CityRepository::class);
         $this->app->bind(ZipRepositoryInterface::class, ZipRepository::class);
+
+
+        // boiler
+        $this->app->bind(BoilerTypeRepositoryInterface::class, BoilerTypeRepository::class);
+
     }
 
     /**

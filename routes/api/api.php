@@ -15,4 +15,5 @@ Route::prefix('/v1')->group(function () {
     require 'v1/address/state/state.php';  // All Auth routes
     require 'v1/address/city/city.php';  // All Auth routes
     require 'v1/address/zip/zip.php';  // All Auth routes
+    require 'v1/boiler/type/type.php';  // All Auth routes
 });
