@@ -13,6 +13,7 @@ use App\Interfaces\V1\Auth\PasswordRepositoryInterface;
 use App\Interfaces\V1\Auth\UserRepositoryInterface;
 use App\Interfaces\V1\Boiler\Model\BoilerModelRepositoryInterface;
 use App\Interfaces\V1\Boiler\Type\BoilerTypeRepositoryInterface;
+use App\Interfaces\V1\Engineer\EngineerRepositoryInterface;
 use App\Interfaces\V1\Property\Job\PropertyJobRepositoryInterface;
 use App\Interfaces\V1\Property\PropertyRepositoryInterface;
 use App\Interfaces\V1\Property\Type\PropertyTypeRepositoryInterface;
@@ -29,6 +30,7 @@ use App\Repositories\V1\Auth\PasswordRepository;
 use App\Repositories\V1\Auth\UserRepository;
 use App\Repositories\V1\Boiler\Model\BoilerModelRepository;
 use App\Repositories\V1\Boiler\Type\BoilerTypeRepository;
+use App\Repositories\V1\Engineer\EngineerRepository;
 use App\Repositories\V1\Property\Job\PropertyJobRepository;
 use App\Repositories\V1\Property\PropertyRepository;
 use App\Repositories\V1\Property\Type\PropertyTypeRepository;
@@ -69,10 +71,12 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(CityRepositoryInterface::class, CityRepository::class);
         $this->app->bind(ZipRepositoryInterface::class, ZipRepository::class);
 
-
         // boiler
         $this->app->bind(BoilerTypeRepositoryInterface::class, BoilerTypeRepository::class);
         $this->app->bind(BoilerModelRepositoryInterface::class, BoilerModelRepository::class);
+
+        // engineer
+        $this->app->bind(EngineerRepositoryInterface::class, EngineerRepository::class);
 
     }
 

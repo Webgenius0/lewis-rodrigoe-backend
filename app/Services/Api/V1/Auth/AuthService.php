@@ -5,6 +5,9 @@ namespace App\Services\Api\V1\Auth;
 use App\Helpers\Helper;
 use App\Interfaces\V1\Auth\OTPRepositoryInterface;
 use App\Interfaces\V1\Auth\UserRepositoryInterface;
+use App\Interfaces\V1\Engineer\EngineerRepositoryInterface;
+use App\Models\User;
+use App\Repositories\V1\Address\AddressRepository;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -16,6 +19,8 @@ class AuthService
     protected UserRepositoryInterface $userRepository;
     protected OTPRepositoryInterface $otpRepository;
 
+    private EngineerRepositoryInterface $engineerRepository;
+
 
     /**
      * Constructor for initializing the class with UserRepository and OTPRepository dependencies.
@@ -23,10 +28,14 @@ class AuthService
      * @param UserRepositoryInterface $userRepository The repository used for user-related data operations.
      * @param OTPRepositoryInterface $otpRepository The repository used for OTP-related data operations.
      */
-    public function __construct(UserRepositoryInterface $userRepository, OTPRepositoryInterface $otpRepository)
-    {
+    public function __construct(
+        UserRepositoryInterface $userRepository,
+        OTPRepositoryInterface $otpRepository,
+        EngineerRepositoryInterface $engineerRepository
+    ) {
         $this->userRepository = $userRepository;
         $this->otpRepository = $otpRepository;
+        $this->engineerRepository = $engineerRepository;
     }
 
     /**
@@ -79,6 +88,10 @@ class AuthService
             DB::beginTransaction();
             $response = $this->register($data, 4);
             $userId = $response['user']['id'];
+            $user = User::find($userId);
+            $addressRepository = new AddressRepository();
+            $address = $addressRepository->createAddress($data);
+            $engineer = $this->engineerRepository->createEngineer($data, $address->id, $user->id);
             DB::commit();
             return $response;
         } catch (Exception $e) {
