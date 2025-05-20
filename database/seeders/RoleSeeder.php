@@ -38,6 +38,18 @@ class RoleSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'slug' => 'plumber',
+                'name' => 'Plumber',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'slug' => 'both',
+                'name' => 'Both',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 }
