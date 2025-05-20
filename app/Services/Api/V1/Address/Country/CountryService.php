@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Api\V1\Country;
+namespace App\Services\Api\V1\Address\Country;
 
 use App\Interfaces\V1\Address\Country\CountryRepositoryInterface;
 use Exception;

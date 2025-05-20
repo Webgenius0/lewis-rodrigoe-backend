@@ -3,8 +3,23 @@
 namespace App\Repositories\V1\Address\State;
 
 use App\Interfaces\V1\Address\State\StateRepositoryInterface;
+use App\Models\CountryState;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class StateRepository implements StateRepositoryInterface
 {
-    // Your Repository logic goes here
+    /**
+     * getCountryStates
+     * @param int $countryId
+     */
+    public function getCountryStates(int $countryId): mixed
+    {
+        try {
+            return CountryState::whereCountryId($countryId)->get();
+        } catch (Exception $e) {
+            Log::error('StateRepository::getCountryStates', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
 }

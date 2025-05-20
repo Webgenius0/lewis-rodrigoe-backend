@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\Country;
+namespace App\Http\Controllers\Api\V1\Address\Country;
 
 use App\Http\Controllers\Api\V1\Controller;
-use App\Services\Api\V1\Country\CountryService;
+use App\Services\Api\V1\Address\Country\CountryService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -17,10 +17,7 @@ class CountryController extends Controller
      */
     private CountryService $countryService;
 
-    /**
-     * __construct
-     * @param \App\Services\Api\V1\Country\CountryService $countryService
-     */
+
     public function __construct(CountryService $countryService)
     {
         $this->countryService = $countryService;

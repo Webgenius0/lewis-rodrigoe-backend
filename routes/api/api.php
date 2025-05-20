@@ -12,4 +12,5 @@ Route::prefix('/v1')->group(function () {
     require 'v1/service/service.php';    // All Auth routes
     require 'v1/property/property.php';  // All Auth routes
     require 'v1/address/country/country.php';  // All Auth routes
+    require 'v1/address/state/state.php';  // All Auth routes
 });
