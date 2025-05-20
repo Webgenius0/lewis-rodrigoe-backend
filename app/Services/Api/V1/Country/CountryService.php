@@ -34,7 +34,7 @@ class CountryService
         try {
             return $this->countryRepository->getList();
         }catch (Exception $e) {
-                        Log::error('CountryService::getIndex', ['error' => $e->getMessage()]);
+            Log::error('CountryService::getIndex', ['error' => $e->getMessage()]);
             throw $e;
         }
     }
