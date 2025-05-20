@@ -26,11 +26,10 @@ class EmployRegistrationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // 'avatar'     => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
             'email'        => "required|email|unique:users",
             'first_name'   => "required|string",
             'last_name'    => "required|string",
-            'password'    => "required|confirmed",
+            'password'     => "required|confirmed",
             'gender'       => 'required|in:male,femail,others',
             'phone'        => 'required|phone:GB',
             'expertise_id' => 'required|exists:expertises,id',

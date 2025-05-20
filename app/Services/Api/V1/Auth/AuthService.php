@@ -40,7 +40,7 @@ class AuthService
      *
      * @return array The registration result, including the generated token, user's role, OTP status, and verification status.
      */
-    public function register(array $credentials): array
+    public function register(array $credentials, $role = 2): array
     {
         try {
             DB::beginTransaction();
@@ -48,7 +48,7 @@ class AuthService
             if (isset($credentials['avatar'])) {
                 $avatar = Helper::uploadFile($credentials['avatar'], 'avatar');
             }
-            $user = $this->userRepository->createUser($credentials, $avatar);
+            $user = $this->userRepository->createUser($credentials, $avatar, $role);
             $otp = $this->otpRepository->sendOtp($user, 'email');
 
             $token = $token = JWTAuth::attempt(['email' => $credentials['email'], 'password' => $credentials['password']]);
@@ -61,6 +61,26 @@ class AuthService
                 $query->select('id', 'user_id');
             }, 'role']);
             return ['token' => $token, 'user' => $user, 'verify' => false];
+        } catch (Exception $e) {
+            DB::rollBack();
+            Log::error('AuthService::register', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
+    /**
+     * engineerRegistration
+     * @param mixed $data
+     * @return array
+     */
+    public function engineerRegistration($data): array
+    {
+        try {
+            DB::beginTransaction();
+            $response = $this->register($data, 4);
+            $userId = $response['user']['id'];
+            DB::commit();
+            return $response;
         } catch (Exception $e) {
             DB::rollBack();
             Log::error('AuthService::register', ['error' => $e->getMessage()]);

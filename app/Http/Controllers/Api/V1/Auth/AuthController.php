@@ -73,7 +73,10 @@ class AuthController extends Controller
     public function employRegistration(EmployRegistrationRequest $employRegistrationRequest)
     {
         try {
-            return $this->success(201, 'Engineer created');
+            $validatedData = $employRegistrationRequest->validated();
+
+            $response = $this->authService->engineerRegistration($validatedData);
+            return $this->success(201, 'Engineer created', $response);
         }catch (Exception $e) {
             Log::error('AuthController::employRegistration', ['error' => $e->getMessage()]);
             return $this->error(500, 'Server Error', $e->getMessage());
