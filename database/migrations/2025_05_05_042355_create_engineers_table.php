@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('expertise_id')->constrained('expertises')->cascadeOnDelete();
             $table->foreignId('address_id')->constrained('addresses')->cascadeOnDelete();
             $table->string('ni')->nullable()->unique()->comment('national identification number');
-            $table->string('utr')->nullable()->unique()->comment('unique taxpayer reference');
+            $table->boolean('utr')->nullable()->unique()->comment('unique taxpayer reference');
             $table->timestamps();
         });
     }
