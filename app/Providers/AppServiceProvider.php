@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Interfaces\V1\Address\AddressRepositoryInterface;
+use App\Interfaces\V1\Address\City\CityRepositoryInterface;
 use App\Interfaces\V1\Address\Country\CountryRepositoryInterface;
 use App\Interfaces\V1\Address\State\StateRepositoryInterface;
 use App\Interfaces\V1\Auth\ForgetPasswordRepositoryInterface;
@@ -14,6 +15,7 @@ use App\Interfaces\V1\Property\PropertyRepositoryInterface;
 use App\Interfaces\V1\Role\RoleRepositoryInterface;
 use App\Interfaces\V1\Service\ServiceRepositoryInterface;
 use App\Repositories\V1\Address\AddressRepository;
+use App\Repositories\V1\Address\City\CityRepository;
 use App\Repositories\V1\Address\Country\CountryRepository;
 use App\Repositories\V1\Address\State\StateRepository;
 use App\Repositories\V1\Auth\ForgetPasswordRepository;
@@ -55,6 +57,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(AddressRepositoryInterface::class, AddressRepository::class);
         $this->app->bind(CountryRepositoryInterface::class, CountryRepository::class);
         $this->app->bind(StateRepositoryInterface::class, StateRepository::class);
+        $this->app->bind(CityRepositoryInterface::class, CityRepository::class);
     }
 
     /**
