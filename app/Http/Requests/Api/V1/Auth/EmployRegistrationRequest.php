@@ -30,10 +30,10 @@ class EmployRegistrationRequest extends FormRequest
             'email'        => "required|email|unique:users",
             'first_name'   => "required|string",
             'last_name'    => "required|string",
-            'password '    => "required|confirmed",
+            'password'    => "required|confirmed",
             'gender'       => 'required|in:male,femail,others',
             'phone'        => 'required|phone:GB',
-            'expertise_id' => 'required|in:1,2,3',
+            'expertise_id' => 'required|exists:expertises,id',
 
             'ni'  => 'required|string',
             'utr' => 'required|boolean',
@@ -56,7 +56,6 @@ class EmployRegistrationRequest extends FormRequest
             'driving_licence_cart_front'  => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
             'driving_licence_card_back'   => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
 
-
             'label'      => 'required|string',
             'street'     => 'required|string',
             'apartment'  => 'nullable|string',
@@ -66,7 +65,6 @@ class EmployRegistrationRequest extends FormRequest
             'zip_id'     => 'required|exists:city_zips,id',
             'latitude'   => 'nullable|numeric',
             'longitude'  => 'nullable|numeric',
-
 
             'bank_accounts_name'           => 'required|string',
             'bank_accounts_number'         => 'required|string',

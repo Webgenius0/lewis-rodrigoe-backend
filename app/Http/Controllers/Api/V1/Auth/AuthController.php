@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1\Auth;
 
 use App\Http\Controllers\Api\V1\Controller;
+use App\Http\Requests\Api\V1\Auth\EmployRegistrationRequest;
 use App\Http\Resources\Api\V1\Auth\LoginResponce;
 use App\Http\Resources\Api\V1\Auth\RegisterUserResource;
 use App\Services\Api\V1\Auth\AuthService;
@@ -57,20 +58,25 @@ class AuthController extends Controller
 
             $response = $this->authService->register($validatedData);
 
-            return $this->success(200, 'Registration Successful', new RegisterUserResource($response));
+            return $this->success(201, 'Registration Successful', new RegisterUserResource($response));
         } catch (Exception $e) {
             Log::error('AuthController::register', ['error' => $e->getMessage()]);
             return $this->error(500, 'Server Error', $e->getMessage());
         }
     }
 
-
-    public function employRegistration()
+    /**
+     * employRegistration
+     * @param \App\Http\Requests\Api\V1\Auth\EmployRegistrationRequest $employRegistrationRequest
+     * @return JsonResponse
+     */
+    public function employRegistration(EmployRegistrationRequest $employRegistrationRequest)
     {
         try {
-
+            return $this->success(201, 'Engineer created');
         }catch (Exception $e) {
-            
+            Log::error('AuthController::employRegistration', ['error' => $e->getMessage()]);
+            return $this->error(500, 'Server Error', $e->getMessage());
         }
     }
 
