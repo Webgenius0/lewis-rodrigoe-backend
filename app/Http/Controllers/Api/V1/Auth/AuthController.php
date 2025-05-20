@@ -65,6 +65,16 @@ class AuthController extends Controller
     }
 
 
+    public function employRegistration()
+    {
+        try {
+
+        }catch (Exception $e) {
+            
+        }
+    }
+
+
 
     /**
      * Handles the user registration process.
