@@ -60,7 +60,7 @@ class PropertyService
         try {
             return $this->propertyRepository->getUserPropertyAddressLabel($this->user->id);
         }catch (Exception $e) {
-            Log::error('propertyDropdownOfUser::createUserProperty', ['error' => $e->getMessage()]);
+            Log::error('PropertyService::propertyDropdownOfUser', ['error' => $e->getMessage()]);
             throw $e;
         }
     }
