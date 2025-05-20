@@ -7,6 +7,7 @@ use App\Interfaces\V1\Auth\ForgetPasswordRepositoryInterface;
 use App\Interfaces\V1\Auth\OTPRepositoryInterface;
 use App\Interfaces\V1\Auth\PasswordRepositoryInterface;
 use App\Interfaces\V1\Auth\UserRepositoryInterface;
+use App\Interfaces\V1\Country\CountryRepositoryInterface;
 use App\Interfaces\V1\Property\Job\PropertyJobRepositoryInterface;
 use App\Interfaces\V1\Property\PropertyRepositoryInterface;
 use App\Interfaces\V1\Role\RoleRepositoryInterface;
@@ -16,6 +17,7 @@ use App\Repositories\V1\Auth\ForgetPasswordRepository;
 use App\Repositories\V1\Auth\OTPRepository;
 use App\Repositories\V1\Auth\PasswordRepository;
 use App\Repositories\V1\Auth\UserRepository;
+use App\Repositories\V1\Country\CountryRepository;
 use App\Repositories\V1\Property\Job\PropertyJobRepository;
 use App\Repositories\V1\Property\PropertyRepository;
 use App\Repositories\V1\Role\RoleRepository;
@@ -49,6 +51,9 @@ class AppServiceProvider extends ServiceProvider
 
         // property job
         $this->app->bind(PropertyJobRepositoryInterface::class, PropertyJobRepository::class);
+
+        // Country
+        $this->app->bind(CountryRepositoryInterface::class, CountryRepository::class);
     }
 
     /**
