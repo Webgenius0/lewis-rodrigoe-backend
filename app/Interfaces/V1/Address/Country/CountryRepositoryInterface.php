@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Interfaces\V1\Country;
+namespace App\Interfaces\V1\Address\Country;
 
 use App\Models\Country;
 use Illuminate\Database\Eloquent\Collection;

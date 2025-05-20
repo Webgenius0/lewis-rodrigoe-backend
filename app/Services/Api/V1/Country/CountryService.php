@@ -2,7 +2,7 @@
 
 namespace App\Services\Api\V1\Country;
 
-use App\Interfaces\V1\Country\CountryRepositoryInterface;
+use App\Interfaces\V1\Address\Country\CountryRepositoryInterface;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Log;
@@ -16,8 +16,8 @@ class CountryService
     private CountryRepositoryInterface $countryRepository;
 
     /**
-     * construct
-     * @param \App\Interfaces\V1\Country\CountryRepositoryInterface $countryRepository
+     * __construct
+     * @param \App\Interfaces\V1\Address\Country\CountryRepositoryInterface $countryRepository
      */
     public function __construct(CountryRepositoryInterface $countryRepository)
     {

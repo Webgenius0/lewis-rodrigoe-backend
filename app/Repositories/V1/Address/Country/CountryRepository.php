@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories\V1\Country;
+namespace App\Repositories\V1\Address\Country;
 
-use App\Interfaces\V1\Country\CountryRepositoryInterface;
+use App\Interfaces\V1\Address\Country\CountryRepositoryInterface;
 use App\Models\Country;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
