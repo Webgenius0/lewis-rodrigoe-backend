@@ -15,6 +15,7 @@ use App\Interfaces\V1\Boiler\Model\BoilerModelRepositoryInterface;
 use App\Interfaces\V1\Boiler\Type\BoilerTypeRepositoryInterface;
 use App\Interfaces\V1\Property\Job\PropertyJobRepositoryInterface;
 use App\Interfaces\V1\Property\PropertyRepositoryInterface;
+use App\Interfaces\V1\Property\Type\PropertyTypeRepositoryInterface;
 use App\Interfaces\V1\Role\RoleRepositoryInterface;
 use App\Interfaces\V1\Service\ServiceRepositoryInterface;
 use App\Repositories\V1\Address\AddressRepository;
@@ -30,6 +31,7 @@ use App\Repositories\V1\Boiler\Model\BoilerModelRepository;
 use App\Repositories\V1\Boiler\Type\BoilerTypeRepository;
 use App\Repositories\V1\Property\Job\PropertyJobRepository;
 use App\Repositories\V1\Property\PropertyRepository;
+use App\Repositories\V1\Property\Type\PropertyTypeRepository;
 use App\Repositories\V1\Role\RoleRepository;
 use App\Repositories\V1\Service\ServiceRepository;
 use Illuminate\Support\ServiceProvider;
@@ -55,6 +57,7 @@ class AppServiceProvider extends ServiceProvider
 
         // property
         $this->app->bind(PropertyRepositoryInterface::class, PropertyRepository::class);
+        $this->app->bind(PropertyTypeRepositoryInterface::class, PropertyTypeRepository::class);
 
         // property job
         $this->app->bind(PropertyJobRepositoryInterface::class, PropertyJobRepository::class);
