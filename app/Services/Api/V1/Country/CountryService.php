@@ -21,7 +21,7 @@ class CountryService
      */
     public function __construct(CountryRepositoryInterface $countryRepository)
     {
-        $this->countryRepository->getList();
+        $this->countryRepository = $countryRepository;
     }
 
 
