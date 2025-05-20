@@ -88,10 +88,10 @@ class AuthService
             DB::beginTransaction();
             $response = $this->register($data, 4);
             $userId = $response['user']['id'];
-            $user = User::find($userId);
+            $user = User::findOrFail($userId);
             $addressRepository = new AddressRepository();
             $address = $addressRepository->createAddress($data);
-            $engineer = $this->engineerRepository->createEngineer($data, $address->id, $user->id);
+            $engineer = $this->engineerRepository->createEngineer($data, $address->id, $user);
             DB::commit();
             return $response;
         } catch (Exception $e) {
