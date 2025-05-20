@@ -17,7 +17,7 @@ class CityRepository implements CityRepositoryInterface
     public function getStateCities(int $stateId): mixed
     {
         try {
-            return StateCity::whereStateId($stateId)->get();
+            return StateCity::select(['id', 'name', 'slug'])->whereStateId($stateId)->get();
         } catch (Exception $e) {
             Log::error('CityRepository::getCountryStates', ['error' => $e->getMessage()]);
             throw $e;

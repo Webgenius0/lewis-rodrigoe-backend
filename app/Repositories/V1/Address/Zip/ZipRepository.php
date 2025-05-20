@@ -16,7 +16,7 @@ class ZipRepository implements ZipRepositoryInterface
     public function getCityZips($cityId): mixed
     {
         try {
-            return CityZip::whereStateCityId($cityId)->get();
+            return CityZip::select(['id', 'number', 'slug'])->whereStateCityId($cityId)->get();
         } catch (Exception $e) {
             Log::error('ZipRepository::getCityZips', ['error' => $e->getMessage()]);
             throw $e;

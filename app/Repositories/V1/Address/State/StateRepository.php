@@ -16,7 +16,7 @@ class StateRepository implements StateRepositoryInterface
     public function getCountryStates(int $countryId): mixed
     {
         try {
-            return CountryState::whereCountryId($countryId)->get();
+            return CountryState::select(['id', 'name', 'slug'])->whereCountryId($countryId)->get();
         } catch (Exception $e) {
             Log::error('StateRepository::getCountryStates', ['error' => $e->getMessage()]);
             throw $e;
