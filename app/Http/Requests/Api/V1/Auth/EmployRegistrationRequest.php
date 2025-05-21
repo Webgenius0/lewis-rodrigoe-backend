@@ -49,6 +49,10 @@ class EmployRegistrationRequest extends FormRequest
             'nic_eic_cart_front'  => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
             'nic_eic_card_back'   => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
 
+            'nvq_number'    => 'required|string',
+            'nvq_leven_one' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
+            'nvq_level_two' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
+
             'driving_licence_number'      => 'required|string',
             'driving_licence_issue_date'  => 'required|date',
             'driving_licence_expire_date' => 'required|date',
@@ -101,6 +105,10 @@ class EmployRegistrationRequest extends FormRequest
             'nic_eic_expire_date',
             'nic_eic_cart_front',
             'nic_eic_card_back',
+
+            'nvq_number',
+            'nvq_level_one',
+            'nvq_level_two',
 
             'driving_licence_number',
             'driving_licence_issue_date',
