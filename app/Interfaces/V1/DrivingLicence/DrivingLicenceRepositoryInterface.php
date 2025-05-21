@@ -16,4 +16,13 @@ interface DrivingLicenceRepositoryInterface
      * @return DrivingLicence
      */
     public function createDrivingLicence(array $data, $frontUrl, $backUrl, User $user): DrivingLicence;
+
+    /**
+     * updateDrivingLicence
+     * @param array $data
+     * @param \App\Models\User $user
+     * @throws \Exception
+     * @return void
+     */
+    public function updateDrivingLicence(array $data, User $user): void;
 }

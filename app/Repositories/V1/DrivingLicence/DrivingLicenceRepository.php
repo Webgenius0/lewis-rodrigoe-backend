@@ -2,6 +2,7 @@
 
 namespace App\Repositories\V1\DrivingLicence;
 
+use App\Helpers\Helper;
 use App\Interfaces\V1\DrivingLicence\DrivingLicenceRepositoryInterface;
 use App\Models\DrivingLicence;
 use App\Models\User;
@@ -34,20 +35,40 @@ class DrivingLicenceRepository implements DrivingLicenceRepositoryInterface
         }
     }
 
+    /**
+     * updateDrivingLicence
+     * @param array $data
+     * @param \App\Models\User $user
+     * @throws \Exception
+     * @return void
+     */
+    public function updateDrivingLicence(array $data, User $user): void
+    {
+        try {
+            $drivingLicence = $user->drivingLicence;
 
+            if (!$drivingLicence) {
+                throw new Exception('Driving licence record not found.');
+            }
 
-    // public function updateDrivingLicence(array $data)
-    // {
-    //     try {
+            if (isset($data['cart_front'])) {
+                $data['cart_front'] = Helper::uploadFile($data['cart_front'], 'drivingLicence');
+            }
 
-    //         $card_front = null;
-    //         $card_back = null;
-    //         if (isset($data['cart_front'])) {
-    //             $card_front
-    //         }
-    //     }catch(Exception $e) {
-    //         Log::error('DrivingLicenceRepository::updateDrivingLicence', ['error' => $e->getMessage()]);
-    //         throw $e;
-    //     }
-    // }
+            if (isset($data['card_back'])) {
+                $data['card_back'] = Helper::uploadFile($data['card_back'], 'drivingLicence');
+            }
+
+            $drivingLicence->update([
+                'number'      => $data['number'],
+                'issue_date'  => $data['issue_date'],
+                'expire_date' => $data['expire_date'],
+                'cart_front'  => $data['cart_front'] ?? $drivingLicence->cart_front,
+                'card_back'   => $data['card_back'] ?? $drivingLicence->card_back,
+            ]);
+        } catch (Exception $e) {
+            Log::error('DrivingLicenceRepository::updateDrivingLicence', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
 }
