@@ -77,4 +77,16 @@ class PropertyRepository implements PropertyRepositoryInterface
             throw $e;
         }
     }
+
+    public function updatePropertyInfo(Property $property, array $data)
+    {
+        try {
+            $property->property_type_id = $data['property_type_id'];
+            $property->accessability_info = $data['accessability_info'];
+            $property->save();
+        } catch (Exception $e) {
+            Log::error('PropertyRepository::updatePropertyInfo', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
 }
