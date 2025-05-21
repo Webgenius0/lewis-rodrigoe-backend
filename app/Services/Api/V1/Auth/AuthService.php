@@ -10,7 +10,7 @@ use App\Interfaces\V1\DrivingLicence\DrivingLicenceRepositoryInterface;
 use App\Interfaces\V1\Engineer\EngineerRepositoryInterface;
 use App\Interfaces\V1\GassSafetyRegistration\GassSafetyRegistrationRepositoryInterface;
 use App\Interfaces\V1\NICEIC\NICEICRepositoryInterface;
-use App\Interfaces\V1\NQR\NVQRepositoryInterface;
+use App\Interfaces\V1\NVQ\NVQRepositoryInterface;
 use App\Models\User;
 use App\Repositories\V1\Address\AddressRepository;
 use Exception;
@@ -115,25 +115,25 @@ class AuthService
             // storing engineer data
             $engineer = $this->engineerRepository->createEngineer($data, $address->id, $user);
             //gas
-            $gas_cart_front = null;
-            $gas_cart_back = null;
-            if (isset($data['gas_cart_front'])) {
-                $gas_cart_front = Helper::uploadFile($data['gas_cart_front'], 'gas');
+            $gas_card_front = null;
+            $gas_card_back = null;
+            if (isset($data['gas_card_front'])) {
+                $gas_card_front = Helper::uploadFile($data['gas_card_front'], 'gas');
             }
-            if (isset($data['gas_cart_back'])) {
-                $gas_cart_back = Helper::uploadFile($data['gas_cart_back'], 'gas');
+            if (isset($data['gas_card_back'])) {
+                $gas_card_back = Helper::uploadFile($data['gas_card_back'], 'gas');
             }
-            $gas = $this->gassSafetyRegistrationRepository->createGSR($data, $gas_cart_front, $gas_cart_back, $user);
+            $gas = $this->gassSafetyRegistrationRepository->createGSR($data, $gas_card_front, $gas_card_back, $user);
             // niceic
-            $nic_eic_cart_front = null;
+            $nic_eic_card_front = null;
             $nic_eic_card_back = null;
-            if (isset($data['nic_eic_cart_front'])) {
-                $nic_eic_cart_front = Helper::uploadFile($data['nic_eic_cart_front'], 'ncieci');
+            if (isset($data['nic_eic_card_front'])) {
+                $nic_eic_card_front = Helper::uploadFile($data['nic_eic_card_front'], 'ncieci');
             }
             if (isset($data['nic_eic_card_back'])) {
                 $nic_eic_card_back = Helper::uploadFile($data['nic_eic_card_back'], 'ncieci');
             }
-            $niceic = $this->niceicRepository->createNICEIC($data, $nic_eic_cart_front, $nic_eic_card_back, $user);
+            $niceic = $this->niceicRepository->createNICEIC($data, $nic_eic_card_front, $nic_eic_card_back, $user);
             // nvq
             $nvq_level_one = null;
             $nvq_level_two = null;
@@ -145,15 +145,15 @@ class AuthService
             }
             $nvq = $this->nvqRepositoy->createNVQ($data, $user, $nvq_level_one, $nvq_level_two);
             // driving licence
-            $driving_licence_cart_front = null;
+            $driving_licence_card_front = null;
             $driving_licence_card_back = null;
-            if (isset($data['driving_licence_cart_front'])) {
-                $driving_licence_cart_front = Helper::uploadFile($data['driving_licence_cart_front'], 'drivingLicence');
+            if (isset($data['driving_licence_card_front'])) {
+                $driving_licence_card_front = Helper::uploadFile($data['driving_licence_card_front'], 'drivingLicence');
             }
             if (isset($data['driving_licence_card_back'])) {
                 $driving_licence_card_back = Helper::uploadFile($data['driving_licence_card_back'], 'drivingLicence');
             }
-            $drigingLicence = $this->drivingLicenceRepository->createDrivingLicence($data, $driving_licence_cart_front, $driving_licence_card_back, $user);
+            $drigingLicence = $this->drivingLicenceRepository->createDrivingLicence($data, $driving_licence_card_front, $driving_licence_card_back, $user);
             // bank account
             $bankAccount = $this->bankAccountRepository->createBankAccount($data, $user);
             DB::commit();

@@ -40,13 +40,13 @@ class EmployRegistrationRequest extends FormRequest
             'gas_number'      => 'required|string',
             'gas_issue_date'  => 'required|date',
             'gas_expire_date' => 'required|date',
-            'gas_cart_front'  => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
+            'gas_card_front'  => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
             'gas_card_back'   => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
 
             'nic_eic_number'      => 'required|string',
             'nic_eic_issue_date'  => 'required|date',
             'nic_eic_expire_date' => 'required|date',
-            'nic_eic_cart_front'  => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
+            'nic_eic_card_front'  => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
             'nic_eic_card_back'   => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
 
             'nvq_number'    => 'required|string',
@@ -56,7 +56,7 @@ class EmployRegistrationRequest extends FormRequest
             'driving_licence_number'      => 'required|string',
             'driving_licence_issue_date'  => 'required|date',
             'driving_licence_expire_date' => 'required|date',
-            'driving_licence_cart_front'  => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
+            'driving_licence_card_front'  => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
             'driving_licence_card_back'   => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
 
             'label'      => 'required|string',
@@ -97,13 +97,13 @@ class EmployRegistrationRequest extends FormRequest
             'gas_number',
             'gas_issue_date',
             'gas_expire_date',
-            'gas_cart_front',
+            'gas_card_front',
             'gas_card_back',
 
             'nic_eic_number',
             'nic_eic_issue_date',
             'nic_eic_expire_date',
-            'nic_eic_cart_front',
+            'nic_eic_card_front',
             'nic_eic_card_back',
 
             'nvq_number',
@@ -113,7 +113,7 @@ class EmployRegistrationRequest extends FormRequest
             'driving_licence_number',
             'driving_licence_issue_date',
             'driving_licence_expire_date',
-            'driving_licence_cart_front',
+            'driving_licence_card_front',
             'driving_licence_card_back',
 
             'label',

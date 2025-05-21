@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Interfaces\V1\NQR;
+namespace App\Interfaces\V1\NVQ;
 
 use App\Models\NVQQualification;
 use App\Models\User;
@@ -15,5 +15,5 @@ interface NVQRepositoryInterface
      * @param mixed $level_tow
      * @return NVQQualification
      */
-    public function createNVQ(array $data, User $user, string $level_one, $level_tow = null):NVQQualification;
+    public function createNVQ(array $data, User $user, $level_one, $level_tow = null):NVQQualification;
 }

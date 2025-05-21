@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories\V1\NQR;
+namespace App\Repositories\V1\NVQ;
 
-use App\Interfaces\V1\NQR\NVQRepositoryInterface;
+use App\Interfaces\V1\NVQ\NVQRepositoryInterface;
 use App\Models\NVQQualification;
 use App\Models\User;
 use Exception;
@@ -18,7 +18,7 @@ class NVQRepository implements NVQRepositoryInterface
      * @param mixed $level_tow
      * @return NVQQualification
      */
-    public function createNVQ(array $data, User $user, string $level_one, $level_tow = null):NVQQualification
+    public function createNVQ(array $data, User $user, $level_one, $level_tow = null):NVQQualification
     {
         try {
             return $user->nvq()->create([
