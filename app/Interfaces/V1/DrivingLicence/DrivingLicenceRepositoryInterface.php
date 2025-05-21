@@ -4,6 +4,7 @@ namespace App\Interfaces\V1\DrivingLicence;
 
 use App\Models\DrivingLicence;
 use App\Models\User;
+use Exception;
 
 interface DrivingLicenceRepositoryInterface
 {
@@ -21,7 +22,7 @@ interface DrivingLicenceRepositoryInterface
      * updateDrivingLicence
      * @param array $data
      * @param \App\Models\User $user
-     * @throws \Exception
+     * @throws Exception
      * @return void
      */
     public function updateDrivingLicence(array $data, User $user): void;
