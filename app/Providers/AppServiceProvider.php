@@ -14,6 +14,8 @@ use App\Interfaces\V1\Auth\UserRepositoryInterface;
 use App\Interfaces\V1\Boiler\Model\BoilerModelRepositoryInterface;
 use App\Interfaces\V1\Boiler\Type\BoilerTypeRepositoryInterface;
 use App\Interfaces\V1\Engineer\EngineerRepositoryInterface;
+use App\Interfaces\V1\GassSafetyRegistration\GassSafetyRegistrationRepositoryInterface;
+use App\Interfaces\V1\NICEIC\NICEICRepositoryInterface;
 use App\Interfaces\V1\Property\Job\PropertyJobRepositoryInterface;
 use App\Interfaces\V1\Property\PropertyRepositoryInterface;
 use App\Interfaces\V1\Property\Type\PropertyTypeRepositoryInterface;
@@ -31,6 +33,8 @@ use App\Repositories\V1\Auth\UserRepository;
 use App\Repositories\V1\Boiler\Model\BoilerModelRepository;
 use App\Repositories\V1\Boiler\Type\BoilerTypeRepository;
 use App\Repositories\V1\Engineer\EngineerRepository;
+use App\Repositories\V1\GassSafetyRegistration\GassSafetyRegistrationRepository;
+use App\Repositories\V1\NICEIC\NICEICRepository;
 use App\Repositories\V1\Property\Job\PropertyJobRepository;
 use App\Repositories\V1\Property\PropertyRepository;
 use App\Repositories\V1\Property\Type\PropertyTypeRepository;
@@ -77,6 +81,12 @@ class AppServiceProvider extends ServiceProvider
 
         // engineer
         $this->app->bind(EngineerRepositoryInterface::class, EngineerRepository::class);
+
+        // GSR
+        $this->app->bind(GassSafetyRegistrationRepositoryInterface::class, GassSafetyRegistrationRepository::class);
+
+        // NICEIC
+        $this->app->bind(NICEICRepositoryInterface::class, NICEICRepository::class);
 
     }
 
