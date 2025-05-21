@@ -24,6 +24,7 @@ use App\Interfaces\V1\Property\PropertyRepositoryInterface;
 use App\Interfaces\V1\Property\Type\PropertyTypeRepositoryInterface;
 use App\Interfaces\V1\Role\RoleRepositoryInterface;
 use App\Interfaces\V1\Service\ServiceRepositoryInterface;
+use App\Interfaces\V1\UserProfile\UserProfileRepositoryInterface;
 use App\Repositories\V1\Address\AddressRepository;
 use App\Repositories\V1\Address\City\CityRepository;
 use App\Repositories\V1\Address\Country\CountryRepository;
@@ -46,6 +47,7 @@ use App\Repositories\V1\Property\PropertyRepository;
 use App\Repositories\V1\Property\Type\PropertyTypeRepository;
 use App\Repositories\V1\Role\RoleRepository;
 use App\Repositories\V1\Service\ServiceRepository;
+use App\Repositories\V1\UserProfile\UserProfileRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -60,6 +62,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ForgetPasswordRepositoryInterface::class, ForgetPasswordRepository::class);
         $this->app->bind(OTPRepositoryInterface::class, OTPRepository::class);
         $this->app->bind(PasswordRepositoryInterface::class, PasswordRepository::class);
+
+        // user profile
+        $this->app->bind(UserProfileRepositoryInterface::class, UserProfileRepository::class);
+
 
         // role
         $this->app->bind(RoleRepositoryInterface::class, RoleRepository::class);
