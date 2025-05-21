@@ -17,7 +17,8 @@ class UserProfileRepository implements UserProfileRepositoryInterface
     public function showProfile(int $userId): User
     {
         try {
-            return User::with('profile')->findOrFail($userId);
+            Log::info('show repo');
+            return User::with(['profile', 'role'])->findOrFail($userId);
         } catch (Exception $e) {
             Log::error('UserProfileRepository::showProfile', ['error' => $e->getMessage()]);
             throw $e;
