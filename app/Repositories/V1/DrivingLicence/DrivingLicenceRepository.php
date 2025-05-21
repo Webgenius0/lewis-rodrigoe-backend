@@ -33,4 +33,21 @@ class DrivingLicenceRepository implements DrivingLicenceRepositoryInterface
             throw $e;
         }
     }
+
+
+
+    // public function updateDrivingLicence(array $data)
+    // {
+    //     try {
+
+    //         $card_front = null;
+    //         $card_back = null;
+    //         if (isset($data['cart_front'])) {
+    //             $card_front
+    //         }
+    //     }catch(Exception $e) {
+    //         Log::error('DrivingLicenceRepository::updateDrivingLicence', ['error' => $e->getMessage()]);
+    //         throw $e;
+    //     }
+    // }
 }
