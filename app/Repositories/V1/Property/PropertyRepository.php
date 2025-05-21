@@ -12,6 +12,21 @@ use Illuminate\Support\Facades\Log;
 class PropertyRepository implements PropertyRepositoryInterface
 {
     /**
+     * getUserPropertyAddressLabel
+     * @param int $userId
+     */
+    public function getUserPropertyAddressLabel(int $userId)
+    {
+        try {
+            return Property::select(['id', 'address_id'])->with(['address:id,label,street,apartment'])->whereUserId($userId)->get();
+        } catch (Exception $e) {
+            Log::error('PropertyRepository::getUserPropertyAddressLabel', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
+
+    /**
      * createProperty
      * @param array $data
      * @param int $userId
@@ -42,15 +57,23 @@ class PropertyRepository implements PropertyRepositoryInterface
     }
 
     /**
-     * getUserPropertyAddressLabel
-     * @param int $userId
+     * updatePropertyBoiler
+     * @param \App\Models\Property $property
+     * @param array $data
+     * @return void
      */
-    public function getUserPropertyAddressLabel(int $userId)
+    public function updatePropertyBoiler(Property $property, array $data): void
     {
         try {
-            return Property::select(['id', 'address_id'])->with(['address:id,label,street,apartment'])->whereUserId($userId)->get();
-        }catch (Exception $e) {
-            Log::error('PropertyRepository::getUserPropertyAddressLabel', ['error' => $e->getMessage()]);
+            $property->boiler_type_id = $data['boiler_type_id'];
+            $property->boiler_model_id = $data['boiler_model_id'];
+            $property->quantity = $data['quantity'];
+            $property->purchase_year = $data['purchase_year'];
+            $property->last_service_date = $data['last_service_date'];
+            $property->location = $data['location'];
+            $property->save();
+        } catch (Exception $e) {
+            Log::error('PropertyRepository::updatePropertyBoiler', ['error' => $e->getMessage()]);
             throw $e;
         }
     }

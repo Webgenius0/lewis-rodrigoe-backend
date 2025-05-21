@@ -41,7 +41,7 @@ class AddressRepository implements AddressRepositoryInterface
      * @param \App\Models\Address $address
      * @return void
      */
-    public function updateAddress(array $data, Address $address)
+    public function updateAddress(Address $address, array $data)
     {
         try {
             $address->update([

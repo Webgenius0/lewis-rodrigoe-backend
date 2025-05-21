@@ -7,6 +7,12 @@ use App\Models\Property;
 interface PropertyRepositoryInterface
 {
     /**
+     * getUserPropertyAddressLabel
+     * @param int $userId
+     */
+    public function getUserPropertyAddressLabel(int $userId);
+
+    /**
      * createProperty
      * @param array $data
      * @param int $userId
@@ -15,11 +21,11 @@ interface PropertyRepositoryInterface
      */
     public function createProperty(array $data, int $userId, int $addressId): Property;
 
-
-
     /**
-     * getUserPropertyAddressLabel
-     * @param int $userId
+     * updatePropertyBoiler
+     * @param \App\Models\Property $property
+     * @param array $data
+     * @return void
      */
-    public function getUserPropertyAddressLabel(int $userId);
+    public function updatePropertyBoiler(Property $property, array $data): void;
 }
