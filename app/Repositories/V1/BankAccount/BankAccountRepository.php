@@ -11,12 +11,12 @@ use Illuminate\Support\Facades\Log;
 class BankAccountRepository implements BankAccountRepositoryInterface
 {
     /**
-     * BankAccountRepository
+     * createBankAccount
      * @param array $data
      * @param \App\Models\User $user
      * @return BankAccount
      */
-    public function BankAccountRepository(array $data, User $user): BankAccount
+    public function createBankAccount(array $data, User $user): BankAccount
     {
         try {
             return $user->backAccount()->create([
@@ -30,7 +30,7 @@ class BankAccountRepository implements BankAccountRepositoryInterface
                 'city'           => $data['bank_accounts_city'],
             ]);
         } catch (Exception $e) {
-            Log::error('BankAccountRepository::BankAccountRepository', ['error' => $e->getMessage()]);
+            Log::error('BankAccountRepository::createBankAccount', ['error' => $e->getMessage()]);
             throw $e;
         }
     }

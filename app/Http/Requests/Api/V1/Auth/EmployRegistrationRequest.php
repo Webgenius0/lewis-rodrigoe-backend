@@ -34,8 +34,8 @@ class EmployRegistrationRequest extends FormRequest
             'phone'        => 'required|phone:GB',
             'expertise_id' => 'required|exists:expertises,id',
 
-            'ni'  => 'required|string',
-            'utr' => 'required|boolean',
+            'ni'  => 'required|string|unique:engineers,ni',
+            'utr' => 'required|string|unique:engineers,utr',
 
             'gas_number'      => 'required|string',
             'gas_issue_date'  => 'required|date',

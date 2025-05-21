@@ -8,10 +8,10 @@ use App\Models\User;
 interface BankAccountRepositoryInterface
 {
     /**
-     * BankAccountRepository
+     * createBankAccount
      * @param array $data
      * @param \App\Models\User $user
      * @return BankAccount
      */
-    public function BankAccountRepository(array $data, User $user): BankAccount;
+    public function createBankAccount(array $data, User $user): BankAccount;
 }

@@ -14,6 +14,7 @@ use App\Interfaces\V1\Auth\UserRepositoryInterface;
 use App\Interfaces\V1\BankAccount\BankAccountRepositoryInterface;
 use App\Interfaces\V1\Boiler\Model\BoilerModelRepositoryInterface;
 use App\Interfaces\V1\Boiler\Type\BoilerTypeRepositoryInterface;
+use App\Interfaces\V1\DrivingLicence\DrivingLicenceRepositoryInterface;
 use App\Interfaces\V1\Engineer\EngineerRepositoryInterface;
 use App\Interfaces\V1\GassSafetyRegistration\GassSafetyRegistrationRepositoryInterface;
 use App\Interfaces\V1\NICEIC\NICEICRepositoryInterface;
@@ -35,6 +36,7 @@ use App\Repositories\V1\Auth\UserRepository;
 use App\Repositories\V1\BankAccount\BankAccountRepository;
 use App\Repositories\V1\Boiler\Model\BoilerModelRepository;
 use App\Repositories\V1\Boiler\Type\BoilerTypeRepository;
+use App\Repositories\V1\DrivingLicence\DrivingLicenceRepository;
 use App\Repositories\V1\Engineer\EngineerRepository;
 use App\Repositories\V1\GassSafetyRegistration\GassSafetyRegistrationRepository;
 use App\Repositories\V1\NICEIC\NICEICRepository;
@@ -97,6 +99,10 @@ class AppServiceProvider extends ServiceProvider
 
         // Bank accoutn
         $this->app->bind(BankAccountRepositoryInterface::class, BankAccountRepository::class);
+
+        // Driving licence
+        $this->app->bind(DrivingLicenceRepositoryInterface::class, DrivingLicenceRepository::class);
+
     }
 
     /**
