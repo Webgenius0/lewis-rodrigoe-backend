@@ -78,7 +78,13 @@ class PropertyRepository implements PropertyRepositoryInterface
         }
     }
 
-    public function updatePropertyInfo(Property $property, array $data)
+    /**
+     * updatePropertyInfo
+     * @param \App\Models\Property $property
+     * @param array $data
+     * @return void
+     */
+    public function updatePropertyInfo(Property $property, array $data): void
     {
         try {
             $property->property_type_id = $data['property_type_id'];

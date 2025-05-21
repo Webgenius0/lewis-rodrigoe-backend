@@ -28,4 +28,12 @@ interface PropertyRepositoryInterface
      * @return void
      */
     public function updatePropertyBoiler(Property $property, array $data): void;
+
+    /**
+     * updatePropertyInfo
+     * @param \App\Models\Property $property
+     * @param array $data
+     * @return void
+     */
+    public function updatePropertyInfo(Property $property, array $data): void;
 }
