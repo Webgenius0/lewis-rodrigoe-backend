@@ -14,10 +14,10 @@ class PropertyJobRepository implements PropertyJobRepositoryInterface
     /**
      * getJobListByStatus
      * @param string $status
-     * @param mixed $per_page
+     * @param int $per_page
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getJobListByStatus(string $status, $per_page): LengthAwarePaginator
+    public function getJobListByStatus(string $status, int $per_page): LengthAwarePaginator
     {
         try {
             return  PropertyJob::whereStatus($status)->paginate($per_page);

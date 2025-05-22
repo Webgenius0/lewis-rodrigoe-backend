@@ -36,9 +36,9 @@ class PropertyJonController extends Controller
     public function index(string $status): JsonResponse
     {
         try {
-            $response = $this->propertyJobService->proopertyJobIndex($status);
-            return $this->success(200, 'Job list', new CreateResource($response));
-        }catch (Exception $e) {
+            $response = $this->propertyJobService->propertyJobIndex($status);
+            return $this->success(200, 'Job list', $response);
+        } catch (Exception $e) {
             Log::error("PropertyController::index", ['message' => $e->getMessage()]);
             return $this->error(500, 'server error');
         }
@@ -55,7 +55,7 @@ class PropertyJonController extends Controller
             $validatedData = $createRequest->validated();
             $response = $this->propertyJobService->createJobforProperty($validatedData);
             return $this->success(201, 'Job Created', new CreateResource($response));
-        }catch (Exception $e) {
+        } catch (Exception $e) {
             Log::error("PropertyController::store", ['message' => $e->getMessage()]);
             return $this->error(500, 'server error');
         }

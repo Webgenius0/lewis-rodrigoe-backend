@@ -17,12 +17,13 @@ Route::prefix('/property')->middleware('auth:api')
 /**
  * property-job
  */
-Route::prefix('/property-job')->middleware('auth:api')
+Route::prefix('/property-job')
 ->controller(PropertyJonController::class)->group(function () {
+    Route::get('/{status}', 'index')->where('status','active|inactive|pending|ongoing|completed|assigned');
     Route::post('/', 'store');
 });
 
-Route::prefix('/property-type')->middleware('auth:api')
+Route::prefix('/property-type')
 ->controller(PropertyTypeController::class)->group(function () {
     Route::get('/', 'index');
 });

@@ -29,15 +29,14 @@ class PropertyJobService
     }
 
     /**
-     * proopertyJobIndex
+     * propertyJobIndex
      * @param string $status
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @return LengthAwarePaginator
      */
-    public function proopertyJobIndex(string $status): LengthAwarePaginator
+    public function propertyJobIndex(string $status): LengthAwarePaginator
     {
         try {
             $per_page = request()->query('per_page', 25);
-
             return $this->propertyJobRepository->getJobListByStatus($status, $per_page);
         }catch (Exception $e) {
             Log::error('PropertyJobService::createJobforProperty', ['error' => $e->getMessage()]);
