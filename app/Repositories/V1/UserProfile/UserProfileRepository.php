@@ -14,12 +14,13 @@ class UserProfileRepository implements UserProfileRepositoryInterface
     /**
      * showProfile
      * @param int $userId
+     * @param array $load
      * @return User
      */
-    public function showProfile(int $userId): User
+    public function showProfile(int $userId, array $load = []): User
     {
         try {
-            return User::with(['profile', 'role'])->findOrFail($userId);
+            return User::with($load)->findOrFail($userId);
         } catch (Exception $e) {
             Log::error('UserProfileRepository::showProfile', ['error' => $e->getMessage()]);
             throw $e;

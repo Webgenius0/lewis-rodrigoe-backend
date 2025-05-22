@@ -9,9 +9,10 @@ interface UserProfileRepositoryInterface
     /**
      * showProfile
      * @param int $userId
+     * @param array $load
      * @return User
      */
-    public function showProfile(int $userId): User;
+    public function showProfile(int $userId, array $load = []): User;
 
     /**
      * updateProfile
