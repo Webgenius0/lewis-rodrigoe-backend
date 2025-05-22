@@ -88,7 +88,8 @@ class AuthService
             $user->load(['profile' => function ($query) {
                 $query->select('id', 'user_id');
             }, 'role']);
-            return ['token' => $token, 'user' => $user, 'verify' => false];
+
+            return ['token' => $token, 'user' => $user, 'verify' => false, 'property' => false];
         } catch (Exception $e) {
             DB::rollBack();
             Log::error('AuthService::register', ['error' => $e->getMessage()]);
@@ -197,7 +198,13 @@ class AuthService
                 $query->select('id', 'user_id');
             }, 'role']);
 
-            return ['token' => $token, 'user' => $user, 'verify' => $verify];
+            $property = false;
+            $completeProfile = false;
+
+            if (count($user->properties)) {
+                $property = true;
+            }
+            return ['token' => $token, 'user' => $user, 'verify' => $verify, 'property' => $property];
         } catch (Exception $e) {
             Log::error('AuthService::login', ['error' => $e->getMessage()]);
             throw $e;

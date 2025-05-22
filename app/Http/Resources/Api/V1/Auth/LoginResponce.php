@@ -27,6 +27,7 @@ class LoginResponce extends JsonResource
         return [
             'token' => $data['token'],
             'verify' => $data['verify'],
+            'property' => $data['property'],
             'user' => $user,
         ];
     }
