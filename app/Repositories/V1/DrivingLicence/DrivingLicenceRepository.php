@@ -39,7 +39,7 @@ class DrivingLicenceRepository implements DrivingLicenceRepositoryInterface
      * updateDrivingLicence
      * @param array $data
      * @param \App\Models\User $user
-     * @throws \Exception
+     * @throws Exception
      * @return void
      */
     public function updateDrivingLicence(array $data, User $user): void
