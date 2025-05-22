@@ -5,6 +5,7 @@ namespace App\Services\Api\V1\Property\Job;
 use App\Interfaces\V1\Property\Job\PropertyJobRepositoryInterface;
 use App\Models\PropertyJob;
 use Exception;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
@@ -25,6 +26,23 @@ class PropertyJobService
     {
         $this->propertyJobRepository = $propertyJobRepository;
         $this->user = Auth::user();
+    }
+
+    /**
+     * proopertyJobIndex
+     * @param string $status
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function proopertyJobIndex(string $status): LengthAwarePaginator
+    {
+        try {
+            $per_page = request()->query('per_page', 25);
+
+            return $this->propertyJobRepository->getJobListByStatus($status, $per_page);
+        }catch (Exception $e) {
+            Log::error('PropertyJobService::createJobforProperty', ['error' => $e->getMessage()]);
+            throw $e;
+        }
     }
 
     /**

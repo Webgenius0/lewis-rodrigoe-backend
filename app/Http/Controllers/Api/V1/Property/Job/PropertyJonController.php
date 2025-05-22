@@ -29,6 +29,22 @@ class PropertyJonController extends Controller
     }
 
     /**
+     * index
+     * @param string $status
+     * @return JsonResponse
+     */
+    public function index(string $status): JsonResponse
+    {
+        try {
+            $response = $this->propertyJobService->proopertyJobIndex($status);
+            return $this->success(200, 'Job list', new CreateResource($response));
+        }catch (Exception $e) {
+            Log::error("PropertyController::index", ['message' => $e->getMessage()]);
+            return $this->error(500, 'server error');
+        }
+    }
+
+    /**
      * store
      * @param \App\Http\Requests\Api\V1\Property\Job\CreateRequest $createRequest
      * @return JsonResponse
