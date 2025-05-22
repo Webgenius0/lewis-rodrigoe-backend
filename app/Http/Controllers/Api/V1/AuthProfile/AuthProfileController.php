@@ -27,10 +27,14 @@ class AuthProfileController extends Controller
         $this->userProfileService = $userProfileService;
     }
 
+    /**
+     * dashboard
+     * @return JsonResponse
+     */
     public function dashboard(): JsonResponse
     {
         try {
-            $response = $this->userProfileService->getAuthProfile();
+            $response = $this->userProfileService->getProfileDashboard();
             return $this->success(200, 'auth profile', $response);
         }catch(Exception $e) {
             Log::error('AuthProfileController::dashboard', ['error' => $e->getMessage()]);

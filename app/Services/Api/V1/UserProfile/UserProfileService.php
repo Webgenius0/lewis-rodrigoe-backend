@@ -36,7 +36,7 @@ class UserProfileService
      * getProfiledashboard
      * @return array{completed_job: int, pending_job: int, user: User}
      */
-    public function getProfiledashboard(): array
+    public function getProfileDashboard(): array
     {
         try {
             $profile = $this->userProfileRepository->showProfile($this->user->id, ['profile']);
