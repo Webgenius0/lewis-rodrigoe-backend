@@ -20,4 +20,11 @@ interface UserProfileRepositoryInterface
      * @return void
      */
     public function updateProfile(array $data, int $userId): void;
+
+    /**
+     * deleteProfile
+     * @param int $userId
+     * @return void
+     */
+    public function deleteProfile(int $userId): void;
 }

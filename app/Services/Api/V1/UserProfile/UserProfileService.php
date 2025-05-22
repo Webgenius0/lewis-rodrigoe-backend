@@ -69,4 +69,18 @@ class UserProfileService
             throw $e;
         }
     }
+
+    /**
+     * deleteUserProfile
+     * @return void
+     */
+    public function deleteUserProfile()
+    {
+        try {
+            $this->userProfileRepository->deleteProfile( $this->user->id);
+        } catch (Exception $e) {
+            Log::error('ServiceService::deleteUserProfile', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
 }

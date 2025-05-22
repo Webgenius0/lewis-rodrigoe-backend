@@ -36,7 +36,7 @@ class AuthProfileController extends Controller
         try {
             $response = $this->userProfileService->getAuthProfile();
             return $this->success(200, 'auth profile', $response);
-        }catch(Exception $e) {
+        } catch (Exception $e) {
             Log::error('AuthProfileController::show', ['error' => $e->getMessage()]);
             return $this->error(500, 'server error', $e->getMessage());
         }
@@ -47,14 +47,29 @@ class AuthProfileController extends Controller
      * @param \App\Http\Requests\Api\V1\Profile\UpdateRequest $updateRequest
      * @return JsonResponse
      */
-    public function update(UpdateRequest $updateRequest):JsonResponse
+    public function update(UpdateRequest $updateRequest): JsonResponse
     {
         try {
             $validatedData = $updateRequest->validated();
             $this->userProfileService->updateUserProfile($validatedData);
             return $this->success(200, 'update successfull');
-        }catch(Exception $e) {
+        } catch (Exception $e) {
             Log::error('AuthProfileController::update', ['error' => $e->getMessage()]);
+            return $this->error(500, 'server error', $e->getMessage());
+        }
+    }
+
+    /**
+     * destory
+     * @return JsonResponse
+     */
+    public function destory(): JsonResponse
+    {
+        try {
+            $this->userProfileService->deleteUserProfile();
+            return $this->success(200, 'deleted successfully');
+        } catch (Exception $e) {
+            Log::error('AuthProfileController::destory', ['error' => $e->getMessage()]);
             return $this->error(500, 'server error', $e->getMessage());
         }
     }

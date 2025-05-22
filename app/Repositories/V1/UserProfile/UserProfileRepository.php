@@ -79,4 +79,19 @@ class UserProfileRepository implements UserProfileRepositoryInterface
             throw $e;
         }
     }
+
+    /**
+     * deleteProfile
+     * @param int $userId
+     * @return void
+     */
+    public function deleteProfile(int $userId): void
+    {
+        try {
+            User::findOrFail($userId)->delete();
+        } catch (Exception $e) {
+            Log::error('UserProfileRepository::deleteProfile', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
 }
