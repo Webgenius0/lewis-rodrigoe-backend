@@ -20,7 +20,7 @@ class PropertyJobRepository implements PropertyJobRepositoryInterface
     public function getJobListByStatus(string $status, int $per_page): LengthAwarePaginator
     {
         try {
-            return  PropertyJob::whereStatus($status)->paginate($per_page);
+            return  PropertyJob::select(['id', 'sn', 'user_id', 'property_id', 'engineer', 'title', 'description', 'date_time', 'status'])->whereStatus($status)->paginate($per_page);
         } catch (Exception $e) {
             Log::error('PropertyJobRepository::getJobList', ['error' => $e->getMessage()]);
             throw $e;

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -59,7 +60,7 @@ class PropertyJob extends Model
         ];
     }
 
-        /**
+    /**
      * user
      * @return BelongsTo<User, GasSafetyRegistration>
      */
@@ -81,8 +82,28 @@ class PropertyJob extends Model
      * property
      * @return BelongsTo<Property, PropertyJob>
      */
-    public function property():BelongsTo
+    public function property(): BelongsTo
     {
         return $this->belongsTo(Property::class);
+    }
+
+    /**
+     * getDateTimeAttribute
+     * @param mixed $value
+     * @return array{date: null, time: null|array{date: string, time: string}}
+     */
+    protected function getDateTimeAttribute($value): array
+    {
+        if (!$value) {
+            return [
+                'date' => null,
+                'time' => null,
+            ];
+        }
+        $dateTime = Carbon::parse($this->value);
+        return [
+            'date' => $dateTime->format('d/m/y'),
+            'time' => $dateTime->format('h:i A'),
+        ];
     }
 }
