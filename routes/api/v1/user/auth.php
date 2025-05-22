@@ -5,5 +5,6 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::prefix('/auth-user')->controller(AuthProfileController::class)->group(function () {
-    Route::get('/show', 'show');
+    Route::get('/', 'show');
+    Route::post('/','update');
 });
