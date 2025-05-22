@@ -55,4 +55,18 @@ class UserProfileService
             throw $e;
         }
     }
+
+    /**
+     * updateUserProfile
+     * @param array $data
+     */
+    public function updateUserProfile(array $data): void
+    {
+        try {
+            $this->userProfileRepository->updateProfile($data, $this->user->id);
+        } catch (Exception $e) {
+            Log::error('ServiceService::updateUserProfile', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
 }

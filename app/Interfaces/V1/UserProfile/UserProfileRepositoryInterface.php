@@ -12,4 +12,12 @@ interface UserProfileRepositoryInterface
      * @return User
      */
     public function showProfile(int $userId): User;
+
+    /**
+     * updateProfile
+     * @param array $data
+     * @param int $userId
+     * @return void
+     */
+    public function updateProfile(array $data, int $userId): void;
 }
