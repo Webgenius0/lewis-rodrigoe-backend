@@ -2,6 +2,8 @@
 
 namespace App\Services\Api\V1\UserProfile;
 
+use App\Interfaces\V1\Property\Job\PropertyJobRepositoryInterface;
+use App\Interfaces\V1\Property\PropertyRepositoryInterface;
 use App\Interfaces\V1\UserProfile\UserProfileRepositoryInterface;
 use App\Models\User;
 use Exception;
@@ -15,16 +17,43 @@ class UserProfileService
      * @var UserProfileRepositoryInterface
      */
     private UserProfileRepositoryInterface $userProfileRepository;
+    private PropertyJobRepositoryInterface $propertyJobRepository;
     private $user;
 
     /**
      * __construct
      * @param \App\Interfaces\V1\UserProfile\UserProfileRepositoryInterface $userProfileRepository
+     * @param \App\Interfaces\V1\Property\Job\PropertyJobRepositoryInterface $propertyJobRepository
      */
-    public function __construct(UserProfileRepositoryInterface $userProfileRepository)
+    public function __construct(UserProfileRepositoryInterface $userProfileRepository, PropertyJobRepositoryInterface $propertyJobRepository)
     {
         $this->userProfileRepository = $userProfileRepository;
+        $this->propertyJobRepository = $propertyJobRepository;
         $this->user = Auth::user();
+    }
+
+    /**
+     * getProfiledashboard
+     * @return array{completed_job: int, pending_job: int, user: User}
+     */
+    public function getProfiledashboard(): array
+    {
+        try {
+            $profile = $this->userProfileRepository->showProfile($this->user->id, ['profile']);
+
+            $pendingJobCount = $this->propertyJobRepository->JobCount('user_id', $this->user->id, 'pending');
+            $completedJobCount = $this->propertyJobRepository->JobCount('user_id', $this->user->id, 'completed');
+
+            return [
+                'user' => $profile,
+                'pending_job' => $pendingJobCount,
+                'completed_job' => $completedJobCount,
+            ];
+
+        } catch (Exception $e) {
+            Log::error('ServiceService::getProfiledashboard', ['error' => $e->getMessage()]);
+            throw $e;
+        }
     }
 
     /**
@@ -34,7 +63,7 @@ class UserProfileService
     public function getAuthProfile(): User
     {
         try {
-            return $this->userProfileRepository->showProfile($this->user->id);
+            return $this->userProfileRepository->showProfile($this->user->id, ['profile', 'role']);
         } catch (Exception $e) {
             Log::error('ServiceService::getList', ['error' => $e->getMessage()]);
             throw $e;
@@ -49,7 +78,7 @@ class UserProfileService
     public function getUserProfile(User $user): User
     {
         try {
-            return $this->userProfileRepository->showProfile($user->id);
+            return $this->userProfileRepository->showProfile($user->id, ['profile', 'role']);
         } catch (Exception $e) {
             Log::error('ServiceService::getList', ['error' => $e->getMessage()]);
             throw $e;
@@ -77,7 +106,7 @@ class UserProfileService
     public function deleteUserProfile()
     {
         try {
-            $this->userProfileRepository->deleteProfile( $this->user->id);
+            $this->userProfileRepository->deleteProfile($this->user->id);
         } catch (Exception $e) {
             Log::error('ServiceService::deleteUserProfile', ['error' => $e->getMessage()]);
             throw $e;
