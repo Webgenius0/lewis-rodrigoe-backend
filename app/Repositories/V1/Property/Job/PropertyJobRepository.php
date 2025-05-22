@@ -6,10 +6,26 @@ use App\Helpers\Helper;
 use App\Interfaces\V1\Property\Job\PropertyJobRepositoryInterface;
 use App\Models\PropertyJob;
 use Exception;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
 
 class PropertyJobRepository implements PropertyJobRepositoryInterface
 {
+    /**
+     * getJobListByStatus
+     * @param string $status
+     * @param mixed $per_page
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function getJobListByStatus(string $status, $per_page): LengthAwarePaginator
+    {
+        try {
+            return  PropertyJob::whereStatus($status)->paginate($per_page);
+        } catch (Exception $e) {
+            Log::error('PropertyJobRepository::getJobList', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
     /**
      * createJob
      * @param array $data

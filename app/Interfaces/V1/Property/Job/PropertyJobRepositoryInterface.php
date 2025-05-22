@@ -3,9 +3,18 @@
 namespace App\Interfaces\V1\Property\Job;
 
 use App\Models\PropertyJob;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 interface PropertyJobRepositoryInterface
 {
+    /**
+     * getJobListByStatus
+     * @param string $status
+     * @param mixed $per_page
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function getJobListByStatus(string $status, $per_page): LengthAwarePaginator;
+
     /**
      * createJob
      * @param array $data
