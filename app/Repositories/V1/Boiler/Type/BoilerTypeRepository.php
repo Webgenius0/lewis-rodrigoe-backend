@@ -23,4 +23,19 @@ class BoilerTypeRepository implements BoilerTypeRepositoryInterface
             throw $e;
         }
     }
+
+    /**
+     * findBoilerType
+     * @param int $id
+     * @return BoilerTypes
+     */
+    public function findBoilerType(int $id): BoilerTypes
+    {
+        try {
+            return BoilerTypes::findOrFail($id);
+        }catch (Exception $e) {
+            Log::error('BoilerTypeRepository::findBoilerType', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
 }

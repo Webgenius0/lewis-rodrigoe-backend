@@ -2,29 +2,43 @@
 
 namespace App\Services\Api\V1\Property;
 
+use App\Interfaces\V1\Boiler\Type\BoilerTypeRepositoryInterface;
 use App\Interfaces\V1\Property\Type\PropertyTypeRepositoryInterface;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Log;
+use PhpParser\Node\Expr\Cast\Double;
 
 class GeneralCalculation
 {
     private PropertyTypeRepositoryInterface $propertyTypeRepository;
+    private BoilerTypeRepositoryInterface $boilerTypeRepository;
 
     /**
      * __construct
      * @param \App\Interfaces\V1\Property\Type\PropertyTypeRepositoryInterface $propertyTypeRepository
+     * @param \App\Interfaces\V1\Boiler\Type\BoilerTypeRepositoryInterface $boilerTypeRepository
      */
-    public function __construct(PropertyTypeRepositoryInterface $propertyTypeRepository)
-    {
+    public function __construct(
+        PropertyTypeRepositoryInterface $propertyTypeRepository,
+        BoilerTypeRepositoryInterface $boilerTypeRepository
+    ) {
         $this->propertyTypeRepository = $propertyTypeRepository;
+        $this->boilerTypeRepository = $boilerTypeRepository;
     }
 
-    public function propertyCostCalculation(array $data)
+    /**
+     * propertyCostCalculation
+     * @param array $data
+     * @return int|float
+     */
+    public function propertyCostCalculation(array $data): int|float
     {
         try {
             $propertyTypeCost = $this->propertyRate($data['property_type_id']);
+            $boilerTypeCost = $this->boilerType($data['boiler_type_id']);
 
+            return $propertyTypeCost;
         } catch (Exception $e) {
             Log::error('PropertyService::generalPropertyCostCalculation', ['error' => $e->getMessage()]);
             throw $e;
@@ -55,12 +69,14 @@ class GeneralCalculation
 
     /**
      * boilerType
-     * @param string $type
+     * @param int $id
      * @return int
      */
-    public function boilerType(string $type): int
+    public function boilerType(int $id): int
     {
         try {
+            $boilerType = $this->boilerTypeRepository->findBoilerType($id);
+            $type = $boilerType->name;
             $rate = 0;
             if ($type == "ASHP") $rate = 3;
             return $rate;

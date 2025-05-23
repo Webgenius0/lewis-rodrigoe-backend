@@ -12,4 +12,11 @@ interface BoilerTypeRepositoryInterface
      * @return \Illuminate\Database\Eloquent\Collection<int, BoilerTypes>
      */
     public function getBoilerTypes(): Collection;
+
+    /**
+     * findBoilerType
+     * @param int $id
+     * @return BoilerTypes
+     */
+    public function findBoilerType(int $id): BoilerTypes;
 }
