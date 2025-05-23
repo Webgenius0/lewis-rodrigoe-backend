@@ -26,24 +26,25 @@ class CreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'label' => 'required|string',
-            'street' => 'required|string',
-            'apartment' => 'nullable|string',
-            'country_id' => 'required|exists:countries,id',
-            'state_id' => 'required|exists:country_states,id',
-            'city_id' => 'required|exists:state_cities,id',
-            'zip_id' => 'required|exists:city_zips,id',
-            'latitude' => 'nullable|numeric',
-            'longitude' => 'nullable|numeric',
-            'boiler_type_id' => 'required|exists:boiler_types,id',
-            'boiler_model_id' => 'required|exists:boiler_models,id',
-            'property_type_id' => 'required|exists:property_types,id',
-            'service_id' => 'required|exists:services,id',
-            'quantity' => 'required|integer',
-            'purchase_year' => 'required|date',
-            'last_service_date' => 'nullable|date',
-            'location' => 'required|string',
+            'label'              => 'required|string',
+            'street'             => 'required|string',
+            'apartment'          => 'nullable|string',
+            'country_id'         => 'required|exists:countries,id',
+            'state_id'           => 'required|exists:country_states,id',
+            'city_id'            => 'required|exists:state_cities,id',
+            'zip_id'             => 'required|exists:city_zips,id',
+            'latitude'           => 'nullable|numeric',
+            'longitude'          => 'nullable|numeric',
+            'boiler_type_id'     => 'required|exists:boiler_types,id',
+            'boiler_model_id'    => 'required|exists:boiler_models,id',
+            'property_type_id'   => 'required|exists:property_types,id',
+            'service_id'         => 'required|exists:services,id',
+            'quantity'           => 'required|integer',
+            'purchase_year'      => 'required|date',
+            'last_service_date'  => 'nullable|date',
+            'location'           => 'required|string',
             'accessability_info' => 'required|string',
+            'price'              => 'required|numeric',
         ];
     }
 
@@ -75,6 +76,7 @@ class CreateRequest extends FormRequest
             'last_service_date',
             'location',
             'accessability_info',
+            'price',
         ];
         $message = 'Validation error';
 

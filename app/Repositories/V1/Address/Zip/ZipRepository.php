@@ -22,4 +22,19 @@ class ZipRepository implements ZipRepositoryInterface
             throw $e;
         }
     }
+
+    /**
+     * findZip
+     * @param int $id
+     * @return CityZip
+     */
+    public function findZip(int $id): CityZip
+    {
+        try {
+            return CityZip::findOrFail($id);
+        }catch(Exception $e) {
+            Log::error('ZipRepository::findZip', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Services\Api\V1\Property;
 
+use App\Interfaces\V1\Address\Zip\ZipRepositoryInterface;
 use App\Interfaces\V1\Boiler\Type\BoilerTypeRepositoryInterface;
 use App\Interfaces\V1\Property\Type\PropertyTypeRepositoryInterface;
 use Carbon\Carbon;
@@ -13,18 +14,22 @@ class GeneralCalculation
 {
     private PropertyTypeRepositoryInterface $propertyTypeRepository;
     private BoilerTypeRepositoryInterface $boilerTypeRepository;
+    private ZipRepositoryInterface $zipRepository;
 
     /**
      * __construct
      * @param \App\Interfaces\V1\Property\Type\PropertyTypeRepositoryInterface $propertyTypeRepository
      * @param \App\Interfaces\V1\Boiler\Type\BoilerTypeRepositoryInterface $boilerTypeRepository
+     * @param \App\Interfaces\V1\Address\Zip\ZipRepositoryInterface $zipRepository
      */
     public function __construct(
         PropertyTypeRepositoryInterface $propertyTypeRepository,
-        BoilerTypeRepositoryInterface $boilerTypeRepository
+        BoilerTypeRepositoryInterface $boilerTypeRepository,
+        ZipRepositoryInterface $zipRepository
     ) {
         $this->propertyTypeRepository = $propertyTypeRepository;
         $this->boilerTypeRepository = $boilerTypeRepository;
+        $this->zipRepository = $zipRepository;
     }
 
     /**
@@ -38,8 +43,9 @@ class GeneralCalculation
             $propertyTypeCost = $this->propertyRate($data['property_type_id']);
             $boilerTypeCost = $this->boilerType($data['boiler_type_id']);
             $lastServiceBasedCost = $this->lastService('last_service_date');
+            $postCodeCost = $this->postCode($data['zip_id']);
 
-            return $propertyTypeCost + $boilerTypeCost + $lastServiceBasedCost;
+            return $propertyTypeCost + $boilerTypeCost + $lastServiceBasedCost + $postCodeCost;
         } catch (Exception $e) {
             Log::error('PropertyService::generalPropertyCostCalculation', ['error' => $e->getMessage()]);
             throw $e;
@@ -122,13 +128,15 @@ class GeneralCalculation
     }
 
     /**
-     * postCode
-     * @param string $postCode
+     * Summary of postCode
+     * @param int $id
      * @return int
      */
-    public function postCode(string $postCode)
+    public function postCode(int $id)
     {
         try {
+            $zip = $this->zipRepository->findZip($id);
+            $postCode = $zip->number;
             $adjustment = 0;
             $londonPrefixes = ["N", "E", "W", "SE", "SW", "NW", "EC", "WC"];
 

@@ -49,6 +49,7 @@ class PropertyRepository implements PropertyRepositoryInterface
                 'last_service_date'  => $data['last_service_date'],
                 'location'           => $data['location'],
                 'accessability_info' => $data['accessability_info'],
+                'price'              => $data['price'],
             ]);
         } catch (Exception $e) {
             Log::error('PropertyRepository::createProperty', ['error' => $e->getMessage()]);
