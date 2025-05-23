@@ -12,6 +12,7 @@ Route::prefix('/property')->middleware('auth:api')
 ->controller(PropertyController::class)->group(function () {
     Route::post('/', 'store');
     Route::get('/dropdown', 'userDropdown');
+    Route::post('/price', 'propertyCalculation');
 });
 
 /**

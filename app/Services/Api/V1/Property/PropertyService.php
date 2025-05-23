@@ -74,22 +74,15 @@ class PropertyService
     /**
      * priceGeneration
      * @param array $data
-     * @return float|int
+     * @return array
      */
-    public function priceGeneration(array $data)
+    public function priceGeneration(array $data): array
     {
         try {
-            $role = $this->user->role_id;
-            $price = 0;
 
-            if ($role  = 2) {
-                // owner
-                $price = $this->ownerPropertyCalculation->propertyCostCalculation($data);
+            $price = $this->ownerPropertyCalculation->propertyCostCalculation($data);
 
-            } else {
-                // landlord
-            }
-            return $price;
+            return ['price' => $price];
         } catch (Exception $e) {
             Log::error('PropertyService::priceGeneration', ['error' => $e->getMessage()]);
             throw $e;

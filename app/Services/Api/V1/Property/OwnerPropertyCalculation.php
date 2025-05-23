@@ -42,7 +42,7 @@ class OwnerPropertyCalculation
         try {
             $propertyTypeCost = $this->propertyRate($data['property_type_id']);
             $boilerTypeCost = $this->boilerType($data['boiler_type_id']);
-            $lastServiceBasedCost = $this->lastService('last_service_date');
+            $lastServiceBasedCost = $this->lastService($data['last_service_date']);
             $postCodeCost = $this->postCode($data['zip_id']);
 
             return $propertyTypeCost + $boilerTypeCost + $lastServiceBasedCost + $postCodeCost;
@@ -65,6 +65,7 @@ class OwnerPropertyCalculation
             $rate = 0;
             if ($type == "Flat") $rate = 22;
             else if ($type == "House") $rate = 24;
+            else if ($type == "HMO") $rate = 26;
             else if ($type == "Commercial Unit") $rate = 30;
             else $rate = 24;
             return $rate;
@@ -101,26 +102,18 @@ class OwnerPropertyCalculation
     public function lastService(string|null $historyDate): int
     {
         try {
-            $adjustment = 0;
-            if (is_null($historyDate)) {
+            if (is_null($historyDate) || trim($historyDate) === '') {
                 return 5;
             }
+
             $history = Carbon::parse($historyDate);
-            $now = Carbon::now();
+            $yearsDiff = $history->diffInYears(Carbon::now());
 
-            $yearsDiff = $history->diffInYears($now);
-
-            if ($yearsDiff < 1) {
-                $adjustment = 0;
-            } elseif ($yearsDiff >= 1 && $yearsDiff < 2) {
-                $adjustment = 1;
-            } elseif ($yearsDiff >= 2 && $yearsDiff < 4) {
-                $adjustment = 2;
-            } else {
-                $adjustment = 5;
-            }
-
-            return $adjustment;
+            return match (true) {
+                $yearsDiff < 2 => 1,
+                $yearsDiff < 4 => 2,
+                default => 5,
+            };
         } catch (Exception $e) {
             Log::error('PropertyService::lastService', ['error' => $e->getMessage()]);
             throw $e;
