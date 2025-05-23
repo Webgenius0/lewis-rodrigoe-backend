@@ -37,8 +37,9 @@ class GeneralCalculation
         try {
             $propertyTypeCost = $this->propertyRate($data['property_type_id']);
             $boilerTypeCost = $this->boilerType($data['boiler_type_id']);
+            $lastServiceBasedCost = $this->lastService('last_service_date');
 
-            return $propertyTypeCost;
+            return $propertyTypeCost + $boilerTypeCost + $lastServiceBasedCost;
         } catch (Exception $e) {
             Log::error('PropertyService::generalPropertyCostCalculation', ['error' => $e->getMessage()]);
             throw $e;
