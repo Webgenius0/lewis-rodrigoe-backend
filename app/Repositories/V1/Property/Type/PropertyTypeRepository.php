@@ -18,8 +18,23 @@ class PropertyTypeRepository implements PropertyTypeRepositoryInterface
     {
         try {
             return PropertyType::all();
-        }catch(Exception $e) {
+        } catch (Exception $e) {
             Log::error('PropertyTypeRepository::getPropertyTypes', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
+    /**
+     * findPropertyType
+     * @param int $id
+     * @return PropertyType
+     */
+    public function findPropertyType(int $id): PropertyType
+    {
+        try {
+            return PropertyType::findOrFail($id);
+        } catch (Exception $e) {
+            Log::error('PropertyTypeRepository::findPropertyType', ['error' => $e->getMessage()]);
             throw $e;
         }
     }

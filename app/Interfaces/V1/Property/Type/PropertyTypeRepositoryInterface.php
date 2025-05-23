@@ -12,4 +12,11 @@ interface PropertyTypeRepositoryInterface
      * @return \Illuminate\Database\Eloquent\Collection<int, PropertyType>
      */
     public function getPropertyTypes(): Collection;
+
+    /**
+     * findPropertyType
+     * @param int $id
+     * @return PropertyType
+     */
+    public function findPropertyType(int $id): PropertyType;
 }
