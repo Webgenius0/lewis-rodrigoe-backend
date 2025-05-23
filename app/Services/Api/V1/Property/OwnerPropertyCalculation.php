@@ -10,7 +10,7 @@ use Exception;
 use Illuminate\Support\Facades\Log;
 use PhpParser\Node\Expr\Cast\Double;
 
-class GeneralCalculation
+class OwnerPropertyCalculation
 {
     private PropertyTypeRepositoryInterface $propertyTypeRepository;
     private BoilerTypeRepositoryInterface $boilerTypeRepository;

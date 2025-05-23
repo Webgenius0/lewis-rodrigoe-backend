@@ -18,17 +18,23 @@ class PropertyService
      */
     private PropertyRepositoryInterface $propertyRepository;
     private AddressRepositoryInterface $addressRepository;
+    private OwnerPropertyCalculation $ownerPropertyCalculation;
     protected $user;
 
     /**
-     * construct
+     * __construct
      * @param \App\Interfaces\V1\Property\PropertyRepositoryInterface $propertyRepository
      * @param \App\Interfaces\V1\Address\AddressRepositoryInterface $addressRepository
+     * @param \App\Services\Api\V1\Property\OwnerPropertyCalculation $ownerPropertyCalculation
      */
-    public function __construct(PropertyRepositoryInterface $propertyRepository, AddressRepositoryInterface $addressRepository)
-    {
+    public function __construct(
+        PropertyRepositoryInterface $propertyRepository,
+        AddressRepositoryInterface $addressRepository,
+        OwnerPropertyCalculation $ownerPropertyCalculation
+    ) {
         $this->propertyRepository = $propertyRepository;
         $this->addressRepository = $addressRepository;
+        $this->ownerPropertyCalculation = $ownerPropertyCalculation;
         $this->user = Auth::user();
     }
 
@@ -55,12 +61,37 @@ class PropertyService
     /**
      * userPropertyDropdown
      */
-    public function userPropertyDropdown():mixed
+    public function userPropertyDropdown(): mixed
     {
         try {
             return $this->propertyRepository->getUserPropertyAddressLabel($this->user->id);
-        }catch (Exception $e) {
+        } catch (Exception $e) {
             Log::error('PropertyService::propertyDropdownOfUser', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
+    /**
+     * priceGeneration
+     * @param array $data
+     * @return float|int
+     */
+    public function priceGeneration(array $data)
+    {
+        try {
+            $role = $this->user->role_id;
+            $price = 0;
+
+            if ($role  = 2) {
+                // owner
+                $price = $this->ownerPropertyCalculation->propertyCostCalculation($data);
+
+            } else {
+                // landlord
+            }
+            return $price;
+        } catch (Exception $e) {
+            Log::error('PropertyService::priceGeneration', ['error' => $e->getMessage()]);
             throw $e;
         }
     }
