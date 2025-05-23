@@ -211,7 +211,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      * properties
      * @return HasMany<Property, User>
      */
-    public function properties():HasMany
+    public function properties(): HasMany
     {
         return $this->hasMany(Property::class);
     }
@@ -220,7 +220,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      * jobes I posted
      * @return HasMany<PropertyJob, User>
      */
-    public function postedJobs():HasMany
+    public function postedJobs(): HasMany
     {
         return $this->hasMany(PropertyJob::class, 'user_id');
     }
@@ -229,8 +229,19 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      * assigned Jobs
      * @return HasMany<PropertyJob, User>
      */
-    public function assignedJobs():HasMany
+    public function assignedJobs(): HasMany
     {
         return $this->hasMany(PropertyJob::class, 'engineer');
+    }
+
+
+    public function sender()
+    {
+        return $this->belongsTo(User::class, 'sender_id');
+    }
+
+    public function receiver()
+    {
+        return $this->belongsTo(User::class, 'receiver_id');
     }
 }

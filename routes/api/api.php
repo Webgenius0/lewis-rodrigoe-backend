@@ -21,6 +21,7 @@ Route::prefix('/v1')->group(function () {
 
     Route::middleware('auth:api')->group(function () {
         require 'v1/user/auth.php';
+        require 'v1/message/message.php';
         require 'v1/property/property.php';
     });
 });
