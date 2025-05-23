@@ -29,7 +29,7 @@ class CalculationRequest extends FormRequest
             'zip_id'             => 'required|exists:city_zips,id',
             'boiler_type_id'     => 'required|exists:boiler_types,id',
             'property_type_id'   => 'required|exists:property_types,id',
-            'last_service_date'  => 'nullable|date',
+            'last_service_date'  => 'nullable|date|before_or_equal:today',
         ];
     }
 

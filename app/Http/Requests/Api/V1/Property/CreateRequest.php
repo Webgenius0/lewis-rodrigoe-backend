@@ -41,7 +41,7 @@ class CreateRequest extends FormRequest
             'service_id'         => 'required|exists:services,id',
             'quantity'           => 'required|integer',
             'purchase_year'      => 'required|date',
-            'last_service_date'  => 'nullable|date',
+            'last_service_date'  => 'nullable|date|before_or_equal:today',
             'location'           => 'required|string',
             'accessability_info' => 'required|string',
             'price'              => 'required|numeric',
