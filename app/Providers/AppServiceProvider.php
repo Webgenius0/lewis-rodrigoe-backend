@@ -17,6 +17,7 @@ use App\Interfaces\V1\Boiler\Type\BoilerTypeRepositoryInterface;
 use App\Interfaces\V1\DrivingLicence\DrivingLicenceRepositoryInterface;
 use App\Interfaces\V1\Engineer\EngineerRepositoryInterface;
 use App\Interfaces\V1\GassSafetyRegistration\GassSafetyRegistrationRepositoryInterface;
+use App\Interfaces\V1\Message\MessageRepositoryInterface;
 use App\Interfaces\V1\NICEIC\NICEICRepositoryInterface;
 use App\Interfaces\V1\NVQ\NVQRepositoryInterface;
 use App\Interfaces\V1\Property\Job\PropertyJobRepositoryInterface;
@@ -40,6 +41,7 @@ use App\Repositories\V1\Boiler\Type\BoilerTypeRepository;
 use App\Repositories\V1\DrivingLicence\DrivingLicenceRepository;
 use App\Repositories\V1\Engineer\EngineerRepository;
 use App\Repositories\V1\GassSafetyRegistration\GassSafetyRegistrationRepository;
+use App\Repositories\V1\Message\MessageRepository;
 use App\Repositories\V1\NICEIC\NICEICRepository;
 use App\Repositories\V1\NVQ\NVQRepository;
 use App\Repositories\V1\Property\Job\PropertyJobRepository;
@@ -108,6 +110,10 @@ class AppServiceProvider extends ServiceProvider
 
         // Driving licence
         $this->app->bind(DrivingLicenceRepositoryInterface::class, DrivingLicenceRepository::class);
+
+        // Message
+        $this->app->bind(MessageRepositoryInterface::class, MessageRepository::class);
+
 
     }
 

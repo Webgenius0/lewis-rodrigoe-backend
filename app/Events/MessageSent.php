@@ -34,6 +34,6 @@ class MessageSent implements ShouldBroadcastNow
 
     public function broadcastWith()
     {
-        return ['message' => $this->message->load('sender')];
+        return ['message' => $this->message->load('sender:id,first_name,last_name,avatar')];
     }
 }
