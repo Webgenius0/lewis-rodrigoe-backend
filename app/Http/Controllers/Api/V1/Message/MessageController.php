@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1\Message;
 use App\Events\MessageSent;
 use App\Http\Controllers\Api\V1\Controller;
 use App\Http\Requests\Api\V1\Message\SendRequest;
+use App\Http\Resources\Api\V1\Message\SendResource;
 use App\Models\Message;
 use App\Services\Api\V1\Message\MessageService;
 use Exception;
@@ -38,7 +39,7 @@ class MessageController extends Controller
         try {
             $validatedData = $sendRequest->validated();
             $response = $this->messageService->sendMessage($validatedData);
-            return $this->success(201, 'message successfully send', $response);
+            return $this->success(201, 'message successfully send', new SendResource($response));
         } catch (Exception $e) {
             Log::error("MessageController::send", ['message' => $e->getMessage()]);
             return $this->error(500, 'server error');
