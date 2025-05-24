@@ -31,19 +31,19 @@ class MessageRepository implements MessageRepositoryInterface
     }
 
     /**
-     * getConversaton
+     * getConversation
      * @param int $authId
      * @param int $receverId
      * @return \Illuminate\Pagination\LengthAwarePaginator
      */
-    public function getConversaton(int $authId, int $receverId): LengthAwarePaginator
+    public function getConversation(int $authId, int $receverId): LengthAwarePaginator
     {
         try {
             return Message::where(function ($q) use ($authId, $receverId) {
                 $q->where('sender_id', $authId)->where('receiver_id', $receverId);
             })->orWhere(function ($q) use ($authId, $receverId) {
                 $q->where('sender_id', $receverId)->where('receiver_id', $authId);
-            })->orderBy('created_at')->paginate(50);
+            })->orderByDesc('created_at')->paginate(50);
         } catch (Exception $e) {
             Log::error('MessageRepository::getConversaton', ['error' => $e->getMessage()]);
             throw $e;

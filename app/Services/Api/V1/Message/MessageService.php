@@ -7,6 +7,7 @@ use App\Interfaces\V1\Message\MessageRepositoryInterface;
 use App\Models\Message;
 use App\Models\User;
 use Exception;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
@@ -47,6 +48,21 @@ class MessageService
             return $message;
         } catch (Exception $e) {
             Log::error('MessageService::sendMessage', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
+    /**
+     * getConversation
+     * @param \App\Models\User $user
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
+    public function getConversation(User $user): LengthAwarePaginator
+    {
+        try {
+            return $this->messageRepository->getConversation($this->authUser->id, $user->id);
+        } catch (Exception $e) {
+            Log::error('MessageService::getConversation', ['error' => $e->getMessage()]);
             throw $e;
         }
     }

@@ -16,10 +16,10 @@ interface MessageRepositoryInterface
     public function createMessage(array $data, int $authId): Message;
 
     /**
-     * getConversaton
+     * getConversation
      * @param int $authId
      * @param int $receverId
      * @return \Illuminate\Pagination\LengthAwarePaginator
      */
-    public function getConversaton(int $authId, int $receverId): LengthAwarePaginator;
+    public function getConversation(int $authId, int $receverId): LengthAwarePaginator;
 }
