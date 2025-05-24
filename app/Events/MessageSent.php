@@ -29,7 +29,6 @@ class MessageSent implements ShouldBroadcastNow
 
     public function broadcastOn()
     {
-        // return new PrivateChannel('App.Models.User.' . $this->receiverId);
         return new PrivateChannel('chat.' . $this->receiverId);
     }
 
