@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class MessageController
 {
-
     public function send(Request $request)
     {
         $request->validate([
@@ -22,7 +21,7 @@ class MessageController
             'content' => $request->content,
         ]);
 
-        broadcast(new MessageSent($message))->toOthers();
+        broadcast(new MessageSent($message, $request->receiver_id))->toOthers();
 
         return response()->json($message->load('sender'));
     }

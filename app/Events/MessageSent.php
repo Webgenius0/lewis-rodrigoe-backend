@@ -17,19 +17,20 @@ class MessageSent implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public $message;
+    public $receiverId;
     /**
      * Create a new event instance.
      */
-    public function __construct(Message $message)
+    public function __construct($message, $receiverId)
     {
-        Log::info($message);
         $this->message = $message;
+        $this->receiverId = $receiverId;
     }
 
     public function broadcastOn()
     {
-        Log::info("message");
-        return new PrivateChannel('chat.' . $this->message->receiver_id);
+        // return new PrivateChannel('App.Models.User.' . $this->receiverId);
+        return new PrivateChannel('chat.' . $this->receiverId);
     }
 
     public function broadcastWith()
