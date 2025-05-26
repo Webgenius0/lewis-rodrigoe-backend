@@ -4,15 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class OTP extends Model
+class OnlineHour extends Model
 {
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
+     * fillable
+     * @var array
      */
-    protected $guarded = [];
+    protected $fillable = ['slot'];
 
 
     /**
@@ -34,18 +34,15 @@ class OTP extends Model
     protected function casts(): array
     {
         return [
-            'number'     => 'integer',
+            'id'         => 'integer',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];
     }
 
-    /**
-     * user
-     * @return BelongsTo<User, Profile>
-     */
-    public function user(): BelongsTo
+    public function users():BelongsToMany
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(User::class);
     }
+
 }

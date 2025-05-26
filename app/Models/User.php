@@ -234,14 +234,29 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         return $this->hasMany(PropertyJob::class, 'engineer');
     }
 
-
+    /**
+     * sender
+     * @return BelongsTo<User, User>
+     */
     public function sender()
     {
         return $this->belongsTo(User::class, 'sender_id');
     }
-
+    /**
+     * receiver
+     * @return BelongsTo<User, User>
+     */
     public function receiver()
     {
         return $this->belongsTo(User::class, 'receiver_id');
+    }
+
+    /**
+     * onlineHours
+     * @return BelongsToMany<OnlineHour, User, \Illuminate\Database\Eloquent\Relations\Pivot>
+     */
+    public function onlineHours(): BelongsToMany
+    {
+        return $this->belongsToMany(OnlineHour::class);
     }
 }
