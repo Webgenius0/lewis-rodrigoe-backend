@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories\V1;
+namespace App\Repositories\V1\OnlineHoiur;
 
-use App\Interfaces\V1\OnlineHourRepositoryInterface;
+use App\Interfaces\V1\OnlineHoiur\OnlineHourRepositoryInterface;
 
 class OnlineHourRepository implements OnlineHourRepositoryInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Interfaces\V1;
+namespace App\Interfaces\V1\OnlineHoiur;
 
 interface OnlineHourRepositoryInterface
 {
