@@ -4,6 +4,7 @@ namespace App\Services\Api\V1\OnlineHoiur;
 
 use App\Interfaces\V1\OnlineHoiur\OnlineHourRepositoryInterface;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class OnlineHourService
@@ -13,6 +14,7 @@ class OnlineHourService
      * @var OnlineHourRepositoryInterface
      */
     private OnlineHourRepositoryInterface $onlineHourRepository;
+    private $authUser;
 
     /**
      * construct
@@ -21,6 +23,7 @@ class OnlineHourService
     public function __construct(OnlineHourRepositoryInterface $onlineHourRepository)
     {
         $this->onlineHourRepository = $onlineHourRepository;
+        $this->authUser = Auth::user();
     }
 
     /**
@@ -31,8 +34,23 @@ class OnlineHourService
     {
         try {
             return $this->onlineHourRepository->getOnlineHours();
-        }catch (Exception $e) {
+        } catch (Exception $e) {
             Log::error('OnlineHourService::getOnlineHours ', [$e->getMessage()]);
+            throw $e;
+        }
+    }
+
+    /**
+     * pareUser
+     * @param array $data
+     * @return array{attached: array, detached: array, updated: array}
+     */
+    public function pareUser(array $data): array
+    {
+        try {
+            return $this->onlineHourRepository->pareUser($this->authUser->id, $data['online_hour_id']);
+        } catch (Exception $e) {
+            Log::error('OnlineHourService::pareUser ', [$e->getMessage()]);
             throw $e;
         }
     }

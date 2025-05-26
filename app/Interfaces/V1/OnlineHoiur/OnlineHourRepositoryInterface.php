@@ -12,4 +12,12 @@ interface OnlineHourRepositoryInterface
      * @return Collection<int, OnlineHour>
      */
     public function getOnlineHours(): Collection;
+
+    /**
+     * pareUser
+     * @param int $authUserId
+     * @param int $onlineHourId
+     * @return array{attached: array, detached: array, updated: array}
+     */
+    public function pareUser(int $authUserId, int $onlineHourId):array;
 }

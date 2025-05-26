@@ -40,6 +40,10 @@ class OnlineHour extends Model
         ];
     }
 
+    /**
+     * users
+     * @return BelongsToMany<User, OnlineHour, \Illuminate\Database\Eloquent\Relations\Pivot>
+     */
     public function users():BelongsToMany
     {
         return $this->belongsToMany(User::class);
