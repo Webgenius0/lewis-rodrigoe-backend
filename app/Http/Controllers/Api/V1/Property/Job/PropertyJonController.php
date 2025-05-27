@@ -77,4 +77,20 @@ class PropertyJonController extends Controller
             return $this->error(500, 'server error');
         }
     }
+
+    /**
+     * assignEngineer
+     * @param \App\Models\PropertyJob $propertyJob
+     * @return JsonResponse
+     */
+    public function assignEngineer( PropertyJob $propertyJob): JsonResponse
+    {
+        try {
+            $this->propertyJobService->assignEngineer($propertyJob);
+            return $this->success(200, 'Engineer assigned successfully');
+        } catch (Exception $e) {
+            Log::error("PropertyController::assignEngineer", ['message' => $e->getMessage()]);
+            return $this->error(500, 'server error');
+        }
+    }
 }

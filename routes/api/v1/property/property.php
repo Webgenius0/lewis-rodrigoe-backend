@@ -22,7 +22,10 @@ Route::prefix('/property-job')
 ->controller(PropertyJonController::class)->group(function () {
     Route::get('/{status}', 'index')->where('status','active|inactive|pending|ongoing|completed|assigned');
     Route::post('/', 'store');
+
+    // engineer
     Route::get('/{propertyJob}/details', 'show');
+    Route::patch('/{propertyJob}/assign', 'assignEngineer');
 });
 
 Route::prefix('/property-type')

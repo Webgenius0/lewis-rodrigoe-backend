@@ -73,4 +73,19 @@ class PropertyJobService
             throw $e;
         }
     }
+
+    /**
+     * assignEngineer
+     * @param \App\Models\PropertyJob $propertyJob
+     * @return void
+     */
+    public function assignEngineer(PropertyJob $propertyJob): void
+    {
+        try {
+            $this->propertyJobRepository->assignengineer($propertyJob, $this->user->id);
+        } catch (Exception $e) {
+            Log::error('PropertyJobService::assignEngineer', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
 }
