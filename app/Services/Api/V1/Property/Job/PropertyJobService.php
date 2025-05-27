@@ -58,4 +58,19 @@ class PropertyJobService
             throw $e;
         }
     }
+
+    /**
+     * getJobDetails
+     * @param \App\Models\PropertyJob $propertyJob
+     * @return PropertyJob
+     */
+    public function getJobDetails(PropertyJob $propertyJob): PropertyJob
+    {
+        try {
+            return $this->propertyJobRepository->findJobById($propertyJob);
+        } catch (Exception $e) {
+            Log::error('PropertyJobService::getJob', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1\Property\Job;
 use App\Http\Controllers\Api\V1\Controller;
 use App\Http\Requests\Api\V1\Property\Job\CreateRequest;
 use App\Http\Resources\Api\V1\Property\Job\CreateResource;
+use App\Models\PropertyJob;
 use App\Services\Api\V1\Property\Job\PropertyJobService;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -57,6 +58,22 @@ class PropertyJonController extends Controller
             return $this->success(201, 'Job Created', new CreateResource($response));
         } catch (Exception $e) {
             Log::error("PropertyController::store", ['message' => $e->getMessage()]);
+            return $this->error(500, 'server error');
+        }
+    }
+
+    /**
+     * show
+     * @param \App\Models\PropertyJob $propertyJob
+     * @return JsonResponse
+     */
+    public function show(PropertyJob $propertyJob): JsonResponse
+    {
+        try {
+            $response = $this->propertyJobService->getJobDetails($propertyJob);
+            return $this->success(200, 'Job details', $response);
+        } catch (Exception $e) {
+            Log::error("PropertyController::show", ['message' => $e->getMessage()]);
             return $this->error(500, 'server error');
         }
     }

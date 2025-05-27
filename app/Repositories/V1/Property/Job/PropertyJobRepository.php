@@ -4,6 +4,7 @@ namespace App\Repositories\V1\Property\Job;
 
 use App\Helpers\Helper;
 use App\Interfaces\V1\Property\Job\PropertyJobRepositoryInterface;
+use App\Models\Property;
 use App\Models\PropertyJob;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -70,6 +71,52 @@ class PropertyJobRepository implements PropertyJobRepositoryInterface
             ]);
         } catch (Exception $e) {
             Log::error('PropertyJobRepository::createJob', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
+    /**
+     * findJobById
+     * @param \App\Models\PropertyJob $propertyJob
+     * @return PropertyJob
+     */
+    public function findJobById(PropertyJob $propertyJob): PropertyJob
+    {
+        try {
+            $propertyJob->load([
+                'property' => function ($query) {
+                    $query->select(['id', 'sn', 'user_id', 'address_id', 'boiler_type_id', 'boiler_model_id', 'property_type_id', 'quantity', 'purchase_year', 'last_service_date', 'location', 'accessability_info', 'radiator', 'price']);
+                },
+                'user',
+                'property.boilerType' => function ($query) {
+                    $query->select(['id', 'name']);
+                },
+                'property.boilerModel' => function ($query) {
+                    $query->select(['id', 'name']);
+                },
+                'property.propertyType' => function ($query) {
+                    $query->select(['id', 'name']);
+                },
+                'property.address' => function ($query) {
+                    $query->select(['id', 'street', 'apartment', 'country_id', 'state_id', 'city_id', 'zip_id', 'latitude', 'longitude']);
+                },
+                'property.address.country' => function ($query) {
+                    $query->select(['id', 'name']);
+                },
+                'property.address.state' => function ($query) {
+                    $query->select(['id', 'name']);
+                },
+                'property.address.city' => function ($query) {
+                    $query->select(['id', 'name']);
+                },
+                'property.address.zip' => function ($query) {
+                    $query->select(['id', 'code']);
+                }
+            ]);
+
+            return $propertyJob;
+        } catch (Exception $e) {
+            Log::error('PropertyJobRepository::findJobById', ['error' => $e->getMessage()]);
             throw $e;
         }
     }

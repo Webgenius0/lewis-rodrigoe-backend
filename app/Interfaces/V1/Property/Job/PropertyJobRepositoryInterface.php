@@ -30,4 +30,11 @@ interface PropertyJobRepositoryInterface
      * @return int
      */
     public function JobCount(string $column, int $value, string $status): int;
+
+    /**
+     * findJobById
+     * @param \App\Models\PropertyJob $propertyJob
+     * @return PropertyJob
+     */
+    public function findJobById(PropertyJob $propertyJob): PropertyJob;
 }
