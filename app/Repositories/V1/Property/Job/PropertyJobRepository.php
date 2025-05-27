@@ -120,4 +120,23 @@ class PropertyJobRepository implements PropertyJobRepositoryInterface
             throw $e;
         }
     }
+
+    /**
+     * assignengineer
+     * @param \App\Models\PropertyJob $propertyJob
+     * @param int $engineerId
+     * @return void
+     */
+    public function assignengineer(PropertyJob $propertyJob, int $engineerId): void
+    {
+        try {
+            $propertyJob->engineer = $engineerId;
+            $propertyJob->status = 'assigned';
+            $propertyJob->engineer_assigned_at = now();
+            $propertyJob->save();
+        } catch (Exception $e) {
+            Log::error('PropertyJobRepository::assignEngineer', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
 }

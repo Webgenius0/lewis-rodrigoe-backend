@@ -37,4 +37,12 @@ interface PropertyJobRepositoryInterface
      * @return PropertyJob
      */
     public function findJobById(PropertyJob $propertyJob): PropertyJob;
+
+    /**
+     * assignengineer
+     * @param \App\Models\PropertyJob $propertyJob
+     * @param int $engineerId
+     * @return void
+     */
+    public function assignengineer(PropertyJob $propertyJob, int $engineerId): void;
 }
