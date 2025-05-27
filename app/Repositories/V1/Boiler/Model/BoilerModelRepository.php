@@ -23,4 +23,19 @@ class BoilerModelRepository implements BoilerModelRepositoryInterface
             throw $e;
         }
     }
+
+    /**
+     * getBoilerModelById
+     * @param int $id
+     * @return BoilerModel
+     */
+    public function getBoilerModelById(int $id): BoilerModel
+    {
+        try {
+            return BoilerModel::findOrFail($id);
+        } catch (Exception $e) {
+            Log::error('BoilerModelRepository::getBoilerModelById', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
 }

@@ -3,8 +3,10 @@
 namespace App\Services\Api\V1\Property;
 
 use App\Interfaces\V1\Address\Zip\ZipRepositoryInterface;
+use App\Interfaces\V1\Boiler\Model\BoilerModelRepositoryInterface;
 use App\Interfaces\V1\Boiler\Type\BoilerTypeRepositoryInterface;
 use App\Interfaces\V1\Property\Type\PropertyTypeRepositoryInterface;
+use App\Models\BoilerModel;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -14,21 +16,25 @@ class OwnerPropertyCalculation
 {
     private PropertyTypeRepositoryInterface $propertyTypeRepository;
     private BoilerTypeRepositoryInterface $boilerTypeRepository;
+    private BoilerModelRepositoryInterface $boilerModelRepository;
     private ZipRepositoryInterface $zipRepository;
 
     /**
-     * __construct
-     * @param \App\Interfaces\V1\Property\Type\PropertyTypeRepositoryInterface $propertyTypeRepository
-     * @param \App\Interfaces\V1\Boiler\Type\BoilerTypeRepositoryInterface $boilerTypeRepository
-     * @param \App\Interfaces\V1\Address\Zip\ZipRepositoryInterface $zipRepository
+     * OwnerPropertyCalculation constructor.
+     * @param PropertyTypeRepositoryInterface $propertyTypeRepository
+     * @param BoilerTypeRepositoryInterface $boilerTypeRepository
+     * @param BoilerModelRepositoryInterface $boilerModelRepository
+     * @param ZipRepositoryInterface $zipRepository
      */
     public function __construct(
         PropertyTypeRepositoryInterface $propertyTypeRepository,
         BoilerTypeRepositoryInterface $boilerTypeRepository,
+        BoilerModelRepositoryInterface $boilerModelRepository,
         ZipRepositoryInterface $zipRepository
     ) {
         $this->propertyTypeRepository = $propertyTypeRepository;
         $this->boilerTypeRepository = $boilerTypeRepository;
+        $this->boilerModelRepository = $boilerModelRepository;
         $this->zipRepository = $zipRepository;
     }
 
@@ -44,8 +50,9 @@ class OwnerPropertyCalculation
             $boilerTypeCost = $this->boilerType($data['boiler_type_id']);
             $lastServiceBasedCost = $this->lastService($data['last_service_date']);
             $postCodeCost = $this->postCode($data['zip_id']);
+            $radiatorCost = $this->radiator($data['radiator']);
 
-            return $propertyTypeCost + $boilerTypeCost + $lastServiceBasedCost + $postCodeCost;
+            return $propertyTypeCost + $boilerTypeCost + $lastServiceBasedCost + $postCodeCost + $radiatorCost;
         } catch (Exception $e) {
             Log::error('PropertyService::generalPropertyCostCalculation', ['error' => $e->getMessage()]);
             throw $e;
@@ -110,12 +117,38 @@ class OwnerPropertyCalculation
             $yearsDiff = $history->diffInYears(Carbon::now());
 
             return match (true) {
+                $yearsDiff < 1 => 0,
                 $yearsDiff < 2 => 1,
-                $yearsDiff < 4 => 2,
+                $yearsDiff < 3 => 2,
+                $yearsDiff < 4 => 3,
                 default => 5,
             };
         } catch (Exception $e) {
             Log::error('PropertyService::lastService', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
+    /**
+     * radiator
+     * @param int $number
+     * @return int
+     */
+    public function radiator(int $number)
+    {
+        try {
+            if ($number <= 8) {
+                return 0;
+            }
+            if ($number <= 12) {
+                return 1;
+            }
+            return 2;
+        } catch (Exception $e) {
+            Log::error('PropertyService::radiator', ['error' => $e->getMessage()]);
+            throw $e;
+        } catch (Exception $e) {
+            Log::error('PropertyService::radiator', ['error' => $e->getMessage()]);
             throw $e;
         }
     }

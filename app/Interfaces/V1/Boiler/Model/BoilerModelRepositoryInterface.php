@@ -12,4 +12,11 @@ interface BoilerModelRepositoryInterface
      * @return \Illuminate\Database\Eloquent\Collection<int, BoilerModel>
      */
     public function getBoilerModels(): Collection;
+
+    /**
+     * getBoilerModelById
+     * @param int $id
+     * @return BoilerModel
+     */
+    public function getBoilerModelById(int $id): BoilerModel;
 }

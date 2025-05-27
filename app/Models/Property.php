@@ -24,6 +24,7 @@ class Property extends Model
         'last_service_date',
         'location',
         'accessability_info',
+        'radiator',
         'price',
     ];
 
@@ -51,6 +52,7 @@ class Property extends Model
             'boiler_type_id'    => 'integer',
             'boiler_model_id'   => 'integer',
             'property_type_id'  => 'integer',
+            'radiator'          => 'integer',
             'quantity'          => 'integer',
             'purchase_year'     => 'date',
             'last_service_date' => 'date',

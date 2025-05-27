@@ -25,6 +25,7 @@ return new class extends Migration
             $table->date('last_service_date')->nullable();
             $table->string('location');
             $table->text('accessability_info');
+            $table->integer('radiator')->default('0');
             $table->decimal('price', 8,2)->nullable()->default(null);
             $table->timestamps();
         });

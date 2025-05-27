@@ -44,6 +44,7 @@ class CreateRequest extends FormRequest
             'last_service_date'  => 'nullable|date|before_or_equal:today',
             'location'           => 'required|string',
             'accessability_info' => 'required|string',
+            'radiator'           => 'required|integer|min:0|max:100',
             'price'              => 'required|numeric',
         ];
     }
@@ -57,7 +58,7 @@ class CreateRequest extends FormRequest
      */
     protected function failedValidation(Validator $validator): never
     {
-        $fieldsToCheck =[
+        $fieldsToCheck = [
             'label',
             'street',
             'apartment',
@@ -76,6 +77,7 @@ class CreateRequest extends FormRequest
             'last_service_date',
             'location',
             'accessability_info',
+            'radiator',
             'price',
         ];
         $message = 'Validation error';

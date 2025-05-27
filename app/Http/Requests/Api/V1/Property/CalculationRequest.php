@@ -26,16 +26,17 @@ class CalculationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'zip_id'             => 'required|exists:city_zips,id',
-            'boiler_type_id'     => 'required|exists:boiler_types,id',
-            'property_type_id'   => 'required|exists:property_types,id',
-            'last_service_date'  => 'nullable|date|before_or_equal:today',
+            'zip_id'            => 'required|exists:city_zips,id',
+            'boiler_type_id'    => 'required|exists:boiler_types,id',
+            'property_type_id'  => 'required|exists:property_types,id',
+            'last_service_date' => 'nullable|date|before_or_equal:today',
+            'radiator'          => 'required|integer|min:0|max:100',
         ];
     }
 
     protected function failedValidation(Validator $validator): never
     {
-        $fieldsToCheck =[
+        $fieldsToCheck = [
             'zip_id',
             'boiler_type_id',
             'property_type_id',
