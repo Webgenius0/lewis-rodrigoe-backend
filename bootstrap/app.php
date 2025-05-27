@@ -2,6 +2,7 @@
 
 use App\Helpers\Helper;
 use App\Http\Middleware\Admin;
+use App\Http\Middleware\EngineerMiddleware;
 use App\Http\Middleware\EnsureGuestJwt;
 use App\Http\Middleware\IsVerifyed;
 use App\Http\Middleware\SuperAdmin;
@@ -58,10 +59,11 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
-            'guest.api' => EnsureGuestJwt::class, // only for guest users
-            'verified.api' => IsVerifyed::class, // is user verified
-            'super_admin' => SuperAdmin::class, // only super admin
-            'admin' => Admin::class, // only admin
+            'guest.api'    => EnsureGuestJwt::class,       // only for guest users
+            'verified.api' => IsVerifyed::class,           // is user verified
+            'super_admin'  => SuperAdmin::class,           // only super admin
+            'engineer'     => EngineerMiddleware::class,   // only engineer
+            'admin'        => Admin::class,                // only admin
         ]);
     })
     ->withBroadcasting(

@@ -9,26 +9,27 @@ use Illuminate\Support\Facades\Route;
  * property
  */
 Route::prefix('/property')->middleware('auth:api')
-->controller(PropertyController::class)->group(function () {
-    Route::post('/', 'store');
-    Route::get('/dropdown', 'userDropdown');
-    Route::post('/price', 'propertyCalculation');
-});
+    ->controller(PropertyController::class)->group(function () {
+        Route::post('/', 'store');
+        Route::get('/dropdown', 'userDropdown');
+        Route::post('/price', 'propertyCalculation');
+    });
 
 /**
  * property-job
  */
 Route::prefix('/property-job')
-->controller(PropertyJonController::class)->group(function () {
-    Route::get('/{status}', 'index')->where('status','active|inactive|pending|ongoing|completed|assigned');
-    Route::post('/', 'store');
+    ->controller(PropertyJonController::class)->group(function () {
+        Route::get('/{status}', 'index')->where('status', 'active|inactive|pending|ongoing|completed|assigned');
+        Route::post('/', 'store');
 
-    // engineer
-    Route::get('/{propertyJob}/details', 'show');
-    Route::patch('/{propertyJob}/assign', 'assignEngineer');
-});
+        Route::middleware('engineer')->group(function () {
+            Route::get('/{propertyJob}/details', 'show');
+            Route::patch('/{propertyJob}/assign', 'assignEngineer');/*  */
+        });
+    });
 
 Route::prefix('/property-type')
-->controller(PropertyTypeController::class)->group(function () {
-    Route::get('/', 'index');
-});
+    ->controller(PropertyTypeController::class)->group(function () {
+        Route::get('/', 'index');
+    });

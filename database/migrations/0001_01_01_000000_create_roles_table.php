@@ -15,6 +15,8 @@ return new class extends Migration
     // ---------------------------
     //  3  | Landlord | landlord |
     // ---------------------------
+    //  4  | Engineer | engineer |
+    // ---------------------------
     /**
      * Run the migrations.
      */
