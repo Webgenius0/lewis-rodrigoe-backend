@@ -45,17 +45,17 @@ class PropertyService
      */
     public function createUserProperty(array $data): Property
     {
-        DB::beginTransaction();
-        try {
+        // DB::beginTransaction();
+        // try {
             $address = $this->addressRepository->createAddress($data);
             $property = $this->propertyRepository->createProperty($data, $this->user->id, $address->id);
-            DB::commit();
+            // DB::commit();
             return $property->load('address');
-        } catch (Exception $e) {
-            DB::rollBack();
-            Log::error('PropertyService::createUserProperty', ['error' => $e->getMessage()]);
-            throw $e;
-        }
+        // } catch (Exception $e) {
+        //     DB::rollBack();
+        //     Log::error('PropertyService::createUserProperty', ['error' => $e->getMessage()]);
+        //     throw $e;
+        // }
     }
 
     /**
