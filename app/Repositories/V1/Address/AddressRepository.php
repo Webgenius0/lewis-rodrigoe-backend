@@ -27,8 +27,8 @@ class AddressRepository implements AddressRepositoryInterface
                 'state_id'   => $data['state_id'],
                 'city_id'    => $data['city_id'],
                 'zip_id '    => $data['zip_id'],
-                'latitude'   => $data['latitude'],
-                'longitude'  => $data['longitude'],
+                'latitude'   => isset($data['latitude']) ? $data['latitude'] : null,
+                'longitude'  => isset($data['longitude']) ? $data['longitude'] : null,
             ]);
         } catch (Exception $e) {
             Log::error('AddressRepository::getList', ['error' => $e->getMessage()]);
