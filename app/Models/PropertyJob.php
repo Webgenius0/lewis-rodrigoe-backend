@@ -61,6 +61,60 @@ class PropertyJob extends Model
     }
 
     /**
+     * sccessor for Image attribute
+     * @param mixed $url
+     * @return string
+     */
+    public function getImageAttribute($url): string
+    {
+        if ($url) {
+            if (strpos($url, 'http://') === 0 || strpos($url, 'https://') === 0) {
+                return $url;
+            } else {
+                return asset('storage/' . $url);
+            }
+        } else {
+            return asset('assets/img/user_placeholder.png');
+        }
+    }
+
+    /**
+     * sccessor for video attribute
+     * @param mixed $url
+     * @return string
+     */
+    public function getVideoAttribute($url): string
+    {
+        if ($url) {
+            if (strpos($url, 'http://') === 0 || strpos($url, 'https://') === 0) {
+                return $url;
+            } else {
+                return asset('storage/' . $url);
+            }
+        } else {
+            return asset('assets/img/user_placeholder.png');
+        }
+    }
+
+    /**
+     * sccessor for ErrorCodeImage attribute
+     * @param mixed $url
+     * @return string
+     */
+    public function getErrorCodeImageAttribute($url): string
+    {
+        if ($url) {
+            if (strpos($url, 'http://') === 0 || strpos($url, 'https://') === 0) {
+                return $url;
+            } else {
+                return asset('storage/' . $url);
+            }
+        } else {
+            return asset('assets/img/user_placeholder.png');
+        }
+    }
+
+    /**
      * user
      * @return BelongsTo<User, GasSafetyRegistration>
      */
