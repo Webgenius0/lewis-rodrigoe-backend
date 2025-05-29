@@ -16,14 +16,57 @@ class PropertyJobRepository implements PropertyJobRepositoryInterface
      * getJobListByStatus
      * @param string $status
      * @param int $per_page
+     * @param int $authId
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getJobListByStatus(string $status, int $per_page): LengthAwarePaginator
+    public function getJobListByStatus(string $status, int $per_page, int $authId): LengthAwarePaginator
     {
         try {
-            return  PropertyJob::select(['id', 'sn', 'user_id', 'property_id', 'engineer', 'title', 'description', 'date_time', 'status'])->whereStatus($status)->paginate($per_page);
+            return  PropertyJob::select(['id', 'sn', 'user_id', 'property_id', 'engineer', 'title', 'description', 'date_time', 'status'])
+                ->whereUserId($authId)
+                ->whereStatus($status)
+                ->orderByDesc('id')
+                ->paginate($per_page);
         } catch (Exception $e) {
             Log::error('PropertyJobRepository::getJobList', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
+    /**
+     * getAllPendingJobs
+     * @param int $per_page
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function getAllPendingJobs(int $per_page): LengthAwarePaginator
+    {
+        try {
+            return  PropertyJob::select(['id', 'sn', 'user_id', 'property_id', 'engineer', 'title', 'description', 'date_time', 'status'])
+                ->whereStatus('pending')
+                ->orderByDesc('id')
+                ->paginate($per_page);
+        } catch (Exception $e) {
+            Log::error('PropertyJobRepository::getAllPendingJobs', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
+    /**
+     * getEngineerJobs
+     * @param string $status
+     * @param int $per_page
+     * @param int $authId
+     */
+    public function getEngineerJobs(string $status, int $per_page, int $authId)
+    {
+        try {
+            return  PropertyJob::select(['id', 'sn', 'user_id', 'property_id', 'engineer', 'title', 'description', 'date_time', 'status'])
+                ->whereEngineer($authId)
+                ->whereStatus($status)
+                ->orderByDesc('id')
+                ->paginate($per_page);
+        } catch (Exception $e) {
+            Log::error('PropertyJobRepository::getEngineerJobs', ['error' => $e->getMessage()]);
             throw $e;
         }
     }
@@ -35,11 +78,11 @@ class PropertyJobRepository implements PropertyJobRepositoryInterface
      * @param string $status
      * @return int
      */
-    public function JobCount(string $column,int $value, string $status): int
+    public function JobCount(string $column, int $value, string $status): int
     {
         try {
-            return PropertyJob::where($column,$value )->whereStatus($status)->count();
-        }catch (Exception $e) {
+            return PropertyJob::where($column, $value)->whereStatus($status)->count();
+        } catch (Exception $e) {
             Log::error('PropertyJobRepository::jobCount', ['error' => $e->getMessage()]);
             throw $e;
         }

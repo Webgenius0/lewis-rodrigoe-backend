@@ -37,8 +37,19 @@ class PropertyJobService
     {
         try {
             $per_page = request()->query('per_page', 25);
-            return $this->propertyJobRepository->getJobListByStatus($status, $per_page);
-        }catch (Exception $e) {
+            return $this->propertyJobRepository->getJobListByStatus($status, $per_page, $this->user->id);
+        } catch (Exception $e) {
+            Log::error('PropertyJobService::createJobforProperty', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
+    public function engineerJobsIndex(string $status): LengthAwarePaginator
+    {
+        try {
+            $per_page = request()->query('per_page', 25);
+            return $this->propertyJobRepository->getJobListByStatus($status, $per_page,$this->user->id);
+        } catch (Exception $e) {
             Log::error('PropertyJobService::createJobforProperty', ['error' => $e->getMessage()]);
             throw $e;
         }
@@ -53,7 +64,7 @@ class PropertyJobService
     {
         try {
             return $this->propertyJobRepository->createJob($data, $this->user->id);
-        }catch (Exception $e) {
+        } catch (Exception $e) {
             Log::error('PropertyJobService::createJobforProperty', ['error' => $e->getMessage()]);
             throw $e;
         }

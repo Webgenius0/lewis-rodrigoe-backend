@@ -45,6 +45,17 @@ class PropertyJonController extends Controller
         }
     }
 
+    public function engineerIndex(string $status): JsonResponse
+    {
+        try {
+            $response = $this->propertyJobService->propertyJobIndex($status);
+            return $this->success(200, 'Job list', $response);
+        } catch (Exception $e) {
+            Log::error("PropertyController::index", ['message' => $e->getMessage()]);
+            return $this->error(500, 'server error');
+        }
+    }
+
     /**
      * store
      * @param \App\Http\Requests\Api\V1\Property\Job\CreateRequest $createRequest
@@ -83,7 +94,7 @@ class PropertyJonController extends Controller
      * @param \App\Models\PropertyJob $propertyJob
      * @return JsonResponse
      */
-    public function assignEngineer( PropertyJob $propertyJob): JsonResponse
+    public function assignEngineer(PropertyJob $propertyJob): JsonResponse
     {
         try {
             $this->propertyJobService->assignEngineer($propertyJob);

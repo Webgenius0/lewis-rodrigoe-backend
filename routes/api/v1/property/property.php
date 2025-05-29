@@ -24,8 +24,9 @@ Route::prefix('/property-job')
         Route::post('/', 'store');
 
         Route::middleware('engineer')->group(function () {
+            Route::get('/engineer/{status}', 'engineerIndex');
             Route::get('/{propertyJob}/details', 'show');
-            Route::patch('/{propertyJob}/assign', 'assignEngineer');/*  */
+            Route::patch('/{propertyJob}/assign', 'assignEngineer');
         });
     });
 
