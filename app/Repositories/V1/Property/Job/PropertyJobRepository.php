@@ -25,7 +25,7 @@ class PropertyJobRepository implements PropertyJobRepositoryInterface
             return  PropertyJob::select(['id', 'sn', 'user_id', 'property_id', 'engineer', 'title', 'description', 'date_time', 'status'])
                 ->whereUserId($authId)
                 ->whereStatus($status)
-                ->orderByDesc('id')
+                ->orderBy('date_time')
                 ->paginate($per_page);
         } catch (Exception $e) {
             Log::error('PropertyJobRepository::getJobList', ['error' => $e->getMessage()]);
@@ -43,7 +43,7 @@ class PropertyJobRepository implements PropertyJobRepositoryInterface
         try {
             return  PropertyJob::select(['id', 'sn', 'user_id', 'property_id', 'engineer', 'title', 'description', 'date_time', 'status'])
                 ->whereStatus('pending')
-                ->orderByDesc('id')
+                ->orderBy('date_time')
                 ->paginate($per_page);
         } catch (Exception $e) {
             Log::error('PropertyJobRepository::getAllPendingJobs', ['error' => $e->getMessage()]);
@@ -63,7 +63,7 @@ class PropertyJobRepository implements PropertyJobRepositoryInterface
             return  PropertyJob::select(['id', 'sn', 'user_id', 'property_id', 'engineer', 'title', 'description', 'date_time', 'status'])
                 ->whereEngineer($authId)
                 ->whereStatus($status)
-                ->orderByDesc('id')
+                ->orderBy('date_time')
                 ->paginate($per_page);
         } catch (Exception $e) {
             Log::error('PropertyJobRepository::getEngineerJobs', ['error' => $e->getMessage()]);
