@@ -16,6 +16,22 @@ interface PropertyJobRepositoryInterface
      */
     public function getJobListByStatus(string $status, int $per_page, int $authId): LengthAwarePaginator;
 
+
+    /**
+     * getAllPendingJobs
+     * @param int $per_page
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function getAllPendingJobs(int $per_page): LengthAwarePaginator;
+
+    /**
+     * getEngineerJobs
+     * @param string $status
+     * @param int $per_page
+     * @param int $authId
+     */
+    public function getEngineerJobs(string $status, int $per_page, int $authId): LengthAwarePaginator;
+
     /**
      * createJob
      * @param array $data

@@ -57,7 +57,7 @@ class PropertyJobRepository implements PropertyJobRepositoryInterface
      * @param int $per_page
      * @param int $authId
      */
-    public function getEngineerJobs(string $status, int $per_page, int $authId)
+    public function getEngineerJobs(string $status, int $per_page, int $authId): LengthAwarePaginator
     {
         try {
             return  PropertyJob::select(['id', 'sn', 'user_id', 'property_id', 'engineer', 'title', 'description', 'date_time', 'status'])
