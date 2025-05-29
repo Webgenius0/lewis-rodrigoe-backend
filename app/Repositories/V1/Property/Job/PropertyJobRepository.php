@@ -97,6 +97,18 @@ class PropertyJobRepository implements PropertyJobRepositoryInterface
     public function createJob(array $data, int $userId): PropertyJob
     {
         try {
+            $errorCodeImage = null;
+            $image = null;
+            $video = null;
+            if (isset($data['error_code_image'])) {
+                $errorCodeImage = Helper::uploadFile($data['error_code_image'], 'property_job/error_code_image');
+            }
+            if (isset($data['image'])) {
+                $image = Helper::uploadFile($data['image'], 'property_job/image');
+            }
+            if (isset($data['video'])) {
+                $video = Helper::uploadFile($data['video'], 'property_job/video');
+            }
             return PropertyJob::create([
                 'sn'                   => Helper::generateUniqueId('property_jobs', 'sn'),
                 'user_id'              => $userId,
@@ -105,12 +117,12 @@ class PropertyJobRepository implements PropertyJobRepositoryInterface
                 'description'          => $data['description'],
                 'date_time'            => $data['date_time'],
                 'error_code'           => $data['error_code'],
-                'error_code_image'     => $data['error_code_image'],
+                'error_code_image'     => $errorCodeImage,
                 'water_pressure_level' => $data['water_pressure_level'],
                 'tools_info'           => $data['tools_info'],
                 'additional_info'      => $data['additional_info'],
-                'image'                => $data['image'],
-                'video'                => $data['video'],
+                'image'                => $image,
+                'video'                => $video,
             ]);
         } catch (Exception $e) {
             Log::error('PropertyJobRepository::createJob', ['error' => $e->getMessage()]);

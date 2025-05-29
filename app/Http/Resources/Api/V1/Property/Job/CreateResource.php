@@ -17,19 +17,20 @@ class CreateResource extends JsonResource
         $data = parent::toArray($request);
 
         return [
-            'id' => $data['id'],
-            'sn' => $data['sn'],
-            'user_id' => $data['user_id'],
-            'property_id' => $data['property_id'],
-            'title' => $data['title'],
-            'description' => $data['description'],
-            'date_time' => $data['date_time'],
-            'error_code' => $data['error_code'],
+            'id'                   => $data['id'],
+            'sn'                   => $data['sn'],
+            'user_id'              => $data['user_id'],
+            'property_id'          => $data['property_id'],
+            'title'                => $data['title'],
+            'description'          => $data['description'],
+            'date_time'            => $data['date_time'],
+            'error_code'           => $data['error_code'],
+            'error_code_image'     => $data['error_code_image'],
             'water_pressure_level' => $data['water_pressure_level'],
-            'tools_info' => $data['tools_info'],
-            'additional_info' => $data['additional_info'],
-            'image' => $data['image'],
-            'video' => $data['video'],
+            'tools_info'           => $data['tools_info'],
+            'additional_info'      => $data['additional_info'],
+            'image'                => $data['image'],
+            'video'                => $data['video'],
         ];
     }
 }
