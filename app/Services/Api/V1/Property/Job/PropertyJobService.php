@@ -44,13 +44,33 @@ class PropertyJobService
         }
     }
 
+    /**
+     * getPostJobs
+     * @return LengthAwarePaginator
+     */
+    public function getPostJobs(): LengthAwarePaginator
+    {
+        try {
+            $per_page = request()->query('per_page', 25);
+            return $this->propertyJobRepository->getAllPendingJobs($per_page);
+        } catch (Exception $e) {
+            Log::error('PropertyJobService::getPostJobs', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
+    /**
+     * engineerJobsIndex
+     * @param string $status
+     * @return LengthAwarePaginator
+     */
     public function engineerJobsIndex(string $status): LengthAwarePaginator
     {
         try {
             $per_page = request()->query('per_page', 25);
-            return $this->propertyJobRepository->getJobListByStatus($status, $per_page,$this->user->id);
+            return $this->propertyJobRepository->getEngineerJobs($status, $per_page,$this->user->id);
         } catch (Exception $e) {
-            Log::error('PropertyJobService::createJobforProperty', ['error' => $e->getMessage()]);
+            Log::error('PropertyJobService::engineerJobsIndex', ['error' => $e->getMessage()]);
             throw $e;
         }
     }
