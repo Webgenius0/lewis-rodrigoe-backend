@@ -48,7 +48,7 @@ class PropertyJobService
      * getPostJobs
      * @return LengthAwarePaginator
      */
-    public function getPostJobs(): LengthAwarePaginator
+    public function getPendingtJobs(): LengthAwarePaginator
     {
         try {
             $per_page = request()->query('per_page', 25);

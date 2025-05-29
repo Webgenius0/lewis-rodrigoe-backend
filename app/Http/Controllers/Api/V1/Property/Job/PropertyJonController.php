@@ -46,6 +46,21 @@ class PropertyJonController extends Controller
     }
 
     /**
+     *  pendingIndex
+     * @return JsonResponse
+     */
+    public function pendingIndex():JsonResponse
+    {
+        try {
+            $response = $this->propertyJobService->getPendingtJobs();
+            return $this->success(200, 'Job list', $response);
+        }catch (Exception $e) {
+            Log::error("PropertyController::pendingIndex", ['message' => $e->getMessage()]);
+            return $this->error(500, 'server error');
+        }
+    }
+
+    /**
      * engineerIndex
      * @param string $status
      * @return JsonResponse
