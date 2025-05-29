@@ -177,12 +177,12 @@ class PropertyJobRepository implements PropertyJobRepositoryInterface
     }
 
     /**
-     * assignengineer
+     * assignEngineer
      * @param \App\Models\PropertyJob $propertyJob
      * @param int $engineerId
      * @return void
      */
-    public function assignengineer(PropertyJob $propertyJob, int $engineerId): void
+    public function assignEngineer(PropertyJob $propertyJob, int $engineerId): void
     {
         try {
             $propertyJob->engineer = $engineerId;
