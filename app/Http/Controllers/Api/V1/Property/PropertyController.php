@@ -72,8 +72,8 @@ class PropertyController extends Controller
     public function show(Property $property): JsonResponse
     {
         try {
-            $response = $this->propertyService->userPropertyDropdown();
-            return $this->success(200, 'users property', new DropdownResource($response));
+            $response = $this->propertyService->getPropertyDetails($property);
+            return $this->success(200, 'users property', $response);
         }catch (Exception $e) {
             Log::error("PropertyController::show", ['message' => $e->getMessage()]);
             return $this->error(500, 'server error');

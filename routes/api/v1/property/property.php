@@ -13,6 +13,7 @@ Route::prefix('/property')->middleware('auth:api')
         Route::post('/', 'store');
         Route::get('/dropdown', 'userDropdown');
         Route::post('/price', 'propertyCalculation');
+        Route::get('/{property}', 'show');
     });
 
 /**

@@ -59,9 +59,9 @@ class PropertyRepository implements PropertyRepositoryInterface
     }
 
     /**
-     * getPropertyInfo
+     * Summary of getPropertyInfo
      * @param \App\Models\Property $property
-     * @return void
+     * @return Property
      */
     public function getPropertyInfo(Property $property): Property
     {

@@ -24,7 +24,7 @@ interface PropertyRepositoryInterface
     /**
      * getPropertyInfo
      * @param \App\Models\Property $property
-     * @return void
+     * @return Property
      */
     public function getPropertyInfo(Property $property): Property;
 

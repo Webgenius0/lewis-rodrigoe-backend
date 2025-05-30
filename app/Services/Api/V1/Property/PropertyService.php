@@ -72,10 +72,10 @@ class PropertyService
     }
 
 
-    public function getPropertyDetails()
+    public function getPropertyDetails(Property $property): Property
     {
         try {
-            
+            return $this->propertyRepository->getPropertyInfo($property);
         } catch (Exception $e) {
             Log::error('PropertyService::getPropertyDetails', ['error' => $e->getMessage()]);
             throw $e;
