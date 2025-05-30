@@ -37,19 +37,19 @@ class EmployRegistrationRequest extends FormRequest
             'ni'  => 'required|string|unique:engineers,ni',
             'utr' => 'required|string|unique:engineers,utr',
 
-            'gas_number'      => 'required|string',
+            'gas_number'      => 'required|string|unique:gas_safety_registrations,id',
             'gas_issue_date'  => 'required|date',
             'gas_expire_date' => 'required|date',
             'gas_card_front'  => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
             'gas_card_back'   => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
 
-            'nic_eic_number'      => 'required|string',
+            'nic_eic_number'      => 'required|string|unique:n_i_c_e_i_c_s,id',
             'nic_eic_issue_date'  => 'required|date',
             'nic_eic_expire_date' => 'required|date',
             'nic_eic_card_front'  => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
             'nic_eic_card_back'   => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
 
-            'nvq_number'    => 'required|string',
+            'nvq_number'    => 'required|string|unique:n_v_q_qualifications,id',
             'nvq_leven_one' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
             'nvq_level_two' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
 
