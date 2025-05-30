@@ -69,10 +69,11 @@ class PropertyController extends Controller
      * @param \App\Models\Property $property
      * @return JsonResponse
      */
-    public function show(Property $property): JsonResponse
+    public function show($property): JsonResponse
     {
         try {
-            $response = $this->propertyService->getPropertyDetails($property);
+            $response = Property::findOrFail($property);
+            // $response = $this->propertyService->getPropertyDetails($property);
             return $this->success(200, 'users property', $response);
         }catch (Exception $e) {
             Log::error("PropertyController::show", ['message' => $e->getMessage()]);
