@@ -31,8 +31,3 @@ Route::prefix('/property-job')
             Route::patch('/{propertyJob}/assign', 'assignEngineer');
         });
     });
-
-Route::prefix('/property-type')
-    ->controller(PropertyTypeController::class)->group(function () {
-        Route::get('/', 'index');
-    });
