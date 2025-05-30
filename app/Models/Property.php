@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -115,4 +116,47 @@ class Property extends Model
     {
         return $this->hasMany(PropertyJob::class, 'property_id');
     }
+
+    /**
+     * getPurchaseYearAttribute
+     * @param mixed $value
+     * @return array{date: null, time: null|array{date: string, time: string}}
+     */
+    protected function getPurchaseYearAttribute($value): array
+    {
+        if (!$value) {
+            return [
+                'date' => null,
+                'time' => null,
+            ];
+        }
+        $dateTime = Carbon::parse($this->value);
+        return [
+            'date' => $dateTime->format('d/m/y'),
+            'time' => $dateTime->format('h:i A'),
+        ];
+    }
+
+    /**
+     * getLastServiceDateAttribute
+     * @param mixed $value
+     * @return array{date: null, time: null|array{date: string, time: string}}
+     */
+    protected function getLastServiceDateAttribute($value): array
+    {
+        if (!$value) {
+            return [
+                'date' => null,
+                'time' => null,
+            ];
+        }
+        $dateTime = Carbon::parse($this->value);
+        return [
+            'date' => $dateTime->format('d/m/y'),
+            'time' => $dateTime->format('h:i A'),
+        ];
+    }
+
+
+
 }
