@@ -7,11 +7,13 @@ use App\Http\Requests\Api\V1\Property\CalculationRequest;
 use App\Http\Requests\Api\V1\Property\CreateRequest;
 use App\Http\Resources\Api\V1\Property\DropdownResource;
 use App\Http\Resources\Api\V1\Property\StoreResource;
+use App\Models\Property;
 use App\Services\Api\V1\Property\PropertyService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use phpseclib3\Crypt\EC\Curves\prime192v1;
 
 class PropertyController extends Controller
 {
@@ -58,6 +60,22 @@ class PropertyController extends Controller
             return $this->success(200, 'users property', new DropdownResource($response));
         } catch (Exception $e) {
             Log::error("PropertyController::userDropdown", ['message' => $e->getMessage()]);
+            return $this->error(500, 'server error');
+        }
+    }
+
+    /**
+     * show
+     * @param \App\Models\Property $property
+     * @return JsonResponse
+     */
+    public function show(Property $property): JsonResponse
+    {
+        try {
+            $response = $this->propertyService->userPropertyDropdown();
+            return $this->success(200, 'users property', new DropdownResource($response));
+        }catch (Exception $e) {
+            Log::error("PropertyController::show", ['message' => $e->getMessage()]);
             return $this->error(500, 'server error');
         }
     }

@@ -59,6 +59,27 @@ class PropertyRepository implements PropertyRepositoryInterface
     }
 
     /**
+     * getPropertyInfo
+     * @param \App\Models\Property $property
+     * @return void
+     */
+    public function getPropertyInfo(Property $property): Property
+    {
+        try {
+            return $property->load([
+                'user',
+                'address',
+                'boilerType',
+                'boilerModel',
+                'propertyType',
+            ]);
+        } catch (Exception $e) {
+            Log::error('PropertyRepository::getPropertyInfo', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
+    /**
      * updatePropertyBoiler
      * @param \App\Models\Property $property
      * @param array $data

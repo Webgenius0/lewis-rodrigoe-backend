@@ -22,6 +22,13 @@ interface PropertyRepositoryInterface
     public function createProperty(array $data, int $userId, int $addressId): Property;
 
     /**
+     * getPropertyInfo
+     * @param \App\Models\Property $property
+     * @return void
+     */
+    public function getPropertyInfo(Property $property): Property;
+
+    /**
      * updatePropertyBoiler
      * @param \App\Models\Property $property
      * @param array $data

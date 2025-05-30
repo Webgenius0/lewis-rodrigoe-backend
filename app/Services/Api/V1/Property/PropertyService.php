@@ -71,6 +71,17 @@ class PropertyService
         }
     }
 
+
+    public function getPropertyDetails()
+    {
+        try {
+            
+        } catch (Exception $e) {
+            Log::error('PropertyService::getPropertyDetails', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
     /**
      * priceGeneration
      * @param array $data
