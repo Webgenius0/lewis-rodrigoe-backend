@@ -30,7 +30,11 @@ class ClientController extends Controller
     {
         try {
             $users = $this->userService->getClientList();
-            
+            $compact = [
+                'users' => $users,
+            ];
+            // dd($users);
+            return view('backend.layouts.user.index', $compact);
         }catch (Exception $e) {
             Log::error('ClientController:index',  [$e->getMessage()]);
         }
