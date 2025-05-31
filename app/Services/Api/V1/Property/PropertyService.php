@@ -6,6 +6,7 @@ use App\Interfaces\V1\Address\AddressRepositoryInterface;
 use App\Interfaces\V1\Property\PropertyRepositoryInterface;
 use App\Models\Property;
 use Exception;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -36,6 +37,21 @@ class PropertyService
         $this->addressRepository = $addressRepository;
         $this->ownerPropertyCalculation = $ownerPropertyCalculation;
         $this->user = Auth::user();
+    }
+
+    /**
+     * getAllUserProperties
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
+    public function getAllUserProperties(): LengthAwarePaginator
+    {
+        try {
+            $perPage = request()->input('per_page', 25);
+            return $this->propertyRepository->getUserProperties($this->user->id, $perPage);
+        } catch (Exception $e) {
+            Log::error('PropertyService::getAllUserProperties', ['error' => $e->getMessage()]);
+            throw $e;
+        }
     }
 
     /**

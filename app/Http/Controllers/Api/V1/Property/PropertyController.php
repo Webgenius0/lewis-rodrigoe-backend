@@ -33,6 +33,21 @@ class PropertyController extends Controller
     }
 
     /**
+     * index
+     * @return JsonResponse
+     */
+    public function index(): JsonResponse
+    {
+        try {
+            $resource = $this->propertyService->getAllUserProperties();
+            return $this->success(201, 'property created', $resource);
+        } catch (Exception $e) {
+            Log::error("PropertyController::index", ['message' => $e->getMessage()]);
+            return $this->error(500, 'server error');
+        }
+    }
+
+    /**
      * store
      * @param \App\Http\Requests\Api\V1\Property\CreateRequest $createRequest
      * @return \Illuminate\Http\JsonResponse
@@ -74,7 +89,7 @@ class PropertyController extends Controller
         try {
             $response = $this->propertyService->getPropertyDetails($property);
             return $this->success(200, 'users property', $response);
-        }catch (Exception $e) {
+        } catch (Exception $e) {
             Log::error("PropertyController::show", ['message' => $e->getMessage()]);
             return $this->error(500, 'server error');
         }
@@ -91,7 +106,7 @@ class PropertyController extends Controller
             $validatedData = $calculationRequest->validated();
             $resource = $this->propertyService->priceGeneration($validatedData);
             return $this->success(200, 'calculation successfull', $resource);
-        }catch(Exception $e) {
+        } catch (Exception $e) {
             Log::error("PropertyController::userDropdown", ['message' => $e->getMessage()]);
             return $this->error(500, 'server error');
         }

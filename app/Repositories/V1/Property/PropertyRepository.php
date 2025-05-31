@@ -18,10 +18,10 @@ class PropertyRepository implements PropertyRepositoryInterface
      * @param int $per_page
      * @return \Illuminate\Pagination\LengthAwarePaginator
      */
-    public function getUserProperties(int $userId, int $per_page): LengthAwarePaginator
+    public function getUserProperties(int $userId, $per_page): LengthAwarePaginator
     {
         try {
-            return Property::whereUserId($userId)->with(['address:id,label,street,apartment'])->paginate($per_page);
+            return Property::whereUserId($userId)->with(['address:id,label,street,apartment'])->orderByDesc('created_at')->paginate($per_page);
         } catch (Exception $e) {
             Log::error('PropertyRepository::getUserProperties', ['error' => $e->getMessage()]);
             throw $e;

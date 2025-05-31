@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
  */
 Route::prefix('/property')->middleware('auth:api')
     ->controller(PropertyController::class)->group(function () {
+        Route::get('/', 'index');
         Route::post('/', 'store');
         Route::get('/dropdown', 'userDropdown');
         Route::post('/price', 'propertyCalculation');

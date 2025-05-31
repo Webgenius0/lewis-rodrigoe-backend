@@ -13,7 +13,7 @@ interface PropertyRepositoryInterface
      * @param int $per_page
      * @return \Illuminate\Pagination\LengthAwarePaginator
      */
-    public function getUserProperties(int $userId, int $per_page): LengthAwarePaginator;
+    public function getUserProperties(int $userId, $per_page): LengthAwarePaginator;
 
     /**
      * getUserPropertyAddressLabel
