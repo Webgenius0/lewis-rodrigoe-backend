@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use App\Interfaces\V1\UserProfile\UserProfileRepositoryInterface;
 use App\Models\User;
 use Exception;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -96,6 +97,24 @@ class UserProfileRepository implements UserProfileRepositoryInterface
             }
 
             Log::error('UserProfileRepository::updateProfile', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
+    /**
+     * updatePassword
+     * @param int $authId
+     * @param array $data
+     * @return void
+     */
+    public function updatePassword(int $authId, array $data): void
+    {
+        try {
+            User::findOrFail($authId)->update([
+                'password' => Hash::make($data['password']),
+            ]);
+        } catch (Exception $e) {
+            Log::error('UserProfileRepository::updatePassword', ['error' => $e->getMessage()]);
             throw $e;
         }
     }

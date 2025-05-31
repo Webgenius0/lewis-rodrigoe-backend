@@ -32,6 +32,14 @@ interface UserProfileRepositoryInterface
     public function updateProfile(array $data, int $userId): void;
 
     /**
+     * updatePassword
+     * @param int $authId
+     * @param array $data
+     * @return void
+     */
+    public function updatePassword(int $authId, array $data): void;
+    
+    /**
      * deleteProfile
      * @param int $userId
      * @return void
