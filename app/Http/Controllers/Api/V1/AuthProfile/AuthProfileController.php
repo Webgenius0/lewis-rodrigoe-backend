@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api\V1\AuthProfile;
 
+use App\Exceptions\WrongPasswordException;
 use App\Http\Controllers\Api\V1\Controller;
+use App\Http\Requests\Api\V1\AuthProfile\UpdatePasswordRequest;
 use App\Http\Requests\Api\V1\Profile\UpdateRequest;
 use App\Services\Api\V1\UserProfile\UserProfileService;
 use Exception;
@@ -36,7 +38,7 @@ class AuthProfileController extends Controller
         try {
             $response = $this->userProfileService->getProfileDashboard();
             return $this->success(200, 'auth profile', $response);
-        }catch(Exception $e) {
+        } catch (Exception $e) {
             Log::error('AuthProfileController::dashboard', ['error' => $e->getMessage()]);
             return $this->error(500, 'server error', $e->getMessage());
         }
@@ -70,6 +72,25 @@ class AuthProfileController extends Controller
             return $this->success(200, 'update successfull');
         } catch (Exception $e) {
             Log::error('AuthProfileController::update', ['error' => $e->getMessage()]);
+            return $this->error(500, 'server error', $e->getMessage());
+        }
+    }
+
+    /**
+     * update password
+     * @param \App\Http\Requests\Api\V1\AuthProfile\UpdatePasswordRequest $updatePasswordRequest
+     * @return JsonResponse
+     */
+    public function password(UpdatePasswordRequest $updatePasswordRequest): JsonResponse
+    {
+        try {
+            $validatedData = $updatePasswordRequest->validated();
+            $this->userProfileService->updateUserPassword($validatedData);
+            return $this->success(200, 'update successfull');
+        } catch (WrongPasswordException $e) {
+            return $this->error(403, 'wrong password', $e->getMessage());
+        } catch (Exception $e) {
+            Log::error('AuthProfileController::password', ['error' => $e->getMessage()]);
             return $this->error(500, 'server error', $e->getMessage());
         }
     }

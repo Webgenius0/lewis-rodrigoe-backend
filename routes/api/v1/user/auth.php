@@ -8,5 +8,6 @@ Route::prefix('/auth-user')->controller(AuthProfileController::class)->group(fun
     Route::get('/', 'show');
     Route::post('/','update');
     Route::delete('/', 'destory');
+    Route::patch('/password','password');
     Route::get('/dashboard', 'dashboard');
 });

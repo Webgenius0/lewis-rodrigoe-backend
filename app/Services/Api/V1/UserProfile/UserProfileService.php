@@ -2,12 +2,14 @@
 
 namespace App\Services\Api\V1\UserProfile;
 
+use App\Exceptions\WrongPasswordException;
 use App\Interfaces\V1\Property\Job\PropertyJobRepositoryInterface;
 use App\Interfaces\V1\Property\PropertyRepositoryInterface;
 use App\Interfaces\V1\UserProfile\UserProfileRepositoryInterface;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
 class UserProfileService
@@ -49,7 +51,6 @@ class UserProfileService
                 'pending_job' => $pendingJobCount,
                 'completed_job' => $completedJobCount,
             ];
-
         } catch (Exception $e) {
             Log::error('ServiceService::getProfiledashboard', ['error' => $e->getMessage()]);
             throw $e;
@@ -95,6 +96,26 @@ class UserProfileService
             $this->userProfileRepository->updateProfile($data, $this->user->id);
         } catch (Exception $e) {
             Log::error('ServiceService::updateUserProfile', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
+    /**
+     * updateUserPassword
+     * @param array $data
+     * @return void
+     */
+    public function updateUserPassword(array $data)
+    {
+        try {
+            if (!Hash::check($data['old_password'], $this->user->password)) {
+                throw new WrongPasswordException;
+            }
+            $this->userProfileRepository->updatePassword($this->user->id, $data);
+        } catch (WrongPasswordException $e) {
+            throw $e;
+        } catch (Exception $e) {
+            Log::error('ServiceService::updateUserPassword', ['error' => $e->getMessage()]);
             throw $e;
         }
     }
