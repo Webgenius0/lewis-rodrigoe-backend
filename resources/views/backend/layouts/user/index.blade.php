@@ -13,8 +13,8 @@
                     <div class="col-lg-12 col-md-12 col-12">
                         <!-- Page header -->
                         <div class="d-flex justify-content-between align-items-center mb-5">
-                            <h3 class="mb-0 ">Author</h3>
-                            <a href="#!" class="btn btn-primary">Button</a>
+                            <h3 class="mb-0 ">Clients</h3>
+                            {{-- <a href="#!" class="btn btn-primary">Button</a> --}}
                         </div>
                     </div>
                 </div>
@@ -22,7 +22,7 @@
                 <div class="row">
                     <div class="col-lg-12 ">
                         <div class="card h-100">
-                            <div class="card-header d-md-flex justify-content-between align-items-center">
+                            {{-- <div class="card-header d-md-flex justify-content-between align-items-center">
 
                                 <form>
                                     <div class="mb-3 mb-md-0">
@@ -32,7 +32,7 @@
                                 <a href="#!" class="btn btn-primary">Add New Author</a>
 
 
-                            </div>
+                            </div> --}}
                             <div class="card-body">
                                 <div class="table-responsive table-card">
                                     <table class="table mb-0 text-nowrap table-centered">
@@ -40,8 +40,8 @@
                                             <tr>
                                                 <th scope="col">Author Name</th>
                                                 <th scope="col">Date Join</th>
-                                                <th scope="col">Total Post </th>
-                                                <th scope="col">Total Followers</th>
+                                                <th scope="col">Total Properties </th>
+                                                <th scope="col">Total Posted Jobs</th>
                                                 <th scope="col">Payment </th>
                                                 <th scope="col">Action</th>
                                             </tr>
@@ -63,9 +63,9 @@
 
                                                     </td>
                                                     <td>{{ $user->created_at }}</td>
-                                                    <td>34</td>
+                                                    <td>{{$user->properties->count()}}</td>
 
-                                                    <td>15,467</td>
+                                                    <td>{{$user->postedJobs->count()}}</td>
                                                     <td>
                                                         @if ($user->status)
                                                             <span
