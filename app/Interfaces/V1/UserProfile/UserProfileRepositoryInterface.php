@@ -3,9 +3,18 @@
 namespace App\Interfaces\V1\UserProfile;
 
 use App\Models\User;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 interface UserProfileRepositoryInterface
 {
+    /**
+     * getUserListByRole
+     * @param array $roles
+     * @param int $perPage
+     * @return LengthAwarePaginator
+     */
+    public function getUserListByRole(array $roles, int $perPage): LengthAwarePaginator;
+
     /**
      * showProfile
      * @param int $userId

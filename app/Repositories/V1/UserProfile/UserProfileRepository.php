@@ -6,11 +6,30 @@ use App\Helpers\Helper;
 use App\Interfaces\V1\UserProfile\UserProfileRepositoryInterface;
 use App\Models\User;
 use Exception;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class UserProfileRepository implements UserProfileRepositoryInterface
 {
+    /**
+     * getUserListByRole
+     * @param array $roles
+     * @param int $perPage
+     * @return LengthAwarePaginator
+     */
+    public function getUserListByRole(array $roles, int $perPage): LengthAwarePaginator
+    {
+        try {
+            return User::whereHas('role', function ($query) use ($roles) {
+                $query->whereIn('slug', $roles);
+            })->paginate($perPage);
+        } catch (Exception $e) {
+            Log::error('UserProfileRepository::getUserListByRole', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
     /**
      * showProfile
      * @param int $userId
