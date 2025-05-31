@@ -14,7 +14,7 @@
                 <!-- Nav item -->
                 <li class="nav-item">
                     <a class="nav-link {{ Route::is('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
-                        <i data-feather="home" class="nav-icon me-2 icon-xxs"></i>Dashboard
+                        <i data-feather="layout" class="nav-icon me-2 icon-xxs"></i>Dashboard
                     </a>
                 </li>
 
@@ -37,6 +37,12 @@
                             </li>
                         </ul>
                     </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::is('v1.property.index') ? 'active' : '' }}" href="{{ route('v1.property.index') }}">
+                        <i data-feather="home" class="nav-icon me-2 icon-xxs"></i>Properties
+                    </a>
                 </li>
 
                 <li class="nav-item">
