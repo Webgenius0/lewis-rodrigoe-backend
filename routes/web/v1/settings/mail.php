@@ -7,4 +7,4 @@ Route::prefix('settings/mail')->name('v1.setting.mail.')->controller(MailControl
 ->group(function () {
     Route::get('/', 'show')->name('show');
     Route::post('/', 'store')->name('store');
-});
+})->middleware(['auth', 'verified']);
