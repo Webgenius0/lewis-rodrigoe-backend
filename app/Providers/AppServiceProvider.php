@@ -52,6 +52,7 @@ use App\Repositories\V1\Property\Type\PropertyTypeRepository;
 use App\Repositories\V1\Role\RoleRepository;
 use App\Repositories\V1\Service\ServiceRepository;
 use App\Repositories\V1\UserProfile\UserProfileRepository;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -126,6 +127,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Paginator::useBootstrapFive();
     }
 }

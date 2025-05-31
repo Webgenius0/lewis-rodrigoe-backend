@@ -115,27 +115,6 @@
                                 </div>
                             </div>
                             <div class="card-footer d-md-flex justify-content-between align-items-center  ">
-                                <span>Showing <span class="text-dark">5</span> of <span class="text-dark">25</span>
-                                    Results</span>
-                                <nav>
-                                    <ul class="pagination  mb-0">
-                                        <li class="page-item disabled">
-                                            <a class="page-link " href="#!"><i class="mdi mdi-chevron-left"></i></a>
-                                        </li>
-                                        <li class="page-item active">
-                                            <a class="page-link " href="#!">1</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link " href="#!">2</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link " href="#!">3</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link " href="#!"><i class="mdi mdi-chevron-right"></i></a>
-                                        </li>
-                                    </ul>
-                                </nav>
                                 {{-- Pagination links --}}
                                 <div class="d-flex justify-content-center">
                                     {{ $users->links() }}
