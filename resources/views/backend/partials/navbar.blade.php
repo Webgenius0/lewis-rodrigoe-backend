@@ -23,11 +23,16 @@
                         aria-expanded="false" aria-controls="usernav">
                         <i class="me-2 icon-xxs dropdown-item-icon" data-feather="user"></i> Users
                     </a>
-                    <div id="usernav" class="collapse {{ Route::is('v1.user.client.index') ? 'show' : '' }} " data-bs-parent="#sideNavbar">
+                    <div id="usernav" class="collapse {{ Route::is('v1.user.*') ? 'show' : '' }} " data-bs-parent="#sideNavbar">
                         <ul class="nav flex-column">
                             <li class="nav-item">
                                 <a class="nav-link has-arrow  {{ Route::is('v1.user.client.index') ? 'active' : '' }} " href="{{ route('v1.user.client.index') }}">
                                     Clients
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link has-arrow  {{ Route::is('v1.user.engineer.index') ? 'active' : '' }} " href="{{ route('v1.user.engineer.index') }}">
+                                    Engineer
                                 </a>
                             </li>
                         </ul>

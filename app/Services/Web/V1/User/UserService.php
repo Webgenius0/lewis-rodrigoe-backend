@@ -38,4 +38,19 @@ class UserService
             throw $e;
         }
     }
+
+    /**
+     * getEngineerList
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
+    public function getEngineerList(): LengthAwarePaginator
+    {
+        try {
+            $per_page = request()->input('per_page', 10);
+            return $this->userProfileRepository->getUserListByRole(['engineer'], $per_page);
+        } catch (Exception $e) {
+            Log::error('UserService::getEngineerList', [$e->getMessage()]);
+            throw $e;
+        }
+    }
 }

@@ -1,7 +1,7 @@
 @extends('backend.app')
 
 @section('title')
-    {{ env('APP_NAME') }} || Dashboard
+    {{ env('APP_NAME') }} || Client
 @endsection
 
 @section('content')
