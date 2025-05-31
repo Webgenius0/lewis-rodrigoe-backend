@@ -8,6 +8,13 @@ use Illuminate\Pagination\LengthAwarePaginator;
 interface PropertyRepositoryInterface
 {
     /**
+     * Summary of allProperties
+     * @param mixed $per_page
+     * @return LengthAwarePaginator
+     */
+    public function allProperties($per_page): LengthAwarePaginator;
+
+    /**
      * getUserProperties
      * @param int $userId
      * @param int $per_page

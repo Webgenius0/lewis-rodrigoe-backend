@@ -13,6 +13,20 @@ use Illuminate\Support\Facades\Log;
 class PropertyRepository implements PropertyRepositoryInterface
 {
     /**
+     * Summary of allProperties
+     * @param mixed $per_page
+     * @return LengthAwarePaginator
+     */
+    public function allProperties($per_page): LengthAwarePaginator
+    {
+        try {
+            return Property::with(['address:id,label,street,apartment'])->orderByDesc('created_at')->paginate($per_page);
+        } catch (Exception $e) {
+            Log::error('PropertyRepository::getUserProperties', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+    /**
      * getUserProperties
      * @param int $userId
      * @param int $per_page
