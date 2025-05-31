@@ -7,10 +7,27 @@ use App\Interfaces\V1\Property\PropertyRepositoryInterface;
 use App\Models\Address;
 use App\Models\Property;
 use Exception;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
 
 class PropertyRepository implements PropertyRepositoryInterface
 {
+    /**
+     * getUserProperties
+     * @param int $userId
+     * @param int $per_page
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
+    public function getUserProperties(int $userId, int $per_page): LengthAwarePaginator
+    {
+        try {
+            return Property::whereUserId($userId)->with(['address:id,label,street,apartment'])->paginate($per_page);
+        } catch (Exception $e) {
+            Log::error('PropertyRepository::getUserProperties', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
     /**
      * getUserPropertyAddressLabel
      * @param int $userId
@@ -24,7 +41,6 @@ class PropertyRepository implements PropertyRepositoryInterface
             throw $e;
         }
     }
-
 
     /**
      * createProperty

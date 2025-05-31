@@ -3,9 +3,18 @@
 namespace App\Interfaces\V1\Property;
 
 use App\Models\Property;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 interface PropertyRepositoryInterface
 {
+    /**
+     * getUserProperties
+     * @param int $userId
+     * @param int $per_page
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
+    public function getUserProperties(int $userId, int $per_page): LengthAwarePaginator;
+
     /**
      * getUserPropertyAddressLabel
      * @param int $userId
