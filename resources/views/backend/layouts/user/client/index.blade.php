@@ -42,7 +42,7 @@
                                                 <th scope="col">Date Join</th>
                                                 <th scope="col">Total Properties </th>
                                                 <th scope="col">Total Posted Jobs</th>
-                                                <th scope="col">Payment </th>
+                                                <th scope="col">Status</th>
                                                 <th scope="col">Action</th>
                                             </tr>
                                         </thead>
