@@ -15,32 +15,32 @@ class BoilerTypeSeeder extends Seeder
     {
         DB::table('boiler_types')->insert([
             [
-                'slug' => 'combi-boiler',
-                'name' => 'Combi Boiler',
+                'slug' => 'system-boiler',
+                'name' => 'System boiler',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'slug' => 'system-boiler',
-                'name' => 'System Boiler',
+                'name' => 'Combination boiler',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'slug' => 'regular-boiler',
-                'name' => 'Regular Boiler',
+                'slug' => 'hyeatin-only-boiler',
+                'name' => 'Heating Only boiler',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'slug' => 'oil-boiler',
-                'name' => 'Oil Boiler',
+                'slug' => 'ashp',
+                'name' => 'ASHP',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'slug' => 'electric-boiler',
-                'name' => 'Electric Boiler',
+                'slug' => 'gshp',
+                'name' => 'GSHP',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
