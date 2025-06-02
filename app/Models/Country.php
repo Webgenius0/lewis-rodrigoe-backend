@@ -39,6 +39,15 @@ class Country extends Model
     }
 
     /**
+     * getRouteKeyName
+     * @return string
+     */
+    public function getRouteKeyName():string
+    {
+        return 'slug';
+    }
+
+    /**
      * has many states
      * @return HasMany<CountryState, Country>
      */
