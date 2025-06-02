@@ -30,7 +30,7 @@ class EmployRegistrationRequest extends FormRequest
             'first_name'   => "required|string",
             'last_name'    => "required|string",
             'password'     => "required|confirmed",
-            'gender'       => 'required|in:male,femail,others',
+            'gender'       => 'required|in:male,female,others',
             'phone'        => 'required|phone:GB',
             'expertise_id' => 'required|exists:expertises,id',
 
