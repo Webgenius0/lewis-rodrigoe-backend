@@ -16,6 +16,8 @@ Route::prefix('/auth')->name('api.auth.')->group(function () {
             Route::post('/login', 'login');
             Route::post('/register', 'register');
             Route::post('/register-both', 'employRegistration');
+            Route::post('/register-engineer', 'engineerRegistration');
+            Route::post('/register-plumber', 'plumberRegistration');
         });
 
         // Password-related routes

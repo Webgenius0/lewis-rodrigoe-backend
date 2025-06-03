@@ -37,13 +37,13 @@ class EngineerRegistrationRequest extends FormRequest
             'ni'  => 'required|string|unique:engineers,ni',
             'utr' => 'required|string|unique:engineers,utr',
 
-            'nic_eic_number'      => 'required|string|unique:n_i_c_e_i_c_s,id',
+            'nic_eic_number'      => 'required|string|unique:n_i_c_e_i_c_s,number',
             'nic_eic_issue_date'  => 'required|date',
             'nic_eic_expire_date' => 'required|date',
             'nic_eic_card_front'  => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
             'nic_eic_card_back'   => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
 
-            'driving_licence_number'      => 'required|string',
+            'driving_licence_number'      => 'required|unique:driving_licences,number',
             'driving_licence_issue_date'  => 'required|date',
             'driving_licence_expire_date' => 'required|date',
             'driving_licence_card_front'  => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',

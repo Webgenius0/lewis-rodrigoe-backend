@@ -37,11 +37,17 @@ class PlumberRegistrationRequest extends FormRequest
             'ni'  => 'required|string|unique:engineers,ni',
             'utr' => 'required|string|unique:engineers,utr',
 
-            'gas_number'      => 'required|string|unique:gas_safety_registrations,id',
+            'gas_number'      => 'required|string|unique:gas_safety_registrations,number',
             'gas_issue_date'  => 'required|date',
             'gas_expire_date' => 'required|date',
             'gas_card_front'  => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
             'gas_card_back'   => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
+
+            'driving_licence_number'      => 'required|unique:driving_licences,number',
+            'driving_licence_issue_date'  => 'required|date',
+            'driving_licence_expire_date' => 'required|date',
+            'driving_licence_card_front'  => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
+            'driving_licence_card_back'   => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
 
             'street'     => 'required|string',
             'apartment'  => 'nullable|string',
