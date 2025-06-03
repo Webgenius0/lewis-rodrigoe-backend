@@ -259,4 +259,15 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     {
         return $this->belongsToMany(OnlineHour::class);
     }
+
+    public function subscriptions(): HasMany
+    {
+        return $this->hasMany(UserSubscription::class);
+    }
+
+    public function subscribedPackages(): BelongsToMany
+    {
+        return $this->belongsToMany(Package::class, 'user_subscriptions')
+            ->withTimestamps();
+    }
 }
