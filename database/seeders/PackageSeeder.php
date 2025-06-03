@@ -16,21 +16,21 @@ class PackageSeeder extends Seeder
     {
         DB::table('packages')->insert([
             [
-                'type' => 'Starter',
+                'type' => 'general',
                 'price' => 19.99,
                 'duration' => 'month',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'type' => 'Professional',
+                'type' => 'general',
                 'price' => 199.99,
                 'duration' => 'year',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'type' => 'Business',
+                'type' => 'general',
                 'price' => 39.99,
                 'duration' => 'month',
                 'created_at' => Carbon::now(),
