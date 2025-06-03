@@ -31,7 +31,7 @@ class StoreResource extends JsonResource
             'boiler_model_id'    => $data['boiler_model_id'],
             'property_type_id'   => $data['property_type_id'],
             'quantity'           => $data['quantity'],
-            'purchase_year'      => $data['purchase_year'],
+            // 'purchase_year'      => $data['purchase_year'],
             'last_service_date'  => $data['last_service_date'],
             'location'           => $data['location'],
             'accessability_info' => $data['accessability_info'],

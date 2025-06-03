@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreignId('property_type_id')->nullable()->constrained('property_types')->nullOnDelete();
             $table->foreignId('service_id')->nullable()->constrained('services')->nullOnDelete();
             $table->integer('quantity');
-            $table->date('purchase_year');
+            // $table->date('purchase_year');
             $table->date('last_service_date')->nullable();
             $table->string('location');
             $table->text('accessability_info');

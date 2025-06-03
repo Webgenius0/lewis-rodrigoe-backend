@@ -75,7 +75,7 @@ class PropertyRepository implements PropertyRepositoryInterface
                 'property_type_id'   => $data['property_type_id'],
                 'service_id'         => $data['service_id'],
                 'quantity'           => $data['quantity'],
-                'purchase_year'      => $data['purchase_year'],
+                // 'purchase_year'      => $data['purchase_year'],
                 'last_service_date'  => $data['last_service_date'],
                 'location'           => $data['location'],
                 'accessability_info' => $data['accessability_info'],
@@ -121,7 +121,7 @@ class PropertyRepository implements PropertyRepositoryInterface
             $property->boiler_type_id = $data['boiler_type_id'];
             $property->boiler_model_id = $data['boiler_model_id'];
             $property->quantity = $data['quantity'];
-            $property->purchase_year = $data['purchase_year'];
+            // $property->purchase_year = $data['purchase_year'];
             $property->last_service_date = $data['last_service_date'];
             $property->location = $data['location'];
             $property->save();
