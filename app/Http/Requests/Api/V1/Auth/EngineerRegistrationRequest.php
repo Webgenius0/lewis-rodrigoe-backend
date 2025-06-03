@@ -43,6 +43,12 @@ class EngineerRegistrationRequest extends FormRequest
             'nic_eic_card_front'  => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
             'nic_eic_card_back'   => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
 
+            'driving_licence_number'      => 'required|string',
+            'driving_licence_issue_date'  => 'required|date',
+            'driving_licence_expire_date' => 'required|date',
+            'driving_licence_card_front'  => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
+            'driving_licence_card_back'   => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
+
             'street'     => 'required|string',
             'apartment'  => 'nullable|string',
             'country_id' => 'required|exists:countries,id',
@@ -77,6 +83,12 @@ class EngineerRegistrationRequest extends FormRequest
             'nic_eic_expire_date',
             'nic_eic_card_front',
             'nic_eic_card_back',
+
+            'driving_licence_number',
+            'driving_licence_issue_date',
+            'driving_licence_expire_date',
+            'driving_licence_card_front',
+            'driving_licence_card_back',
 
             'street',
             'apartment',

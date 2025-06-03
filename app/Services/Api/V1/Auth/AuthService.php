@@ -105,6 +105,7 @@ class AuthService
     public function bothRegistration(array $data): array
     {
         try {
+            Log::info($data);
             DB::beginTransaction();
             $response = $this->register($data, 4);
             // finding the user
@@ -135,16 +136,6 @@ class AuthService
                 $nic_eic_card_back = Helper::uploadFile($data['nic_eic_card_back'], 'ncieci');
             }
             $niceic = $this->niceicRepository->createNICEIC($data, $nic_eic_card_front, $nic_eic_card_back, $user);
-            // nvq
-            $nvq_level_one = null;
-            $nvq_level_two = null;
-            if (isset($data['nvq_level_one'])) {
-                $nvq_level_one = Helper::uploadFile($data['nvq_level_one'], 'nvq');
-            }
-            if (isset($data['nvq_level_two'])) {
-                $nvq_level_two = Helper::uploadFile($data['nvq_level_two'], 'nvq');
-            }
-            $nvq = $this->nvqRepositoy->createNVQ($data, $user, $nvq_level_one, $nvq_level_two);
             // driving licence
             $driving_licence_card_front = null;
             $driving_licence_card_back = null;
@@ -244,7 +235,7 @@ class AuthService
                 $gas_card_back = Helper::uploadFile($data['gas_card_back'], 'gas');
             }
             $gas = $this->gassSafetyRegistrationRepository->createGSR($data, $gas_card_front, $gas_card_back, $user);
-            
+
             // driving licence
             $driving_licence_card_front = null;
             $driving_licence_card_back = null;

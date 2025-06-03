@@ -78,6 +78,12 @@ class PlumberRegistrationRequest extends FormRequest
             'gas_card_front',
             'gas_card_back',
 
+            'driving_licence_number',
+            'driving_licence_issue_date',
+            'driving_licence_expire_date',
+            'driving_licence_card_front',
+            'driving_licence_card_back',
+
             'street',
             'apartment',
             'country_id',
