@@ -33,8 +33,6 @@ class Package extends Model
     {
         return [
             'id'         => 'integer',
-            'price'      => 'decimal',
-            'status'     => 'boolean',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];

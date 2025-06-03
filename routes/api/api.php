@@ -19,6 +19,7 @@ Route::prefix('/v1')->group(function () {
     require 'v1/boiler/type/type.php';
     require 'v1/boiler/model/model.php';
     require 'v1/property/property-withoutauth.php';
+    require 'v1/package/package.php';
 
     Route::middleware('auth:api')->group(function () {
         require 'v1/user/auth.php';
