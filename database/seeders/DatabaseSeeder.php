@@ -21,6 +21,9 @@ class DatabaseSeeder extends Seeder
             BoilerModelSeeder::class,
             LocationSeeder::class,
             UserSeeder::class,
+            ExpertiesSeeder::class,
+            OnlineHourSeed::class,
+            PackageSeeder::class,
         ]);
     }
 }
