@@ -22,8 +22,8 @@ return new class extends Migration
             $table->timestamp('date_time');
             $table->string('error_code')->nullable();
             $table->string('error_code_image')->nullable();
-            $table->string('water_pressure_level')->nullable();
-            $table->string('tools_info')->nullable();
+            // $table->string('water_pressure_level')->nullable();
+            // $table->string('tools_info')->nullable();
             $table->text('additional_info')->nullable();
             $table->string('image')->nullable();
             $table->string('video')->nullable();
