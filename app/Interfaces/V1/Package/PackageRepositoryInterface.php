@@ -2,7 +2,14 @@
 
 namespace App\Interfaces\V1\Package;
 
+use Illuminate\Database\Eloquent\Collection;
+
 interface PackageRepositoryInterface
 {
-    // Define the methods your repository should implement
+    /**
+     * getPackagesByType
+     * @param string $type
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getPackagesByType(string $type): Collection;
 }
