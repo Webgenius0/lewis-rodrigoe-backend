@@ -34,7 +34,8 @@ class RegisterRequest extends FormRequest
             'password'   => "required|confirmed",
             'avatar'     => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
             'gender'     => 'required|in:male,female,others',
-            'phone'      => 'required|phone:GB,mobile,fixed_line'
+            'phone'      => 'required|phone:GB,mobile,fixed_line',
+            'package_id' => 'required|exists:packages,id'
         ];
     }
 

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('package_id')->constrained('packages');
-            $table->boolean('status')->default(true);
+            $table->boolean('status')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });
