@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Api\V1\Auth;
 
 use App\Http\Controllers\Api\V1\Controller;
 use App\Http\Requests\Api\V1\Auth\EmployRegistrationRequest;
+use App\Http\Requests\Api\V1\Auth\EngineerRegistrationRequest;
 use App\Http\Resources\Api\V1\Auth\LoginResponce;
 use App\Http\Resources\Api\V1\Auth\RegisterUserResource;
 use App\Services\Api\V1\Auth\AuthService;
 use App\Http\Requests\Api\V1\Auth\LoginRequest;
+use App\Http\Requests\Api\V1\Auth\PlumberRegistrationRequest;
 use App\Http\Requests\Api\V1\Auth\RegisterRequest;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -75,10 +77,46 @@ class AuthController extends Controller
         try {
             $validatedData = $employRegistrationRequest->validated();
 
+            $response = $this->authService->bothRegistration($validatedData);
+            return $this->success(201, 'engineer and plumber created', $response);
+        } catch (Exception $e) {
+            Log::error('AuthController::employRegistration', ['error' => $e->getMessage()]);
+            return $this->error(500, 'Server Error', $e->getMessage());
+        }
+    }
+
+    /**
+     * engineerRegistration
+     * @param \App\Http\Requests\Api\V1\Auth\EngineerRegistrationRequest $engineerRegistrationRequest
+     * @return JsonResponse
+     */
+    public function engineerRegistration(EngineerRegistrationRequest $engineerRegistrationRequest)
+    {
+        try {
+            $validatedData = $engineerRegistrationRequest->validated();
+
             $response = $this->authService->engineerRegistration($validatedData);
             return $this->success(201, 'Engineer created', $response);
-        }catch (Exception $e) {
-            Log::error('AuthController::employRegistration', ['error' => $e->getMessage()]);
+        } catch (Exception $e) {
+            Log::error('AuthController::engineerRegistration', ['error' => $e->getMessage()]);
+            return $this->error(500, 'Server Error', $e->getMessage());
+        }
+    }
+
+    /**
+     * plumberRegistration
+     * @param \App\Http\Requests\Api\V1\Auth\PlumberRegistrationRequest $plumberRegistrationRequest
+     * @return JsonResponse
+     */
+    public function plumberRegistration(PlumberRegistrationRequest $plumberRegistrationRequest)
+    {
+        try {
+            $validatedData = $plumberRegistrationRequest->validated();
+
+            $response = $this->authService->plumberRegistration($validatedData);
+            return $this->success(201, 'plumber created', $response);
+        } catch (Exception $e) {
+            Log::error('AuthController::plumberRegistration', ['error' => $e->getMessage()]);
             return $this->error(500, 'Server Error', $e->getMessage());
         }
     }

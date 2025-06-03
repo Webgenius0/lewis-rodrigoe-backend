@@ -98,11 +98,11 @@ class AuthService
     }
 
     /**
-     * engineerRegistration
+     * bothRegistration
      * @param mixed $data
      * @return array
      */
-    public function engineerRegistration($data): array
+    public function bothRegistration(array $data): array
     {
         try {
             DB::beginTransaction();
@@ -166,7 +166,105 @@ class AuthService
         }
     }
 
+    /**
+     * engineerRegistration
+     * @param array $data
+     * @return array
+     */
+    public function engineerRegistration(array $data):array
+    {
+        try {
+            DB::beginTransaction();
+            $response = $this->register($data, 4);
+            // finding the user
+            $userId = $response['user']['id'];
+            $user = User::findOrFail($userId);
+            $addressRepository = new AddressRepository();
+            // creating address
+            $address = $addressRepository->createAddress($data);
+            // storing engineer data
+            $engineer = $this->engineerRepository->createEngineer($data, $address->id, $user);
+            // niceic
+            $nic_eic_card_front = null;
+            $nic_eic_card_back = null;
+            if (isset($data['nic_eic_card_front'])) {
+                $nic_eic_card_front = Helper::uploadFile($data['nic_eic_card_front'], 'ncieci');
+            }
+            if (isset($data['nic_eic_card_back'])) {
+                $nic_eic_card_back = Helper::uploadFile($data['nic_eic_card_back'], 'ncieci');
+            }
+            $niceic = $this->niceicRepository->createNICEIC($data, $nic_eic_card_front, $nic_eic_card_back, $user);
 
+            // driving licence
+            $driving_licence_card_front = null;
+            $driving_licence_card_back = null;
+            if (isset($data['driving_licence_card_front'])) {
+                $driving_licence_card_front = Helper::uploadFile($data['driving_licence_card_front'], 'drivingLicence');
+            }
+            if (isset($data['driving_licence_card_back'])) {
+                $driving_licence_card_back = Helper::uploadFile($data['driving_licence_card_back'], 'drivingLicence');
+            }
+            $drigingLicence = $this->drivingLicenceRepository->createDrivingLicence($data, $driving_licence_card_front, $driving_licence_card_back, $user);
+            // bank account
+            $bankAccount = $this->bankAccountRepository->createBankAccount($data, $user);
+            DB::commit();
+            return $response;
+        } catch (Exception $e) {
+            DB::rollBack();
+            Log::error('AuthService::register', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
+    /**
+     * plumberRegistration
+     * @param array $data
+     * @return array
+     */
+    public function plumberRegistration(array $data): array
+    {
+        try {
+            DB::beginTransaction();
+            $response = $this->register($data, 4);
+            // finding the user
+            $userId = $response['user']['id'];
+            $user = User::findOrFail($userId);
+            $addressRepository = new AddressRepository();
+            // creating address
+            $address = $addressRepository->createAddress($data);
+            // storing engineer data
+            $engineer = $this->engineerRepository->createEngineer($data, $address->id, $user);
+            //gas
+            $gas_card_front = null;
+            $gas_card_back = null;
+            if (isset($data['gas_card_front'])) {
+                $gas_card_front = Helper::uploadFile($data['gas_card_front'], 'gas');
+            }
+            if (isset($data['gas_card_back'])) {
+                $gas_card_back = Helper::uploadFile($data['gas_card_back'], 'gas');
+            }
+            $gas = $this->gassSafetyRegistrationRepository->createGSR($data, $gas_card_front, $gas_card_back, $user);
+            
+            // driving licence
+            $driving_licence_card_front = null;
+            $driving_licence_card_back = null;
+            if (isset($data['driving_licence_card_front'])) {
+                $driving_licence_card_front = Helper::uploadFile($data['driving_licence_card_front'], 'drivingLicence');
+            }
+            if (isset($data['driving_licence_card_back'])) {
+                $driving_licence_card_back = Helper::uploadFile($data['driving_licence_card_back'], 'drivingLicence');
+            }
+            $drigingLicence = $this->drivingLicenceRepository->createDrivingLicence($data, $driving_licence_card_front, $driving_licence_card_back, $user);
+            // bank account
+            $bankAccount = $this->bankAccountRepository->createBankAccount($data, $user);
+            DB::commit();
+            return $response;
+        } catch (Exception $e) {
+            DB::rollBack();
+            Log::error('AuthService::register', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
 
     /**
      * Authenticates a user and generates a JWT token.

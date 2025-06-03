@@ -23,11 +23,6 @@ class BankAccountRepository implements BankAccountRepositoryInterface
                 'name'           => $data['bank_accounts_name'],
                 'number'         => $data['bank_accounts_number'],
                 'bank_name'      => $data['bank_accounts_bank_name'],
-                // 'branch'         => $data['bank_accounts_branch'],
-                // 'routing_number' => $data['bank_accounts_routing_number'],
-                // 'country'        => $data['bank_accounts_country'],
-                // 'state'          => $data['bank_accounts_state'],
-                // 'city'           => $data['bank_accounts_city'],
             ]);
         } catch (Exception $e) {
             Log::error('BankAccountRepository::createBankAccount', ['error' => $e->getMessage()]);

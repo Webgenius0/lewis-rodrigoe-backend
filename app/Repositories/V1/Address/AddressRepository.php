@@ -20,7 +20,6 @@ class AddressRepository implements AddressRepositoryInterface
         try {
             return Address::create([
                 'uin'        => Helper::generateUniqueId('addresses', 'uin'),
-                'label'      => $data['label'],
                 'street'     => $data['street'],
                 'apartment'  => $data['apartment'],
                 'country_id' => $data['country_id'],

@@ -7,7 +7,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\ValidationException;
 
-class EmployRegistrationRequest extends FormRequest
+class EngineerRegistrationRequest extends FormRequest
 {
     use ApiResponse;
     /**
@@ -36,12 +36,6 @@ class EmployRegistrationRequest extends FormRequest
 
             'ni'  => 'required|string|unique:engineers,ni',
             'utr' => 'required|string|unique:engineers,utr',
-
-            'gas_number'      => 'required|string|unique:gas_safety_registrations,id',
-            'gas_issue_date'  => 'required|date',
-            'gas_expire_date' => 'required|date',
-            'gas_card_front'  => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
-            'gas_card_back'   => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:15360',
 
             'nic_eic_number'      => 'required|string|unique:n_i_c_e_i_c_s,id',
             'nic_eic_issue_date'  => 'required|date',
@@ -77,12 +71,6 @@ class EmployRegistrationRequest extends FormRequest
 
             'ni',
             'utr',
-            
-            'gas_number',
-            'gas_issue_date',
-            'gas_expire_date',
-            'gas_card_front',
-            'gas_card_back',
 
             'nic_eic_number',
             'nic_eic_issue_date',
