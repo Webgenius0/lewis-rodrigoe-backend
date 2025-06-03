@@ -17,11 +17,11 @@ return new class extends Migration
             $table->string('name');
             $table->string('number');
             $table->string('bank_name');
-            $table->string('branch');
-            $table->string('routing_number');
-            $table->string('country');
-            $table->string('state');
-            $table->string('city');
+            // $table->string('branch');
+            // $table->string('routing_number');
+            // $table->string('country');
+            // $table->string('state');
+            // $table->string('city');
             $table->timestamps();
         });
     }

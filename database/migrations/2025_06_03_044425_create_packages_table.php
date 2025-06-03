@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
+            $table->enum('type', ['general', 'landload']);
             $table->decimal('price');
             $table->enum('duration', ['month', 'year']);
             $table->softDeletes();

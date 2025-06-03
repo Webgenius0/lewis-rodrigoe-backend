@@ -72,11 +72,11 @@ class EmployRegistrationRequest extends FormRequest
             'bank_accounts_name'           => 'required|string',
             'bank_accounts_number'         => 'required|string',
             'bank_accounts_bank_name'      => 'required|string',
-            'bank_accounts_branch'         => 'required|string',
-            'bank_accounts_routing_number' => 'required|string',
-            'bank_accounts_country'        => 'required|string',
-            'bank_accounts_state'          => 'required|string',
-            'bank_accounts_city'           => 'required|string',
+            // 'bank_accounts_branch'         => 'required|string',
+            // 'bank_accounts_routing_number' => 'required|string',
+            // 'bank_accounts_country'        => 'required|string',
+            // 'bank_accounts_state'          => 'required|string',
+            // 'bank_accounts_city'           => 'required|string',
         ];
     }
 
@@ -129,11 +129,11 @@ class EmployRegistrationRequest extends FormRequest
             'bank_accounts_name',
             'bank_accounts_number',
             'bank_accounts_bank_name',
-            'bank_accounts_branch',
-            'bank_accounts_routing_number',
-            'bank_accounts_country',
-            'bank_accounts_state',
-            'bank_accounts_city',
+            // 'bank_accounts_branch',
+            // 'bank_accounts_routing_number',
+            // 'bank_accounts_country',
+            // 'bank_accounts_state',
+            // 'bank_accounts_city',
         ];
         $message = 'Validation error'; // Default message
 

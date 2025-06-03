@@ -21,7 +21,7 @@ class BoilerTypeSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'slug' => 'system-boiler',
+                'slug' => 'combination-boiler',
                 'name' => 'Combination boiler',
                 'created_at' => now(),
                 'updated_at' => now(),
