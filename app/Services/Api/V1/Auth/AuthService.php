@@ -105,7 +105,6 @@ class AuthService
     public function bothRegistration(array $data): array
     {
         try {
-            Log::info($data);
             DB::beginTransaction();
             $response = $this->register($data, 4);
             // finding the user

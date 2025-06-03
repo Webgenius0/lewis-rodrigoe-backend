@@ -21,6 +21,7 @@ use App\Interfaces\V1\Message\MessageRepositoryInterface;
 use App\Interfaces\V1\NICEIC\NICEICRepositoryInterface;
 use App\Interfaces\V1\NVQ\NVQRepositoryInterface;
 use App\Interfaces\V1\OnlineHoiur\OnlineHourRepositoryInterface;
+use App\Interfaces\V1\Package\PackageRepositoryInterface;
 use App\Interfaces\V1\Property\Job\PropertyJobRepositoryInterface;
 use App\Interfaces\V1\Property\PropertyRepositoryInterface;
 use App\Interfaces\V1\Property\Type\PropertyTypeRepositoryInterface;
@@ -46,6 +47,7 @@ use App\Repositories\V1\Message\MessageRepository;
 use App\Repositories\V1\NICEIC\NICEICRepository;
 use App\Repositories\V1\NVQ\NVQRepository;
 use App\Repositories\V1\OnlineHoiur\OnlineHourRepository;
+use App\Repositories\V1\Package\PackageRepository;
 use App\Repositories\V1\Property\Job\PropertyJobRepository;
 use App\Repositories\V1\Property\PropertyRepository;
 use App\Repositories\V1\Property\Type\PropertyTypeRepository;
@@ -119,6 +121,9 @@ class AppServiceProvider extends ServiceProvider
 
         // OnlineHours
         $this->app->bind(OnlineHourRepositoryInterface::class, OnlineHourRepository::class);
+
+        // Package
+        $this->app->bind(PackageRepositoryInterface::class, PackageRepository::class);
 
     }
 
