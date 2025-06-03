@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('type');
             $table->decimal('price');
             $table->enum('duration', ['month', 'year']);
+            $table->boolean('status')->default(true);
             $table->softDeletes();
             $table->timestamps();
         });
