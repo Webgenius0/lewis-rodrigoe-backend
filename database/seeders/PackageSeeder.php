@@ -18,6 +18,7 @@ class PackageSeeder extends Seeder
             [
                 'type' => 'general',
                 'price' => 21,
+                'category' => 'basic',
                 'duration' => 'month',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -25,13 +26,15 @@ class PackageSeeder extends Seeder
             [
                 'type' => 'general',
                 'price' => 24,
-                'duration' => 'year',
+                'category' => 'basic',
+                'duration' => 'month',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
                 'type' => 'general',
                 'price' => 28,
+                'category' => 'standard plus',
                 'duration' => 'month',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -39,6 +42,7 @@ class PackageSeeder extends Seeder
             [
                 'type' => 'general',
                 'price' => 30,
+                'category' => 'primum',
                 'duration' => 'month',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -46,6 +50,7 @@ class PackageSeeder extends Seeder
             [
                 'type' => 'landlord',
                 'price' => 21,
+                'category' => 'basic',
                 'duration' => 'month',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -53,13 +58,15 @@ class PackageSeeder extends Seeder
             [
                 'type' => 'landlord',
                 'price' => 24,
-                'duration' => 'year',
+                'category' => 'standard',
+                'duration' => 'month',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
                 'type' => 'landlord',
                 'price' => 28,
+                'category' => 'standard plus',
                 'duration' => 'month',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -67,6 +74,7 @@ class PackageSeeder extends Seeder
             [
                 'type' => 'landlord',
                 'price' => 30,
+                'category' => 'primum',
                 'duration' => 'month',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),

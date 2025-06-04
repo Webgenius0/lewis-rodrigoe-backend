@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
             $table->enum('type', ['general', 'landlord']);
+            $table->enum('category', ['basic', 'standard', 'standard plus', 'primum']);
             $table->decimal('price');
             $table->enum('duration', ['month', 'year']);
             $table->softDeletes();
