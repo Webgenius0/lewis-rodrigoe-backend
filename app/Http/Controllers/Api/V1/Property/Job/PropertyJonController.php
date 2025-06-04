@@ -38,7 +38,7 @@ class PropertyJonController extends Controller
     {
         try {
             $response = $this->propertyJobService->propertyJobIndex($status);
-            return $this->success(200, ucfirst($status).' Job list', $response);
+            return $this->success(200, ucfirst($status) . ' Job list', $response);
         } catch (Exception $e) {
             Log::error("PropertyController::index", ['message' => $e->getMessage()]);
             return $this->error(500, 'server error');
@@ -49,12 +49,12 @@ class PropertyJonController extends Controller
      *  pendingIndex
      * @return JsonResponse
      */
-    public function pendingIndex():JsonResponse
+    public function pendingIndex(): JsonResponse
     {
         try {
             $response = $this->propertyJobService->getPendingtJobs();
             return $this->success(200, 'Job list', $response);
-        }catch (Exception $e) {
+        } catch (Exception $e) {
             Log::error("PropertyController::pendingIndex", ['message' => $e->getMessage()]);
             return $this->error(500, 'server error');
         }
@@ -105,6 +105,24 @@ class PropertyJonController extends Controller
             return $this->success(200, 'Job details', $response);
         } catch (Exception $e) {
             Log::error("PropertyController::show", ['message' => $e->getMessage()]);
+            return $this->error(500, 'server error');
+        }
+    }
+
+    /**
+     * status
+     * @param \App\Models\PropertyJob $propertyJob
+     * @param mixed $status
+     * @return JsonResponse
+     */
+    public function status(PropertyJob $propertyJob, $status): JsonResponse
+    {
+        try {
+            $propertyJob->status = $status;
+            $propertyJob->save();
+            return $this->success(200, 'Status updated');
+        } catch (Exception $e) {
+            Log::error("PropertyController::status", ['message' => $e->getMessage()]);
             return $this->error(500, 'server error');
         }
     }

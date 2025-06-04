@@ -25,6 +25,8 @@ Route::prefix('/property-job')
         Route::get('/{status}', 'index')->where('status', 'all|active|inactive|pending|ongoing|completed|assigned');
         Route::post('/', 'store');
 
+        Route::patch('{propertyJob}/status/{status}', 'status')->where('status', 'active|inactive|ongoing|completed|assigned');
+
         Route::middleware('engineer')->group(function () {
             Route::get('/engineer/{status}', 'engineerIndex')->where('status', 'active|inactive|ongoing|completed|assigned');
             Route::get('/engineer/pending', 'pendingIndex');
