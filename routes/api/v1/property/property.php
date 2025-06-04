@@ -22,7 +22,7 @@ Route::prefix('/property')->middleware('auth:api')
  */
 Route::prefix('/property-job')
     ->controller(PropertyJonController::class)->group(function () {
-        Route::get('/{status}', 'index')->where('status', 'active|inactive|pending|ongoing|completed|assigned');
+        Route::get('/{status}', 'index')->where('status', 'all|active|inactive|pending|ongoing|completed|assigned');
         Route::post('/', 'store');
 
         Route::middleware('engineer')->group(function () {

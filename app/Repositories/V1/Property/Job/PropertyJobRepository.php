@@ -22,11 +22,24 @@ class PropertyJobRepository implements PropertyJobRepositoryInterface
     public function getJobListByStatus(string $status, int $per_page, int $authId): LengthAwarePaginator
     {
         try {
-            return  PropertyJob::select(['id', 'sn', 'user_id', 'property_id', 'engineer', 'title', 'description', 'date_time', 'status'])
-                ->whereUserId($authId)
-                ->whereStatus($status)
-                ->orderBy('date_time')
-                ->paginate($per_page);
+            $query = PropertyJob::select([
+                'id',
+                'sn',
+                'user_id',
+                'property_id',
+                'engineer',
+                'title',
+                'description',
+                'date_time',
+                'status'
+            ])
+                ->whereUserId($authId);
+
+            if ($status !== 'all') {
+                $query->whereStatus($status);
+            }
+
+            return $query->orderBy('date_time')->paginate($per_page);
         } catch (Exception $e) {
             Log::error('PropertyJobRepository::getJobList', ['error' => $e->getMessage()]);
             throw $e;

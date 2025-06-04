@@ -38,7 +38,7 @@ class PropertyJonController extends Controller
     {
         try {
             $response = $this->propertyJobService->propertyJobIndex($status);
-            return $this->success(200, 'Job list', $response);
+            return $this->success(200, ucfirst($status).' Job list', $response);
         } catch (Exception $e) {
             Log::error("PropertyController::index", ['message' => $e->getMessage()]);
             return $this->error(500, 'server error');
