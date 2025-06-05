@@ -38,10 +38,13 @@ class UserRepository implements UserRepositoryInterface
                 'gender' => $credentials['gender'],
                 'phone'  => $credentials['phone'],
             ]);
-            // asign package
-            $user->subscriptions()->create([
-                'package_id'  => $credentials['package_id'],
-            ]);
+
+            if (isset($credentials['package_id'])) {
+                // asign package
+                $user->subscriptions()->create([
+                    'package_id'  => $credentials['package_id'],
+                ]);
+            }
 
             return $user;
         } catch (Exception $e) {
