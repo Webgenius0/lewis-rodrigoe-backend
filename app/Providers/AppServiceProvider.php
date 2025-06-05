@@ -14,6 +14,7 @@ use App\Interfaces\V1\Auth\UserRepositoryInterface;
 use App\Interfaces\V1\BankAccount\BankAccountRepositoryInterface;
 use App\Interfaces\V1\Boiler\Model\BoilerModelRepositoryInterface;
 use App\Interfaces\V1\Boiler\Type\BoilerTypeRepositoryInterface;
+use App\Interfaces\V1\Card\CardRepositoryInterface;
 use App\Interfaces\V1\DrivingLicence\DrivingLicenceRepositoryInterface;
 use App\Interfaces\V1\Engineer\EngineerRepositoryInterface;
 use App\Interfaces\V1\GassSafetyRegistration\GassSafetyRegistrationRepositoryInterface;
@@ -40,6 +41,7 @@ use App\Repositories\V1\Auth\UserRepository;
 use App\Repositories\V1\BankAccount\BankAccountRepository;
 use App\Repositories\V1\Boiler\Model\BoilerModelRepository;
 use App\Repositories\V1\Boiler\Type\BoilerTypeRepository;
+use App\Repositories\V1\Card\CardRepository;
 use App\Repositories\V1\DrivingLicence\DrivingLicenceRepository;
 use App\Repositories\V1\Engineer\EngineerRepository;
 use App\Repositories\V1\GassSafetyRegistration\GassSafetyRegistrationRepository;
@@ -124,6 +126,9 @@ class AppServiceProvider extends ServiceProvider
 
         // Package
         $this->app->bind(PackageRepositoryInterface::class, PackageRepository::class);
+
+        // Card
+        $this->app->bind(CardRepositoryInterface::class, CardRepository::class);
 
     }
 

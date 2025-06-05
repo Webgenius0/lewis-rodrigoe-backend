@@ -26,5 +26,6 @@ Route::prefix('/v1')->group(function () {
         require 'v1/online-hour/online-hour.php';
         require 'v1/message/message.php';
         require 'v1/property/property.php';
+        require 'v1/card/card.php';
     });
 });
