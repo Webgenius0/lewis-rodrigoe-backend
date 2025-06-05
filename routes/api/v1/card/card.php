@@ -6,4 +6,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('/card')->controller(CardController::class)->group(function () {
     Route::post('/', 'store');
+    Route::get('/{card}', 'show');
+    Route::put('/{card}', 'show');
 });

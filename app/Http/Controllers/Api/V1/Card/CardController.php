@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1\Card;
 
 use App\Http\Controllers\Api\V1\Controller;
 use App\Http\Requests\Api\V1\Card\StoreRequest;
+use App\Models\Card;
 use App\Services\Api\V1\Card\CardService;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -39,6 +40,21 @@ class CardController extends Controller
             return $this->success(201, 'card created', $response);
         }catch (Exception $e) {
             Log::error('CardController::store', [$e->getMessage()]);
+            return $this->error(500, 'server error', $e->getMessage());
+        }
+    }
+
+    /**
+     * show
+     * @param \App\Models\Card $card
+     * @return JsonResponse
+     */
+    public function show(Card $card): JsonResponse
+    {
+        try {
+            return $this->success(200, 'card created', $card);
+        }catch(Exception $e) {
+                        Log::error('CardController::show', [$e->getMessage()]);
             return $this->error(500, 'server error', $e->getMessage());
         }
     }
