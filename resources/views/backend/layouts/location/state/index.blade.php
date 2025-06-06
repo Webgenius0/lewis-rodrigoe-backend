@@ -144,7 +144,7 @@
                         pagingType: "full_numbers",
                         dom: "<'row justify-content-between table-topbar'<'col-md-2 col-sm-4 px-0'f>>tipr",
                         ajax: {
-                            url: "{{ route('state.index') }}",
+                            url: "{{ route('location.state.index') }}",
                             type: "GET",
                             data: (d) => {
                                 d.search = $('#search-input').val();
@@ -223,7 +223,7 @@
 
                     // AJAX request to save state
                     $.ajax({
-                        url: `{{ route('state.store') }}`,
+                        url: `{{ route('location.state.store') }}`,
                         type: `POST`,
                         data: {
                             name: stateName,
@@ -271,7 +271,7 @@
             try {
                 // $('#overlay').show();
                 $.ajax({
-                    url: `{{ route('state.edit', ':slug') }}`.replace(':slug', slug),
+                    url: `{{ route('location.state.edit', ':slug') }}`.replace(':slug', slug),
                     type: 'GET',
                     dataType: 'json',
                     success: (response) => {
@@ -327,7 +327,7 @@
                     _token: '{{ csrf_token() }}'
                 };
                 $.ajax({
-                    url: `{{ route('state.destroy', ':slug') }}`.replace(':slug', slug),
+                    url: `{{ route('location.state.destroy', ':slug') }}`.replace(':slug', slug),
                     type: 'POST',
                     data: formData,
                     dataType: 'json',

@@ -82,7 +82,7 @@
 
                 // Make the AJAX request to update the state
                 $.ajax({
-                    url: '{{ route('state.update', $state->slug) }}',
+                    url: '{{ route('location.state.update', $state->slug) }}',
                     type: 'POST',
                     data: formData,
                     success: (response) => {
