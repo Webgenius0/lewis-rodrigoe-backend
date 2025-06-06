@@ -18,6 +18,8 @@
 {{-- dropify --}}
 <link rel="stylesheet" href="{{ asset('assets/custom/css/dropify.min.css') }}">
 
+{{-- data table --}}
+<link rel="stylesheet" href="{{ asset('assets/custom/css/datatables.min.css') }}">
 
 {{-- sweet alert --}}
 <style>

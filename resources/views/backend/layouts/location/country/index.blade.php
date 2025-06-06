@@ -1,11 +1,10 @@
 @extends('backend.app')
 
 @section('title')
-    Users-Admin
+    {{ env('APP_NAME') }} || Country
 @endsection
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('assets/dev/css/datatables.min.css') }}">
     <style>
         .dt-info {
             display: flex;
@@ -20,7 +19,7 @@
     </style>
 @endpush
 
-@section('main')
+@section('content')
     <div id="overlay"
         style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.5); z-index:9999;">
     </div>
@@ -115,9 +114,7 @@
 
 @push('scripts')
     {{-- Datatable --}}
-    <script src="{{ asset('assets/dev/js/datatables.min.js') }}"></script>
     <script>
-        let dTable;
         $(document).ready(function() {
             /**
              *Indexing the table
@@ -143,7 +140,7 @@
                         pagingType: "full_numbers",
                         dom: "<'row justify-content-between table-topbar'<'col-md-2 col-sm-4 px-0'f>>tipr",
                         ajax: {
-                            url: "{{ route('admin.country.index') }}",
+                            url: "{{ route('country.index') }}",
                             type: "GET",
                             data: (d) => {
                                 d.search = $('#search-input').val();
@@ -191,7 +188,7 @@
                     $('#name_error').text('');
 
                     $.ajax({
-                        url: `{{ route('admin.country.store') }}`,
+                        url: `{{ route('country.store') }}`,
                         type: `POST`,
                         data: {
                             'name': countryName,
@@ -236,7 +233,7 @@
             try {
                 // $('#overlay').show();
                 $.ajax({
-                    url: `{{ route('admin.country.edit', '') }}/${slug}`,
+                    url: `{{ route('country.edit', ':slug') }}`.replace(':slug', slug),
                     type: 'GET',
                     dataType: 'json',
                     success: (response) => {
@@ -297,7 +294,7 @@
                     _method: 'DELETE'
                 };
                 $.ajax({
-                    url: `{{ route('admin.country.destroy', '') }}/${slug}`,
+                    url: `{{ route('country.destroy', ':slug') }}`.replace(':slug', slug),
                     type: 'POST',
                     data: formData,
                     dataType: 'json',
