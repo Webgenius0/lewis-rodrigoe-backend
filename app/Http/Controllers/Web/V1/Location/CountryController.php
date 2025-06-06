@@ -15,14 +15,26 @@ use Illuminate\Support\Facades\Log;
 
 class CountryController extends Controller
 {
+    /**
+     * countryService
+     * @var CountryService
+     */
     protected CountryService $countryService;
 
-
+    /**
+     * __construct
+     * @param \App\Services\Web\V1\Location\CountryService $countryService
+     */
     public function __construct(CountryService $countryService)
     {
         $this->countryService = $countryService;
     }
 
+    /**
+     * index
+     * @param \Illuminate\Http\Request $request
+     * @return JsonResponse|View
+     */
     public function index(Request $request): JsonResponse|RedirectResponse|View
     {
         try {
@@ -36,6 +48,11 @@ class CountryController extends Controller
         }
     }
 
+    /**
+     * store
+     * @param \App\Http\Requests\Web\V1\Location\Country\CreateRequest $createRequest
+     * @return JsonResponse
+     */
     public function store(CreateRequest $createRequest): JsonResponse
     {
         try {
@@ -48,7 +65,11 @@ class CountryController extends Controller
         }
     }
 
-
+    /**
+     * edit
+     * @param \App\Models\Country $country
+     * @return JsonResponse
+     */
     public function edit(Country $country): JsonResponse
     {
         try {
@@ -60,6 +81,12 @@ class CountryController extends Controller
         }
     }
 
+    /**
+     * update
+     * @param \App\Http\Requests\Web\V1\Location\Country\CreateRequest $updateRequest
+     * @param \App\Models\Country $country
+     * @return JsonResponse
+     */
     public function update(CreateRequest $updateRequest, Country $country): JsonResponse
     {
         try {
@@ -72,6 +99,11 @@ class CountryController extends Controller
         }
     }
 
+    /**
+     * destroy
+     * @param \App\Models\Country $country
+     * @return JsonResponse
+     */
     public function destroy(Country $country): JsonResponse
     {
         try {

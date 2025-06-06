@@ -12,21 +12,34 @@ use Yajra\DataTables\DataTables;
 
 class StateService
 {
-    // Your service logic goes here
+    /**
+     * stateRepository
+     * @var StateRepositoryInterface
+     */
     protected StateRepositoryInterface $stateRepository;
+    /**
+     * countryRepository
+     * @var CountryRepositoryInterface
+     */
     protected CountryRepositoryInterface $countryRepository;
 
+    /**
+     * construct
+     * @param \App\Interfaces\V1\Address\Country\CountryRepositoryInterface $countryRepository
+     * @param \App\Interfaces\V1\Address\State\StateRepositoryInterface $stateRepository
+     */
     public function __construct(CountryRepositoryInterface $countryRepository, StateRepositoryInterface $stateRepository)
     {
         $this->countryRepository = $countryRepository;
         $this->stateRepository = $stateRepository;
     }
-    /**
-     * yajra table for State
-     * @param mixed $request
-     * @return JsonResponse
-     */
 
+    /**
+     * index
+     * @param mixed $request
+     * @throws \Exception
+     * @return JsonResponse|mixed
+     */
     public function index($request): JsonResponse
     {
         try {
@@ -78,6 +91,11 @@ class StateService
         }
     }
 
+    /**
+     * storeState
+     * @param array $credentials
+     * @return CountryState
+     */
     public function storeState(array $credentials): CountryState
     {
         try {
@@ -88,6 +106,11 @@ class StateService
         }
     }
 
+    /**
+     * showModelToEdit
+     * @param \App\Models\CountryState $state
+     * @return array{html: string}
+     */
     public function showModelToEdit(CountryState $state): array
     {
         try {
@@ -100,6 +123,12 @@ class StateService
         }
     }
 
+    /**
+     * updateState
+     * @param array $credentials
+     * @param \App\Models\CountryState $state
+     * @return CountryState
+     */
     public function updateState(array $credentials, CountryState $state): CountryState
     {
         try {

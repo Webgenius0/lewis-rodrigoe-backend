@@ -20,5 +20,13 @@ interface CountryRepositoryInterface
      */
     public function createCountry(array $credential): Country;
 
-    public function updateCountry(array $credential, Country $country);
+        /**
+     * update  country
+     * @param array $credential
+     * @param \App\Models\Country $country
+     * @return void
+     */
+    public function updateCountry(array $credential, Country $country): void;
+
+
 }

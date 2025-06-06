@@ -51,7 +51,7 @@ class CountryRepository implements CountryRepositoryInterface
      * @param \App\Models\Country $country
      * @return void
      */
-    public function updateCountry(array $credential, Country $country)
+    public function updateCountry(array $credential, Country $country): void
     {
         try {
             $oldName = $country->name;

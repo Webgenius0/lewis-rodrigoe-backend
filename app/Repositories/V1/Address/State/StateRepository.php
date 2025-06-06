@@ -12,7 +12,11 @@ use Illuminate\Support\Facades\Log;
 
 class StateRepository implements StateRepositoryInterface
 {
-
+    /**
+     * getCountryStates
+     * @param int $countryId
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public function getCountryStates(int $countryId): Collection
     {
         try {
@@ -23,7 +27,10 @@ class StateRepository implements StateRepositoryInterface
         }
     }
 
-
+    /**
+     * listOfState
+     * @return Builder<CountryState>
+     */
     public function listOfState(): Builder
     {
         try {
@@ -34,7 +41,11 @@ class StateRepository implements StateRepositoryInterface
         }
     }
 
-
+    /**
+     * storeState
+     * @param array $credentials
+     * @return CountryState
+     */
     public function storeState(array $credentials): CountryState
     {
         try {
@@ -49,7 +60,12 @@ class StateRepository implements StateRepositoryInterface
         }
     }
 
-
+    /**
+     * updateState
+     * @param array $credentials
+     * @param \App\Models\CountryState $state
+     * @return CountryState
+     */
     public function updateState(array $data, CountryState $state): CountryState
     {
         try {

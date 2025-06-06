@@ -25,6 +25,10 @@ class CountryService
         $this->countryRepository = $countryRepository;
     }
 
+    /**
+     * countries
+     * @return \Illuminate\Database\Eloquent\Collection<int, Country>
+     */
     public function countries()
     {
         try {
@@ -35,6 +39,11 @@ class CountryService
         }
     }
 
+    /**
+     * index
+     * @param mixed $request
+     * @return JsonResponse
+     */
     public function index($request): JsonResponse
     {
         try {
@@ -78,7 +87,11 @@ class CountryService
         }
     }
 
-
+    /**
+     * store
+     * @param array $credentials
+     * @return Country
+     */
     public function store(array $credentials): Country
     {
         try {
@@ -89,6 +102,11 @@ class CountryService
         }
     }
 
+    /**
+     * showModelToEdit
+     * @param \App\Models\Country $country
+     * @return array{html: string}
+     */
     public function showModelToEdit(Country $country): array
     {
         try {
@@ -99,7 +117,12 @@ class CountryService
         }
     }
 
-
+    /**
+     * update
+     * @param array $credentials
+     * @param \App\Models\Country $country
+     * @return void
+     */
     public function update(array $credentials, Country $country): void
     {
         try {
