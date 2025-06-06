@@ -5,7 +5,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form action="{{ route('country.update', $country->slug) }}" method="POST" id="updateCountry">
+            <form action="{{ route('location.country.update', $country->slug) }}" method="POST" id="updateCountry">
                 @csrf
                 @method('PUT')
                 <div>
@@ -42,7 +42,7 @@
                 };
 
                 $.ajax({
-                    url: '{{ route('country.update', $country->slug) }}',
+                    url: '{{ route('location.country.update', $country->slug) }}',
                     type: 'POST',
                     data: formData,
                     success: (response) => {

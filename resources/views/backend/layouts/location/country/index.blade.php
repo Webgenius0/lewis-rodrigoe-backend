@@ -142,7 +142,7 @@
                         pagingType: "full_numbers",
                         dom: "<'row justify-content-between table-topbar'<'col-md-2 col-sm-4 px-0'f>>tipr",
                         ajax: {
-                            url: "{{ route('country.index') }}",
+                            url: "{{ route('location.country.index') }}",
                             type: "GET",
                             data: (d) => {
                                 d.search = $('#search-input').val();
@@ -190,7 +190,7 @@
                     $('#name_error').text('');
 
                     $.ajax({
-                        url: `{{ route('country.store') }}`,
+                        url: `{{ route('location.country.store') }}`,
                         type: `POST`,
                         data: {
                             'name': countryName,
@@ -235,7 +235,7 @@
             try {
                 // $('#overlay').show();
                 $.ajax({
-                    url: `{{ route('country.edit', ':slug') }}`.replace(':slug', slug),
+                    url: `{{ route('location.country.edit', ':slug') }}`.replace(':slug', slug),
                     type: 'GET',
                     dataType: 'json',
                     success: (response) => {
@@ -296,7 +296,7 @@
                     _method: 'DELETE'
                 };
                 $.ajax({
-                    url: `{{ route('country.destroy', ':slug') }}`.replace(':slug', slug),
+                    url: `{{ route('location.country.destroy', ':slug') }}`.replace(':slug', slug),
                     type: 'POST',
                     data: formData,
                     dataType: 'json',
