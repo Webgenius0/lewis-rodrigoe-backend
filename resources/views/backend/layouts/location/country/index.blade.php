@@ -23,53 +23,55 @@
     <div id="overlay"
         style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.5); z-index:9999;">
     </div>
-    <div class="app-content-area">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-12">
-                    <!-- Page header -->
-                    <div class="mb-5">
-                        <h3 class="mb-0 ">Country List</h3>
+    <div id="app-content">
+        <div class="app-content-area">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-12">
+                        <!-- Page header -->
+                        <div class="mb-5">
+                            <h3 class="mb-0 ">Country List</h3>
 
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div>
-                <!-- row -->
-                <div class="row">
-                    <div class="col-12">
-                        <!-- card -->
-                        <div class="card mb-4">
-                            <div class="card-header  ">
-                                <div class="row justify-content-between">
-                                    <div class="col-md-6 mb-3 ">
-                                        <a href="#!" class="btn btn-primary me-2" data-bs-toggle="modal"
-                                            data-bs-target="#addCountryModel">+ Add Country</a>
-                                    </div>
+                <div>
+                    <!-- row -->
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- card -->
+                            <div class="card mb-4">
+                                <div class="card-header  ">
+                                    <div class="row justify-content-between">
+                                        <div class="col-md-6 mb-3 ">
+                                            <a href="#!" class="btn btn-primary me-2" data-bs-toggle="modal"
+                                                data-bs-target="#addCountryModel">+ Add Country</a>
+                                        </div>
 
-                                    <div class=" col-lg-4 col-md-6">
-                                        <input type="search" id="search-input" class="form-control "
-                                            placeholder="Search for name">
+                                        <div class=" col-lg-4 col-md-6">
+                                            <input type="search" id="search-input" class="form-control "
+                                                placeholder="Search for name">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive table-card">
-                                    <table class="table text-nowrap mb-0 table-centered table-hover" id="data-table">
-                                        <thead class="table-light">
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
+                                <div class="card-body">
+                                    <div class="table-responsive table-card">
+                                        <table class="table text-nowrap mb-0 table-centered table-hover" id="data-table">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
             </div>
         </div>

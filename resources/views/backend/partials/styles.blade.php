@@ -1,3 +1,17 @@
+<style>
+    :root {
+        --m-error: #df4655;
+        --m-success: #48b180;
+    }
+
+    .v-error-message {
+        color: var(--m-error);
+    }
+
+    .success-color {
+        color: var(--m-success);
+    }
+</style>
 <!-- Libs CSS -->
 <link href="{{ asset('assets/backend/libs/bootstrap-icons/font/bootstrap-icons.css') }}" rel="stylesheet">
 <link href="{{ asset('assets/backend/libs/%40mdi/font/css/materialdesignicons.min.css') }}" rel="stylesheet">

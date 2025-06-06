@@ -98,7 +98,7 @@ class CountryService
     public function showModelToEdit(Country $country):array
     {
         try {
-            return ['html' => view('backend.layouts.dropdown.country.components.update', compact('country'))->render()];
+            return ['html' => view('backend.layouts.location.country.components.update', compact('country'))->render()];
         } catch (Exception $e) {
             Log::error('CountryService::showModelToEdit', ['error' => $e->getMessage()]);
             throw $e;
