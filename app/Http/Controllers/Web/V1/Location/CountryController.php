@@ -32,7 +32,7 @@ class CountryController extends Controller
             return view('backend.layouts.location.country.index');
         } catch (Exception $e) {
             Log::error('CountryController::index', ['error' => $e->getMessage()]);
-            return redirect()->back()->with('t-error', 'Something went wring..!');
+            return view('errors.500');
         }
     }
 

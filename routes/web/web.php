@@ -14,6 +14,7 @@ Route::middleware('admin')->group(function () {
 
     require 'v1/user/engineer.php';
     require 'v1/location/country.php';
+    require 'v1/location/state.php';
     require 'v1/user/user.php';
     require 'v1/property/property.php';
     require 'v1/settings/mail.php';

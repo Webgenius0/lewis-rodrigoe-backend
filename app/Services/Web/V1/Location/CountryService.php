@@ -25,28 +25,32 @@ class CountryService
         $this->countryRepository = $countryRepository;
     }
 
-        /**
-     * yajra table for country
-     * @param mixed $request
-     * @return JsonResponse
-     */
+    public function countries()
+    {
+        try {
+            return $this->countryRepository->getList();
+        } catch (Exception $e) {
+            Log::error('CountryService::countries', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
 
-     public function index($request): JsonResponse
-     {
-         try {
-             $countrys = $this->countryRepository->getList();
-             /**
-              * applying search operation
-              */
-             if ($request->has('search') && $request->search) {
-                 $searchTerm = $request->search;
-                 $countrys->where(function ($countrys) use ($searchTerm) {
-                     $countrys->where('name', 'like', '%' . $searchTerm . '%');
-                 });
-             }
-             return DataTables::of($countrys)
-                 ->addColumn('name', function ($data) {
-                     return '<td class="ps-1">
+    public function index($request): JsonResponse
+    {
+        try {
+            $countrys = $this->countries();
+            /**
+             * applying search operation
+             */
+            if ($request->has('search') && $request->search) {
+                $searchTerm = $request->search;
+                $countrys->where(function ($countrys) use ($searchTerm) {
+                    $countrys->where('name', 'like', '%' . $searchTerm . '%');
+                });
+            }
+            return DataTables::of($countrys)
+                ->addColumn('name', function ($data) {
+                    return '<td class="ps-1">
                                  <div class="d-flex align-items-center">
                                      <a>
                                          <h5 class="mb-0">
@@ -55,9 +59,9 @@ class CountryService
                                      </div>
                                  </div>
                              </td>';
-                 })
-                 ->addColumn('action', function ($data) {
-                     return '<td class="ps-1">
+                })
+                ->addColumn('action', function ($data) {
+                    return '<td class="ps-1">
                                  <div class="d-flex align-items-center">
                                      <a>
                                          <button type="button" class="btn btn-secondary-soft mb-2" onclick="editModal(\'' . $data->slug . '\')">Edit</button>
@@ -65,22 +69,17 @@ class CountryService
                                      </div>
                                  </div>
                              </td>';
-                 })
-                 ->rawColumns(['name', 'action'])
-                 ->make(true);
-         } catch (Exception $e) {
-             Log::error('CountryService::index', ['error' => $e->getMessage()]);
-             throw $e;
-         }
-     }
+                })
+                ->rawColumns(['name', 'action'])
+                ->make(true);
+        } catch (Exception $e) {
+            Log::error('CountryService::index', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
 
 
-     /**
-     * storing Country
-     * @param array $credentials
-     * @return Country
-     */
-    public function store(array $credentials):Country
+    public function store(array $credentials): Country
     {
         try {
             return $this->countryRepository->createCountry($credentials);
@@ -90,12 +89,7 @@ class CountryService
         }
     }
 
-    /**
-     * of show Model To Edit
-     * @param \App\Models\Country $country
-     * @return array{html: string}
-     */
-    public function showModelToEdit(Country $country):array
+    public function showModelToEdit(Country $country): array
     {
         try {
             return ['html' => view('backend.layouts.location.country.components.update', compact('country'))->render()];
@@ -105,13 +99,8 @@ class CountryService
         }
     }
 
-     /**
-     * update
-     * @param array $credentials
-     * @param \App\Models\Country $country
-     * @return void
-     */
-    public function update(array $credentials, Country $country):void
+
+    public function update(array $credentials, Country $country): void
     {
         try {
             $this->countryRepository->updateCountry($credentials, $country);
