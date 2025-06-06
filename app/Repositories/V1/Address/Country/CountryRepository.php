@@ -12,18 +12,18 @@ use Illuminate\Support\Facades\Log;
 class CountryRepository implements CountryRepositoryInterface
 {
     //Called country type repository
-    public function listOfCountry():mixed
+    public function listOfCountry(): mixed
     {
-       try {
-        return Country::select('id','name','slug')->latest();
-    } catch (Exception $e) {
-        Log::error('CountryRepository::listOfCountryType', ['error' => $e->getMessage()]);
-        throw $e;
-    }
+        try {
+            return Country::select('id', 'name', 'slug')->latest();
+        } catch (Exception $e) {
+            Log::error('CountryRepository::listOfCountryType', ['error' => $e->getMessage()]);
+            throw $e;
+        }
     }
 
 
-     /**
+    /**
      * create Country
      * @param array $credential
      * @return Country
@@ -42,7 +42,7 @@ class CountryRepository implements CountryRepositoryInterface
     }
 
 
-/**
+    /**
      * update  country
      * @param array $credential
      * @param \App\Models\Country $country
