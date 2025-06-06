@@ -12,11 +12,7 @@ use Illuminate\Support\Facades\Log;
 
 class StateRepository implements StateRepositoryInterface
 {
-    /**
-     * getCountryStates
-     * @param int $countryId
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
+
     public function getCountryStates(int $countryId): Collection
     {
         try {
@@ -28,56 +24,50 @@ class StateRepository implements StateRepositoryInterface
     }
 
 
-    /**
-     * listOfState
-     * @return \Illuminate\Database\Eloquent\Builder<CountryState>
-     */
-    public function listOfState():Builder
+    public function listOfState(): Builder
     {
         try {
             return CountryState::query();
         } catch (Exception $e) {
-            Log::error('App\Repositories\Web\Backend\V1\Dropdown\StateRepository::listOfState', ['error' => $e->getMessage()]);
+            Log::error('StateRepository::listOfState', ['error' => $e->getMessage()]);
             throw $e;
         }
     }
 
-    /**
-     * storeState
-     * @param array $credentials
-     * @return CountryState
-     */
-    public function storeState(array $credentials):CountryState
+
+    public function storeState(array $credentials): CountryState
     {
         try {
             return CountryState::create([
                 'name' => $credentials['name'],
                 'country_id' => $credentials['country_id'],
-                'slug' => Helper::generateUniqueSlug($credentials['name'], 'states', 'slug'),
+                'slug' => Helper::generateUniqueSlug($credentials['name'], 'country_states', 'slug'),
             ]);
         } catch (Exception $e) {
-            Log::error('App\Repositories\Web\Backend\V1\Dropdown\StateRepository::storeState', ['error' => $e->getMessage()]);
+            Log::error('StateRepository::storeState', ['error' => $e->getMessage()]);
             throw $e;
         }
     }
 
-    /**
-     * updateState
-     * @param array $credentials
-     * @param \App\Models\CountryState $state
-     * @return CountryState
-     */
-    public function updateState(array $credentials, CountryState $state): CountryState
+
+    public function updateState(array $data, CountryState $state): CountryState
     {
         try {
-            $state->update([
-                'name' => $credentials['name'],
-                'country_id' => $credentials['country_id'],
-               'slug' => Helper::generateUniqueSlug($credentials['name'], 'states', 'slug'),
-            ]);
+            if ($state->name != $data['name']) {
+                $state->update([
+                    'name' => $data['name'],
+                    'country_id' => $data['country_id'],
+                    'slug' => Helper::generateUniqueSlug($data['name'], 'country_states', 'slug'),
+                ]);
+            } else {
+                $state->update([
+                    'name' => $data['name'],
+                    'country_id' => $data['country_id'],
+                ]);
+            }
             return $state;
         } catch (Exception $e) {
-            Log::error('App\Repositories\Web\Backend\V1\Dropdown\StateRepository::updateState', ['error' => $e->getMessage()]);
+            Log::error('StateRepository::updateState', ['error' => $e->getMessage()]);
             throw $e;
         }
     }
