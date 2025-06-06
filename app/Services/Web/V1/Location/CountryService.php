@@ -34,7 +34,7 @@ class CountryService
      public function index($request): JsonResponse
      {
          try {
-             $countrys = $this->countryRepository->listOfCountry();
+             $countrys = $this->countryRepository->getList();
              /**
               * applying search operation
               */

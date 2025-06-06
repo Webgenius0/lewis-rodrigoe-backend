@@ -11,13 +11,16 @@ use Illuminate\Support\Facades\Log;
 
 class CountryRepository implements CountryRepositoryInterface
 {
-    //Called country type repository
-    public function listOfCountry(): mixed
+    /**
+     * getList
+     * @return Collection<int, Country>
+     */
+    public function getList():Collection
     {
         try {
-            return Country::select('id', 'name', 'slug')->latest();
-        } catch (Exception $e) {
-            Log::error('CountryRepository::listOfCountryType', ['error' => $e->getMessage()]);
+            return Country::select(['id','name', 'slug'])->get();
+        }catch(Exception $e) {
+            Log::error('CountryRepository::getList', ['error' => $e->getMessage()]);
             throw $e;
         }
     }

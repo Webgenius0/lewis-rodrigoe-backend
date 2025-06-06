@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Collection;
 interface CountryRepositoryInterface
 {
     /**
-     *  list Of country types
-     * @return Country
+     * getList
+     * @return Collection<int, Country>
      */
-    public function listOfCountry(): mixed;
+    public function getList(): Collection;
 
     /**
      * create Country
