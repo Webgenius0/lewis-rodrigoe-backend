@@ -53,6 +53,7 @@ class CityRepository implements CityRepositoryInterface
 
             return StateCity::create([
                 'name' => $credential['name'],
+                'country_id' => $credential['country_id'],
                 'country_state_id' => $stateId,
                 'slug' => Helper::generateUniqueSlug($credential['name'], 'state_cities'),
             ]);
@@ -72,6 +73,7 @@ class CityRepository implements CityRepositoryInterface
     {
         try {
             $city->name = $credential['name'];
+            $city->country_id = $credential['country_id'];
             $city->country_state_id = $credential['state_id'];
             $city->slug = Helper::generateUniqueSlug($credential['name'], 'state_cities');
             $city->update();

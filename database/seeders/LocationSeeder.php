@@ -39,6 +39,7 @@ class LocationSeeder extends Seeder
 
                 foreach ($cities as $city) {
                     $cityModel = StateCity::create([
+                        'country_id' => $country->id,
                         'country_state_id' => $state->id,
                         'slug' => Str::slug($city['name']),
                         'name' => $city['name'],

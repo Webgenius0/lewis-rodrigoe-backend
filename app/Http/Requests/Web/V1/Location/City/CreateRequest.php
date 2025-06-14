@@ -23,6 +23,7 @@ class CreateRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
+            'country_id' => 'required|string|exists:countries,id',
             'state_id' => 'required|string|exists:country_states,id',
         ];
     }
@@ -36,6 +37,10 @@ class CreateRequest extends FormRequest
         return [
             'name.required' => 'The name field is required.',
             'name.string' => 'The name must be a string.',
+
+            'country_id.required' => 'Please select a country.',
+            'country_id.string' => 'Invalid country format.',
+            'country_id.exists' => 'The selected country does not exist.',
 
             'state_id.required' => 'Please select a state.',
             'state_id.string' => 'Invalid state format.',

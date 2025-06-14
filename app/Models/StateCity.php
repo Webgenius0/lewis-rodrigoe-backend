@@ -12,7 +12,7 @@ class StateCity extends Model
      * fillable
      * @var array
      */
-    protected $fillable = ['name', 'slug', 'country_state_id'];
+    protected $fillable = ['name', 'slug', 'country_id', 'country_state_id'];
 
     /**
      * The attributes that should be hidden for serialization.
