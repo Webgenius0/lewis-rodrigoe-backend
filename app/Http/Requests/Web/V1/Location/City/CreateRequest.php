@@ -11,7 +11,7 @@ class CreateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,24 @@ class CreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string',
+            'state_id' => 'required|string|exists:country_states,id',
+        ];
+    }
+
+    /**
+     * messages
+     * @return array{country_id.required: string, country_id.string: string, name.required: string, name.string: string}
+     */
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'The name field is required.',
+            'name.string' => 'The name must be a string.',
+
+            'state_id.required' => 'Please select a state.',
+            'state_id.string' => 'Invalid state format.',
+            'state_id.exists' => 'The selected state does not exist.',
         ];
     }
 }

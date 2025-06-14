@@ -71,10 +71,9 @@ class CityRepository implements CityRepositoryInterface
     public function updateCity(array $credential, StateCity $city): StateCity
     {
         try {
-            //update country state and city
             $city->name = $credential['name'];
-            $city->state_id = $credential['state_id'];
-            $city->slug = Helper::generateUniqueSlug($credential['name'], 'cities');
+            $city->country_state_id = $credential['state_id'];
+            $city->slug = Helper::generateUniqueSlug($credential['name'], 'state_cities');
             $city->update();
             return $city;
         } catch (Exception $e) {

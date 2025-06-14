@@ -10,21 +10,6 @@
                 @method('PUT')
                 <input type="hidden" id="city_id" name="city_id" value="{{ $city->id }}">
 
-                <!-- Country Selection -->
-                <div class="mb-3">
-                    <label for="edit_country_id" class="form-label">Country Name</label>
-                    <select class="form-control" id="edit_country_id" name="country_id">
-                        <option value="">Select Country</option>
-                        @foreach ($countries as $country)
-                            <option value="{{ $country->id }}"
-                                @if($country->id == $city->country_id) selected @endif>
-                                {{ $country->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                    <p class="v-error-message text-danger" id="edit_country_error"></p>
-                </div>
-
                 <!-- State Selection -->
                 <div class="mb-3">
                     <label for="edit_state_id" class="form-label">State Name</label>
@@ -32,7 +17,7 @@
                         <option value="">Select State</option>
                         @foreach ($states as $state)
                             <option value="{{ $state->id }}"
-                                @if($state->id == $city->state_id) selected @endif>
+                                @if($state->id == $city->country_state_id) selected @endif>
                                 {{ $state->name }}
                             </option>
                         @endforeach
@@ -64,7 +49,6 @@
                 e.preventDefault();  // Prevent default form submission
 
                 const cityName = $('#edit_city_name').val();
-                const countryId = $('#edit_country_id').val();  // Get selected country ID
                 const stateId = $('#edit_state_id').val()||null;  // Get selected state ID
 
                 // Clear any previous error messages
@@ -79,11 +63,6 @@
                     $('#edit_name_error').text('City name is required.');
                     hasError = true;
                 }
-                if (!countryId) {
-                    $('#edit_country_error').text('Country field is required.');
-                    hasError = true;
-                }
-
                 // If there's a validation error, stop the AJAX request
                 if (hasError) {
                     $('#overlay').hide();  // Hide loading overlay
@@ -93,7 +72,6 @@
                 // Create the form data for AJAX request
                 const formData = {
                     name: cityName,
-                    country_id: countryId,
                     state_id: stateId,
                     _method: 'PUT',
                     _token: '{{ csrf_token() }}'
