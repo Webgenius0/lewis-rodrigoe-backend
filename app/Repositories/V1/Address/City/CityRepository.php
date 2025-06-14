@@ -53,11 +53,11 @@ class CityRepository implements CityRepositoryInterface
 
             return StateCity::create([
                 'name' => $credential['name'],
-                'state_id' => $stateId, // Either a valid state_id or null
-                'slug' => Helper::generateUniqueSlug($credential['name'], 'cities'),
+                'country_state_id' => $stateId,
+                'slug' => Helper::generateUniqueSlug($credential['name'], 'state_cities'),
             ]);
         } catch (Exception $e) {
-            Log::error('CountryRepository::cityRepository', ['error' => $e->getMessage()]);
+            Log::error('CountryRepository::createCity', ['error' => $e->getMessage()]);
             throw $e;
         }
     }

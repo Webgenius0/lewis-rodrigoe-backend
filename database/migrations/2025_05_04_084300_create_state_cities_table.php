@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('state_cities', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('country_id')->constrained('countries')->cascadeOnDelete();
             $table->foreignId('country_state_id')->constrained('country_states')->cascadeOnDelete();
             $table->string('slug')->unique();
             $table->string('name');
