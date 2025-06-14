@@ -36,17 +36,11 @@ class CityController extends Controller
                 return $this->cityService->index($request);
             }
             $countries = $this->cityService->countrys();
-            if (empty($countries)) {
-                return $this->error(404, 'No Countries Found.');
-            }
             $states = $this->cityService->states();
-            if (empty($states)) {
-                return $this->error(404, 'No States Found.');
-            }
-
-            return view('backend.layouts.dropdown.city.index', compact('countries', 'states'));
+            // dd($countries);
+            return view('backend.layouts.location.city.index', compact('countries', 'states'));
         } catch (Exception $e) {
-            Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\CityController::index', ['error' => $e->getMessage()]);
+            Log::error('CityController::index', ['error' => $e->getMessage()]);
             return redirect()->back()->with('t-error', 'Something went wring..!');
         }
     }
@@ -64,7 +58,7 @@ class CityController extends Controller
             $response = $this->cityService->store($validatedData);
             return $this->success(201, 'Created Successfully.', $response);
         } catch (Exception $e) {
-            Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\CityController::store', ['error' => $e->getMessage()]);
+            Log::error('CityController::store', ['error' => $e->getMessage()]);
             return $this->error(500, 'Server Error.');
         }
     }
@@ -79,7 +73,7 @@ class CityController extends Controller
             $response = $this->cityService->showModelToEdit($city);
             return $this->success(200, 'Successfull', $response);
         } catch (Exception $e) {
-            Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\CityController::edit', ['error' => $e->getMessage()]);
+            Log::error('CityController::edit', ['error' => $e->getMessage()]);
             return $this->error(500, 'Server Error.');
         }
     }
@@ -99,7 +93,7 @@ class CityController extends Controller
             return $this->success(200, 'Updated Successfully.', $response);
 
         } catch (Exception $e) {
-            Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\CityController::update', ['error' => $e->getMessage()]);
+            Log::error('CityController::update', ['error' => $e->getMessage()]);
             return $this->error(500, 'Server Error.');
         }
     }
@@ -115,7 +109,7 @@ class CityController extends Controller
             $city->delete();
             return $this->success(202, 'Delete Successfully');
         } catch (Exception $e) {
-            Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\CountryController::destroy', ['error' => $e->getMessage()]);
+            Log::error('CityController::destroy', ['error' => $e->getMessage()]);
             return $this->error(500, 'Server Error.');
         }
     }

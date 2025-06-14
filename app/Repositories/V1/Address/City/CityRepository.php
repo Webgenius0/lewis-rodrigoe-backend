@@ -35,7 +35,7 @@ class CityRepository implements CityRepositoryInterface
         try {
             return StateCity::with(['state', 'state.country'])->get();
         } catch (Exception $e) {
-            Log::error('App\Repositories\Web\Backend\V1\Dropdown\CityRepository::listOfCity', ['error' => $e->getMessage()]);
+            Log::error('CityRepository::listOfCity', ['error' => $e->getMessage()]);
             throw $e;
         }
     }
@@ -57,7 +57,7 @@ class CityRepository implements CityRepositoryInterface
                 'slug' => Helper::generateUniqueSlug($credential['name'], 'cities'),
             ]);
         } catch (Exception $e) {
-            Log::error('App\Repositories\Web\Backend\V1\Dropdown\CountryRepository::cityRepository', ['error' => $e->getMessage()]);
+            Log::error('CountryRepository::cityRepository', ['error' => $e->getMessage()]);
             throw $e;
         }
     }
@@ -78,7 +78,7 @@ class CityRepository implements CityRepositoryInterface
             $city->update();
             return $city;
         } catch (Exception $e) {
-            Log::error('App\Repositories\Web\Backend\V1\Dropdown\CityRepository::updateCity', ['error' => $e->getMessage()]);
+            Log::error('CityRepository::updateCity', ['error' => $e->getMessage()]);
             throw $e;
         }
     }

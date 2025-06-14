@@ -3,24 +3,34 @@
 namespace App\Services\Web\V1\Location;
 
 use App\Interfaces\V1\Address\City\CityRepositoryInterface;
+use App\Interfaces\V1\Address\Country\CountryRepositoryInterface;
+use App\Interfaces\V1\Address\State\StateRepositoryInterface;
 use App\Models\StateCity;
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Facades\DataTables;
 
 class CityService
 {
-protected CityRepositoryInterface $cityRepository;
+    private CityRepositoryInterface $cityRepository;
+    private StateRepositoryInterface $stateRepository;
+    private CountryRepositoryInterface $countryRepository;
+
 
 
     /**
      * construct
-     * @param cityRepositoryInterface $cityRepository
+     * @param \App\Interfaces\V1\Address\City\CityRepositoryInterface $cityRepository
+     * @param \App\Interfaces\V1\Address\State\StateRepositoryInterface $stateRepository
+     * @param \App\Interfaces\V1\Address\Country\CountryRepositoryInterface $countryRepository
      */
-    public function __construct(CityRepositoryInterface $cityRepository)
+    public function __construct(CityRepositoryInterface $cityRepository, StateRepositoryInterface $stateRepository, CountryRepositoryInterface $countryRepository)
     {
         $this->cityRepository = $cityRepository;
+        $this->stateRepository = $stateRepository;
+        $this->countryRepository = $countryRepository;
     }
 
 
@@ -29,7 +39,6 @@ protected CityRepositoryInterface $cityRepository;
      * @param mixed $request
      * @return JsonResponse
      */
-
     public function index($request): JsonResponse
     {
         try {
@@ -49,11 +58,9 @@ protected CityRepositoryInterface $cityRepository;
                         });
                 });
             }
-            $citys= $citys->with('country','state')->get();
-
             return DataTables::of($citys)
-            ->addColumn('country_name', fn($data) => $data->country->name ?? 'N/A')
-            ->addColumn('state_name', fn($data) => $data->state->name ?? 'N/A')
+                ->addColumn('country_name', fn($data) => $data->country->name ?? 'N/A')
+                ->addColumn('state_name', fn($data) => $data->state->name ?? 'N/A')
                 ->addColumn('name', function ($data) {
                     return '<td class="ps-1">
                                  <div class="d-flex align-items-center">
@@ -88,7 +95,7 @@ protected CityRepositoryInterface $cityRepository;
     /**
      * storing city
      * @param array $credentials
-     * @return City
+     * @return StateCity
      */
     public function store(array $credentials): StateCity
     {
@@ -100,40 +107,57 @@ protected CityRepositoryInterface $cityRepository;
         }
     }
 
-    public function countrys()
+    /**
+     * countrys
+     * @return Collection<int, \App\Models\Country>
+     */
+    public function countrys():Collection
     {
         try {
-            return $this->cityRepository->countrys();
+            return $this->countryRepository->getList();
         } catch (Exception $e) {
             Log::error('CityService::country', ['error' => $e->getMessage()]);
             throw $e;
         }
     }
 
-    //get the state of the country
-    public function states()
+    /**
+     * Summary of states
+     * @return Collection<int, \App\Models\CountryState>
+     */
+    public function states():Collection
     {
         try {
-            return $this->cityRepository->states();
+            return $this->stateRepository->listOfState()->get();
         } catch (Exception $e) {
             Log::error('CityService::state', ['error' => $e->getMessage()]);
             throw $e;
         }
     }
 
-    public function showModelToEdit(StateCity $city):array
+    /**
+     * showModelToEdit
+     * @param \App\Models\StateCity $city
+     * @return array{html: string}
+     */
+    public function showModelToEdit(StateCity $city): array
     {
         try {
-            $states = $this->cityRepository->states();
-            $countries = $this->cityRepository->countrys();
-
-            return ['html' => view('backend.layouts.dropdown.city.components.update', compact('city', 'states', 'countries'))->render()];
+            $states = $this->states();
+            $countries = $this->countrys();
+            return ['html' => view('backend.layouts.location.city.components.update', compact('city', 'states', 'countries'))->render()];
         } catch (Exception $e) {
             Log::error('cityService::showModelToEdit', ['error' => $e->getMessage()]);
             throw $e;
         }
     }
 
+    /**
+     * update
+     * @param array $credentials
+     * @param \App\Models\StateCity $city
+     * @return StateCity
+     */
     public function update(array $credentials, StateCity $city): StateCity
     {
         try {

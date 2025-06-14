@@ -1,11 +1,11 @@
 @extends('backend.app')
 
+
 @section('title')
-    Users-Admin
+    {{ env('APP_NAME') }} || City
 @endsection
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('assets/dev/css/datatables.min.css') }}">
     <style>
         .dt-info {
             display: flex;
@@ -20,64 +20,65 @@
     </style>
 @endpush
 
-@section('main')
+@section('content')
     <div id="overlay"
         style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.5); z-index:9999;">
     </div>
-    <div class="app-content-area">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-12">
-                    <!-- Page header -->
-                    <div class="mb-5">
-                        <h3 class="mb-0 ">City List</h3>
+    <div id="app-content">
+        <div class="app-content-area">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-12">
+                        <!-- Page header -->
+                        <div class="mb-5">
+                            <h3 class="mb-0 ">City List</h3>
 
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div>
-                <!-- row -->
-                <div class="row">
-                    <div class="col-12">
-                        <!-- card -->
-                        <div class="card mb-4">
-                            <div class="card-header  ">
-                                <div class="row justify-content-between">
-                                    <div class="col-md-6 mb-3 ">
-                                        <a href="#!" class="btn btn-primary me-2" data-bs-toggle="modal"
-                                            data-bs-target="#addCitymodel">+ Add City</a>
-                                    </div>
+                <div>
+                    <!-- row -->
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- card -->
+                            <div class="card mb-4">
+                                <div class="card-header  ">
+                                    <div class="row justify-content-between">
+                                        <div class="col-md-6 mb-3 ">
+                                            <a href="#!" class="btn btn-primary me-2" data-bs-toggle="modal"
+                                                data-bs-target="#addCitymodel">+ Add City</a>
+                                        </div>
 
-                                    <div class=" col-lg-4 col-md-6">
-                                        <input type="search" id="search-input" class="form-control "
-                                            placeholder="Search for name">
+                                        <div class=" col-lg-4 col-md-6">
+                                            <input type="search" id="search-input" class="form-control "
+                                                placeholder="Search for name">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive table-card">
-                                    <table class="table text-nowrap mb-0 table-centered table-hover" id="data-table">
-                                        <thead class="table-light">
-                                            <tr>
-                                                <th>Country Name</th>
-                                                <th>State Name</th>
-                                                <th>City Name</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
+                                <div class="card-body">
+                                    <div class="table-responsive table-card">
+                                        <table class="table text-nowrap mb-0 table-centered table-hover" id="data-table">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>Country Name</th>
+                                                    <th>State Name</th>
+                                                    <th>City Name</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
 
     {{-- create modal start --}}
     <div class="modal fade" id="addCitymodel" tabindex="-1" aria-labelledby="addCitymodelLabel" aria-hidden="true">
@@ -131,9 +132,10 @@
     <div class="modal fade" id="updateModel" tabindex="-1" aria-labelledby="updateLabel" aria-hidden="true"></div>
     {{-- update modal end --}}
 @endsection
+
+
 @push('scripts')
     {{-- Datatable --}}
-    <script src="{{ asset('assets/dev/js/datatables.min.js') }}"></script>
     <script>
         let dTable;
 
@@ -162,22 +164,21 @@
                         pagingType: "full_numbers",
                         dom: "<'row justify-content-between table-topbar'<'col-md-2 col-sm-4 px-0'f>>tipr",
                         ajax: {
-                            url: "{{ route('admin.city.index') }}",
+                            url: "{{ route('location.city.index') }}",
                             type: "GET",
                             data: (d) => {
                                 d.search = $('#search-input').val(); // Send custom search input value
                             }
                         },
-                        columns: [
-                            {
+                        columns: [{
                                 data: 'country_name',
                                 name: 'country_name',
                                 orderable: true,
                                 searchable: true
                             },
                             {
-                                data:'state_name',
-                                name:'state_name',
+                                data: 'state_name',
+                                name: 'state_name',
                                 orderable: true,
                                 searchable: true
                             },
@@ -206,118 +207,118 @@
                 console.error(e);
             }
 
-        /**
-         * Handle Enter key press in city_name input field
-         */
-        $('#city_name').keypress(function(e) {
-            if (e.which === 13) { // Check if Enter key is pressed
-                e.preventDefault();
-                $('#saveBtn').click(); // Trigger the save button click event
-            }
-        });
-
-        /**
-         * Create new city functionality
-         */
-        $('#saveBtn').click(() => {
-            try {
-                $('#overlay').show(); // Show loading overlay
-
-                const cityName = $('#city_name').val();
-                const countryId = $('#country_name').val(); // Get the selected country ID
-                const stateId = $('#state_name').val()||null; // Get the selected state ID
-
-                // Remove any previous validation error messages
-                $('#name_error').text('');
-                $('#country_error').text('');
-
-                // Validation for empty fields
-                let hasError = false;
-
-                if (!cityName) {
-                    $('#name_error').text('City name is required.');
-                    hasError = true;
+            /**
+             * Handle Enter key press in city_name input field
+             */
+            $('#city_name').keypress(function(e) {
+                if (e.which === 13) { // Check if Enter key is pressed
+                    e.preventDefault();
+                    $('#saveBtn').click(); // Trigger the save button click event
                 }
-                if (!countryId) {
-                    $('#country_error').text('Country field is required.');
-                    hasError = true;
-                }
-                // if (!stateId) {
-                //     $('#state_error').text('State field is required.');
-                //     hasError = true;
-                // }
+            });
 
-                // If there's a validation error, stop the AJAX request
-                if (hasError) {
-                    $('#overlay').hide();
-                    return;
-                }
+            /**
+             * Create new city functionality
+             */
+            $('#saveBtn').click(() => {
+                try {
+                    $('#overlay').show(); // Show loading overlay
 
-                // Make the AJAX request to create the new city
-                $.ajax({
-                    url: `{{ route('admin.city.store') }}`,
-                    type: `POST`,
-                    data: {
-                        'name': cityName,
-                        'country_id': countryId,
-                        'state_id': stateId,
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: (response) => {
-                        if (response.code == 201) {
-                            dTable.draw();
-                            $('#city_name').val('');
-                            $('#country_name').val('');
-                            $('#state_name').val('');
-                            $('#addCitymodel').modal('hide');
-                            $('#overlay').hide(); // Hide loading overlay
-                            toastr.success(
-                                'City Created successfully!'); // Show success message
+                    const cityName = $('#city_name').val();
+                    const countryId = $('#country_name').val(); // Get the selected country ID
+                    const stateId = $('#state_name').val() || null; // Get the selected state ID
 
-                        } else {
-                            $('#overlay').hide();
-                            toastr.error('Something went wrong while creating the city.');
-                        }
-                    },
-                    error: (Xhr, status, error) => {
-                        $('#overlay').hide(); // Hide loading overlay in case of error
+                    // Remove any previous validation error messages
+                    $('#name_error').text('');
+                    $('#country_error').text('');
 
-                        if (Xhr && Xhr.responseJSON && Xhr.responseJSON.errors) {
-                            // Display error messages from the server response
-                            if (Xhr.responseJSON.errors['name']) {
-                                $('#name_error').text(Xhr.responseJSON.errors['name'][0]);
-                            }
-                            if (Xhr.responseJSON.errors['country_id']) {
-                                $('#country_error').text(Xhr.responseJSON.errors[
-                                    'country_id'][0]);
-                            }
-                            if (Xhr.responseJSON.errors['state_id']) {
-                                $('#state_error').text(Xhr.responseJSON.errors['state_id'][
-                                    0
-                                ]);
-                            }
-                        } else {
-                            toastr.error(
-                                'Something went wrong while processing the request.');
-                        }
+                    // Validation for empty fields
+                    let hasError = false;
+
+                    if (!cityName) {
+                        $('#name_error').text('City name is required.');
+                        hasError = true;
                     }
-                });
-            } catch (e) {
-                $('#overlay').hide();
-                toastr.error('An error occurred. Please try again.');
-                console.error(e);
-            }
-        });
+                    if (!countryId) {
+                        $('#country_error').text('Country field is required.');
+                        hasError = true;
+                    }
+                    // if (!stateId) {
+                    //     $('#state_error').text('State field is required.');
+                    //     hasError = true;
+                    // }
 
-        /**
-         * Reset modal form when modal is closed
-         */
-        $('#addCityModel').on('hidden.bs.modal', function() {
-        $('#createYachtType')[0].reset(); // Reset the form fields when modal is hidden
-        $('#name_error').text(''); // Clear any error messages
-        $('#country_error').text('');
-        $('#state_error').text('');
-        });
+                    // If there's a validation error, stop the AJAX request
+                    if (hasError) {
+                        $('#overlay').hide();
+                        return;
+                    }
+
+                    // Make the AJAX request to create the new city
+                    $.ajax({
+                        url: `{{ route('location.city.store') }}`,
+                        type: `POST`,
+                        data: {
+                            'name': cityName,
+                            'country_id': countryId,
+                            'state_id': stateId,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: (response) => {
+                            if (response.code == 201) {
+                                dTable.draw();
+                                $('#city_name').val('');
+                                $('#country_name').val('');
+                                $('#state_name').val('');
+                                $('#addCitymodel').modal('hide');
+                                $('#overlay').hide(); // Hide loading overlay
+                                toastr.success(
+                                    'City Created successfully!'); // Show success message
+
+                            } else {
+                                $('#overlay').hide();
+                                toastr.error('Something went wrong while creating the city.');
+                            }
+                        },
+                        error: (Xhr, status, error) => {
+                            $('#overlay').hide(); // Hide loading overlay in case of error
+
+                            if (Xhr && Xhr.responseJSON && Xhr.responseJSON.errors) {
+                                // Display error messages from the server response
+                                if (Xhr.responseJSON.errors['name']) {
+                                    $('#name_error').text(Xhr.responseJSON.errors['name'][0]);
+                                }
+                                if (Xhr.responseJSON.errors['country_id']) {
+                                    $('#country_error').text(Xhr.responseJSON.errors[
+                                        'country_id'][0]);
+                                }
+                                if (Xhr.responseJSON.errors['state_id']) {
+                                    $('#state_error').text(Xhr.responseJSON.errors['state_id'][
+                                        0
+                                    ]);
+                                }
+                            } else {
+                                toastr.error(
+                                    'Something went wrong while processing the request.');
+                            }
+                        }
+                    });
+                } catch (e) {
+                    $('#overlay').hide();
+                    toastr.error('An error occurred. Please try again.');
+                    console.error(e);
+                }
+            });
+
+            /**
+             * Reset modal form when modal is closed
+             */
+            $('#addCityModel').on('hidden.bs.modal', function() {
+                $('#createYachtType')[0].reset(); // Reset the form fields when modal is hidden
+                $('#name_error').text(''); // Clear any error messages
+                $('#country_error').text('');
+                $('#state_error').text('');
+            });
         });
 
 
@@ -328,7 +329,7 @@
         const editModal = (slug) => {
             try {
                 $.ajax({
-                    url: `{{ route('admin.city.edit', '') }}/${slug}`,
+                    url: `{{ route('location.city.edit', ':slug') }}`.replace(':slug', slug),
                     type: 'GET',
                     dataType: 'json',
                     success: (response) => {
@@ -390,7 +391,7 @@
                     _method: 'DELETE'
                 };
                 $.ajax({
-                    url: `{{ route('admin.city.destroy', '') }}/${slug}`,
+                    url: `{{ route('location.city.destroy', ':slug') }}`.replace(':slug', slug),
                     type: 'POST',
                     data: formData,
                     dataType: 'json',
