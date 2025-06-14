@@ -40,6 +40,15 @@ class StateCity extends Model
     }
 
     /**
+     * getRouteKeyName
+     * @return string
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
+    /**
      * belongs to state
      * @return BelongsTo<CountryState, DrivingLicence>
      */

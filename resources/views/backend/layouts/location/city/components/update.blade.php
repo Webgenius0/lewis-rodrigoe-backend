@@ -101,7 +101,7 @@
 
                 // Make the AJAX request to update the city
                 $.ajax({
-                    url: '{{ route('admin.city.update', $city->slug) }}',  // Update the city route
+                    url: '{{ route('location.city.update', $city->slug) }}',  // Update the city route
                     type: 'POST',
                     data: formData,
                     success: (response) => {
