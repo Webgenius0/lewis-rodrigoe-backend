@@ -16,8 +16,7 @@
                     <select class="form-control" id="edit_country_id" name="country_id">
                         <option value="">Select Country</option>
                         @foreach ($countries as $country)
-                            <option value="{{ $country->id }}"
-                                @if($country->id == $city->country_id) selected @endif>
+                            <option value="{{ $country->id }}" @if ($country->id == $city->country_id) selected @endif>
                                 {{ $country->name }}
                             </option>
                         @endforeach
@@ -31,8 +30,7 @@
                     <select class="form-control" id="edit_state_id" name="state_id">
                         <option value="">Select State</option>
                         @foreach ($states as $state)
-                            <option value="{{ $state->id }}"
-                                @if($state->id == $city->country_state_id) selected @endif>
+                            <option value="{{ $state->id }}" @if ($state->id == $city->country_state_id) selected @endif>
                                 {{ $state->name }}
                             </option>
                         @endforeach
@@ -43,7 +41,8 @@
                 <!-- City Name Input -->
                 <div class="mb-3">
                     <label for="edit_city_name" class="form-label">City Name</label>
-                    <input type="text" class="form-control" id="edit_city_name" name="name" value="{{ $city->name }}">
+                    <input type="text" class="form-control" id="edit_city_name" name="name"
+                        value="{{ $city->name }}">
                     <p class="v-error-message text-danger" id="edit_name_error"></p>
                 </div>
 
@@ -58,14 +57,25 @@
 
 <script>
     $(document).ready(() => {
+
+        /**
+         * Handle Enter key press in city_name input field
+         */
+        $('#edit_city_name').keypress(function(e) {
+            if (e.which === 13) { // Check if Enter key is pressed
+                e.preventDefault();
+                $('#updateBtn').click(); // Trigger the save button click event
+            }
+        });
+
         $('#updateBtn').click((e) => {
             try {
-                $('#overlay').show();  // Show loading overlay
-                e.preventDefault();  // Prevent default form submission
+                $('#overlay').show(); // Show loading overlay
+                e.preventDefault(); // Prevent default form submission
 
                 const cityName = $('#edit_city_name').val();
-                const countryId = $('#edit_country_id').val();  // Get selected country ID
-                const stateId = $('#edit_state_id').val()||null;  // Get selected state ID
+                const countryId = $('#edit_country_id').val(); // Get selected country ID
+                const stateId = $('#edit_state_id').val() || null; // Get selected state ID
 
                 // Clear any previous error messages
                 $('#edit_name_error').text('');
@@ -86,7 +96,7 @@
 
                 // If there's a validation error, stop the AJAX request
                 if (hasError) {
-                    $('#overlay').hide();  // Hide loading overlay
+                    $('#overlay').hide(); // Hide loading overlay
                     return;
                 }
 
@@ -101,37 +111,42 @@
 
                 // Make the AJAX request to update the city
                 $.ajax({
-                    url: '{{ route('location.city.update', $city->slug) }}',  // Update the city route
+                    url: '{{ route('location.city.update', $city->slug) }}', // Update the city route
                     type: 'POST',
                     data: formData,
                     success: (response) => {
 
-                        if (response.code== 200) {
-                            dTable.draw();  // Redraw the data table
+                        if (response.code == 200) {
+                            dTable.draw(); // Redraw the data table
                             $('#updateModel').modal('hide');
-                            $('#overlay').hide();  // Hide loading overlay
-                            toastr.success('City updated successfully!');  // Show success message
+                            $('#overlay').hide(); // Hide loading overlay
+                            toastr.success(
+                            'City updated successfully!'); // Show success message
                         } else {
                             $('#overlay').hide();
                             toastr.error('Something went wrong while updating the city.');
                         }
                     },
                     error: (Xhr, status, error) => {
-                        $('#overlay').hide();  // Hide loading overlay in case of error
+                        $('#overlay').hide(); // Hide loading overlay in case of error
 
                         if (Xhr && Xhr.responseJSON && Xhr.responseJSON.errors) {
                             // Display validation errors from server response
                             if (Xhr.responseJSON.errors['name']) {
-                                $('#edit_name_error').text(Xhr.responseJSON.errors['name'][0]);
+                                $('#edit_name_error').text(Xhr.responseJSON.errors['name'][
+                                    0]);
                             }
                             if (Xhr.responseJSON.errors['country_id']) {
-                                $('#edit_country_error').text(Xhr.responseJSON.errors['country_id'][0]);
+                                $('#edit_country_error').text(Xhr.responseJSON.errors[
+                                    'country_id'][0]);
                             }
                             if (Xhr.responseJSON.errors['state_id']) {
-                                $('#edit_state_error').text(Xhr.responseJSON.errors['state_id'][0]);
+                                $('#edit_state_error').text(Xhr.responseJSON.errors[
+                                    'state_id'][0]);
                             }
                         } else {
-                            toastr.error('Something went wrong while processing the request.');
+                            toastr.error(
+                                'Something went wrong while processing the request.');
                         }
                     }
                 });
