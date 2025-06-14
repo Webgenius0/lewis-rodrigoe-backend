@@ -43,6 +43,7 @@ class CityService
     {
         try {
             $citys = $this->cityRepository->listOfCity();
+            // dd($citys);
             /**
              * applying search operation
              */
@@ -59,7 +60,7 @@ class CityService
                 });
             }
             return DataTables::of($citys)
-                ->addColumn('country_name', fn($data) => $data->country->name ?? 'N/A')
+                ->addColumn('country_name', fn($data) => $data->state->country->name ?? 'N/A')
                 ->addColumn('state_name', fn($data) => $data->state->name ?? 'N/A')
                 ->addColumn('name', function ($data) {
                     return '<td class="ps-1">

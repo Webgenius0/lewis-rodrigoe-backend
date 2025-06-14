@@ -45,7 +45,7 @@ class StateCity extends Model
      */
     public function state(): BelongsTo
     {
-        return $this->belongsTo(CountryState::class);
+        return $this->belongsTo(CountryState::class, 'country_state_id');
     }
 
     /**
